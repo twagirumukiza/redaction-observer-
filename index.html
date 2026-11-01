@@ -83,8 +83,17 @@ small{color:var(--muted)}
 </section>
 
 <section id="t-ex" hidden>
+<div class="card" style="margin-bottom:18px"><h2>Connexion au journal <small id="cs"></small></h2>
+<p><small>Une fois la connexion enregistrée, la rédaction met le journal à jour toute seule : chaque validation, retrait ou suppression envoie le nouveau <code>data/items.json</code> dans le dépôt du journal. Le journal affiche le changement 1 à 2 minutes plus tard. Seuls les éléments validés sont envoyés.</small></p>
+<div class="cols"><div><label for="co">Compte GitHub</label><input id="co" value="twagirumukiza"></div><div><label for="cr">Dépôt du journal</label><input id="cr" value="cyber-risk-observer"></div></div>
+<div class="cols"><div><label for="cb">Branche</label><input id="cb" value="main"></div><div><label for="cpth">Fichier</label><input id="cpth" value="data/items.json"></div></div>
+<label for="ctk">Jeton d’accès GitHub</label><input id="ctk" type="password" autocomplete="off" placeholder="github_pat_…">
+<label style="display:flex;gap:8px;align-items:center;font-weight:400"><input type="checkbox" id="cau" style="width:auto" checked> Publier automatiquement à chaque modification</label>
+<div class="row" style="margin-top:12px"><button class="btn" id="csv" type="button">Enregistrer la connexion</button><button class="ghost" id="cpub" type="button">Publier maintenant</button><button class="ghost" id="cpull" type="button">Récupérer les éléments collectés</button></div>
+<p class="msg" id="cmsg" role="status"></p>
+<p><small>Le jeton reste dans ce navigateur, jamais dans le dépôt. Créez-le sur GitHub : Settings, Developer settings, Personal access tokens, Fine-grained tokens. Accès au seul dépôt du journal, permission « Contents : Read and write ».</small></p></div>
 <div class="two">
-<div class="card"><h2>Mettre à jour le journal</h2>
+<div class="card"><h2>Publication manuelle (secours)</h2>
 <ol class="steps"><li>Copiez le contenu ci-dessous.</li><li>Dans votre dépôt GitHub, remplacez le contenu du fichier <code>data/items.json</code>.</li><li>Le journal affiche les éléments « validés » au prochain chargement.</li></ol>
 <textarea id="out" readonly style="min-height:260px;font:12px/1.4 ui-monospace,monospace" aria-label="Contenu à publier"></textarea>
 <div class="row" style="margin-top:10px"><button class="btn" id="cp" type="button">Copier</button><small id="oc"></small></div>
@@ -100,15 +109,16 @@ small{color:var(--muted)}
 </main>
 
 <script>
-var SEC=['Actualités','Géopolitique','Cyber & numérique','Économie','Société','Analyses','CTF'],items=[],cur=null,pend=null,sel={};
+var SEC=['Actualités','Géopolitique','Cyber & numérique','Économie','Société','Analyses','CTF'],items=[],cur=null,pend=null,sel={},gone={},cfg={},tm=null,busy=false,again=false;
 var $=function(i){return document.getElementById(i)};
 function esc(t){return String(t==null?'':t).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function today(){return new Date().toISOString().slice(0,10)}
 function uid(){return 'r'+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
 function secOf(x){var k=x.section!=null?+x.section:SEC.indexOf(x.rubrique);return k>=0&&k<7?k:2}
 function norm(x){return{id:x.id||uid(),section:secOf(x),kicker:x.kicker||'',titre:String(x.titre||''),resume:x.resume||'',analyse:x.analyse||'',actions:Array.isArray(x.actions)?x.actions:(x.action?[x.action]:[]),source:x.source||'',url:x.url||'',date:x.date||'',criticite:x.criticite||'',statut:x.statut=='valide'?'valide':'a_valider'}}
-function load(){try{items=JSON.parse(localStorage.getItem('cro-items')||'[]').map(norm)}catch(e){items=[]}}
-function save(){try{localStorage.setItem('cro-items',JSON.stringify(items))}catch(e){}}
+function load(){try{items=JSON.parse(localStorage.getItem('cro-items')||'[]').map(norm)}catch(e){items=[]}try{gone=JSON.parse(localStorage.getItem('cro-gone')||'{}')}catch(e){gone={}}try{cfg=JSON.parse(localStorage.getItem('cro-cfg')||'{}')}catch(e){cfg={}}}
+function saveLocal(){try{localStorage.setItem('cro-items',JSON.stringify(items));localStorage.setItem('cro-gone',JSON.stringify(gone))}catch(e){}}
+function save(){saveLocal();if(cfg.auto&&cfg.token)schedule()}
 $('sec').innerHTML=SEC.map(function(s,i){return '<option value="'+i+'">'+s+'</option>'}).join('');
 
 function drawList(){
@@ -123,12 +133,12 @@ $('sec').value=x.section;$('kick').value=x.kicker;$('tit').value=x.titre;$('res'
 $('list').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var id=b.getAttribute('data-id'),a=b.getAttribute('data-a'),x=items.filter(function(i){return i.id==id})[0];if(!x)return;
 if(a=='e'){fill(x);$('f').scrollIntoView()}
 if(a=='t'){x.statut=x.statut=='valide'?'a_valider':'valide';save()}
-if(a=='d'){if(pend==id){items=items.filter(function(i){return i.id!=id});pend=null;save();if(cur==id)fill(null)}else pend=id}
+if(a=='d'){if(pend==id){items=items.filter(function(i){return i.id!=id});gone[id]=1;pend=null;save();if(cur==id)fill(null)}else pend=id}
 if(a!='d')pend=null;drawList();drawPick()});
 $('f').addEventListener('submit',function(e){e.preventDefault();
 var x=norm({id:cur,section:$('sec').value,kicker:$('kick').value.trim(),titre:$('tit').value.trim(),resume:$('res').value.trim(),analyse:$('ana').value.trim(),actions:$('act').value.split('\n').map(function(l){return l.trim()}).filter(Boolean),source:$('src').value.trim(),url:$('url').value.trim(),date:$('dat').value,criticite:$('cri').value,statut:$('sta').value});
 if(!x.titre){$('fm').textContent='Le titre est obligatoire.';return}
-var i=items.map(function(t){return t.id}).indexOf(x.id);if(i>-1)items[i]=x;else items.unshift(x);
+var i=items.map(function(t){return t.id}).indexOf(x.id);if(i>-1)items[i]=x;else items.unshift(x);delete gone[x.id];
 save();cur=x.id;$('ft').textContent='Modifier l’élément';$('fm').textContent=x.statut=='valide'?'Enregistré. Il sera publié au prochain envoi.':'Enregistré. Non publié tant qu’il n’est pas validé.';drawList();drawPick()});
 $('new').addEventListener('click',function(){fill(null);$('tit').focus()});
 $('rst').addEventListener('click',function(){fill(null)});
@@ -143,10 +153,10 @@ $('mk').addEventListener('click',function(){
 var per=$('per').value.trim(),ch=items.filter(function(x){return sel[x.id]&&x.statut=='valide'});
 if(!per){$('em').textContent='Indiquez la période.';return}
 var x=norm({id:'edition-'+per.toLowerCase().replace(/[^a-z0-9]+/g,'-'),section:5,kicker:'Édition de la semaine',titre:'Édition de la semaine : '+per,resume:('À retenir : '+ch.map(function(c){return c.titre}).join(' · ')).slice(0,380),analyse:$('edi').value.trim(),actions:$('sur').value.split('\n').map(function(l){return l.trim()}).filter(Boolean),source:'Rédaction',date:today(),statut:'valide'});
-var i=items.map(function(t){return t.id}).indexOf(x.id);if(i>-1)items[i]=x;else items.unshift(x);
+var i=items.map(function(t){return t.id}).indexOf(x.id);if(i>-1)items[i]=x;else items.unshift(x);delete gone[x.id];
 save();$('em').textContent='Article de synthèse enregistré et validé ('+ch.length+' élément'+(ch.length>1?'s':'')+' retenu'+(ch.length>1?'s':'')+'). Allez dans Publier pour l’envoyer au journal.';drawList()});
 
-function drawOut(){$('out').value=JSON.stringify(items,null,1);var n=items.filter(function(x){return x.statut=='valide'}).length;$('oc').textContent=items.length+' éléments, '+n+' validé'+(n>1?'s':'')+' (seuls les validés s’affichent)'}
+function drawOut(){$('out').value=JSON.stringify(items.filter(function(x){return x.statut=='valide'}),null,1);var n=items.filter(function(x){return x.statut=='valide'}).length;$('oc').textContent=n+' élément'+(n>1?'s':'')+' validé'+(n>1?'s':'')+' à publier'}
 $('cp').addEventListener('click',function(){var t=$('out').value;
 function man(){$('out').select();$('cm').textContent='Sélectionné : copiez avec Ctrl+C ou Cmd+C.'}
 try{navigator.clipboard.writeText(t).then(function(){$('cm').textContent='Copié.'},man)}catch(e){man()}});
@@ -160,7 +170,37 @@ document.querySelector('.tabs').addEventListener('click',function(e){var b=e.tar
 [].forEach.call(document.querySelectorAll('.tabs button'),function(t){t.setAttribute('aria-selected',t==b?'true':'false')});
 ['items','ed','ex'].forEach(function(k){$('t-'+k).hidden=k!=b.getAttribute('data-t')});
 if(b.getAttribute('data-t')=='ex')drawOut();if(b.getAttribute('data-t')=='ed')drawPick()});
-load();fill(null);drawList();drawPick();
+function cst(t){$('cmsg').textContent=t}
+function enc(t){return btoa(unescape(encodeURIComponent(t)))}
+function dec(t){return decodeURIComponent(escape(atob(t.replace(/\s/g,''))))}
+function api(m,body){var u='https://api.github.com/repos/'+encodeURIComponent(cfg.owner)+'/'+encodeURIComponent(cfg.repo)+'/contents/'+cfg.path.split('/').map(encodeURIComponent).join('/')+(m=='GET'?'?ref='+encodeURIComponent(cfg.branch):'');
+return fetch(u,{method:m,headers:{'Accept':'application/vnd.github+json','Authorization':'Bearer '+cfg.token,'X-GitHub-Api-Version':'2022-11-28'},body:body?JSON.stringify(body):undefined})}
+function merge(rem){var ids={},n=0;items.forEach(function(x){ids[x.id]=1});(Array.isArray(rem)?rem:[]).forEach(function(x){if(!x||!x.titre)return;var y=norm(x);if(!ids[y.id]&&!gone[y.id]){items.push(y);ids[y.id]=1;n++}});return n}
+async function sync(push){
+if(!cfg.token||!cfg.owner||!cfg.repo){cst('Renseignez d’abord la connexion au journal.');return}
+if(busy){again=true;return}busy=true;
+try{for(var k=0;k<2;k++){
+cst(push?'Publication en cours…':'Récupération en cours…');
+var r=await api('GET'),sha=null,n=0;
+if(r.ok){var j=await r.json();sha=j.sha;try{n=merge(JSON.parse(dec(j.content)))}catch(e){}}
+else if(r.status!=404){var t=await r.json().catch(function(){return{}});throw new Error(r.status+' '+(t.message||''))}
+if(n){saveLocal();drawList();drawPick();drawOut()}
+if(!push){cst(n+' élément'+(n>1?'s':'')+' récupéré'+(n>1?'s':'')+'. Retrouvez-les dans Éléments, statut « À valider ».');break}
+var body={message:'Journal : mise à jour depuis la rédaction',content:enc(JSON.stringify(items.filter(function(x){return x.statut=='valide'}),null,1)),branch:cfg.branch};
+if(sha)body.sha=sha;
+var w=await api('PUT',body);
+if(w.ok){var d=new Date();cst('Publié à '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})+'. Le journal sera à jour dans 1 à 2 minutes.');break}
+var e2=await w.json().catch(function(){return{}});
+if(k==0&&(w.status==409||w.status==422))continue;
+throw new Error(w.status+' '+(e2.message||''))}
+}catch(e){cst('Échec : '+e.message+(/401|403/.test(e.message)?' (vérifiez le jeton et ses droits)':'')+(/404/.test(e.message)?' (vérifiez le compte, le dépôt et la branche)':''))}
+busy=false;if(again){again=false;schedule()}}
+function schedule(){clearTimeout(tm);cst('Modification enregistrée, publication dans un instant…');tm=setTimeout(function(){sync(true)},1500)}
+function showCfg(){if(cfg.owner)$('co').value=cfg.owner;if(cfg.repo)$('cr').value=cfg.repo;if(cfg.branch)$('cb').value=cfg.branch;if(cfg.path)$('cpth').value=cfg.path;$('cau').checked=cfg.auto!==false;$('ctk').placeholder=cfg.token?'Jeton enregistré (laisser vide pour le conserver)':'github_pat_…';$('cs').textContent=cfg.token?'(connecté)':'(non connecté)'}
+$('csv').addEventListener('click',function(){cfg={owner:$('co').value.trim(),repo:$('cr').value.trim(),branch:$('cb').value.trim()||'main',path:$('cpth').value.trim()||'data/items.json',token:$('ctk').value.trim()||cfg.token||'',auto:$('cau').checked};try{localStorage.setItem('cro-cfg',JSON.stringify(cfg))}catch(e){}$('ctk').value='';showCfg();cst('Connexion enregistrée.')});
+$('cpub').addEventListener('click',function(){sync(true)});
+$('cpull').addEventListener('click',function(){sync(false)});
+load();showCfg();fill(null);drawList();drawPick();
 </script>
 </body>
 </html>
