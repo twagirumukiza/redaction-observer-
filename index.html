@@ -39,8 +39,16 @@ small{color:var(--muted)}
 .msg{color:var(--ok);margin:8px 0 0;min-height:1.4em}
 .pick label{display:flex;gap:8px;align-items:flex-start;font-weight:400;margin:0}.pick input{width:auto;margin-top:5px}
 .steps{margin:0 0 12px;padding-left:20px;list-style:decimal}.steps li{padding:2px 0}
-.rl{max-height:220px;overflow:auto;border:1px solid var(--line);border-radius:5px;padding:4px 10px;background:var(--bg)}.rl label{display:flex;gap:8px;align-items:flex-start;font-weight:400;margin:6px 0}.rl input{width:auto;margin-top:5px}
 @media (max-width:760px){.two,.cols{grid-template-columns:1fr}}
+.rte{border:1px solid var(--line);border-radius:5px;background:var(--bg)}
+.rtb{display:flex;gap:4px;flex-wrap:wrap;padding:5px;border-bottom:1px solid var(--line)}
+.rtb button{background:var(--card);border:1px solid var(--line);border-radius:4px;min-width:34px;min-height:32px;padding:2px 8px;cursor:pointer;font-size:.85rem}
+.rtb button:hover{border-color:var(--acc)}
+.rtc{padding:8px 10px;min-height:96px;outline:0;overflow-wrap:anywhere;line-height:1.5}
+.rtc:focus{box-shadow:inset 0 0 0 2px var(--acc)}
+.rtc p{margin:0 0 .6em}.rtc h3,.rtc h4{font:700 1.05rem var(--head);margin:.4em 0}.rtc blockquote{border-left:3px solid var(--line);margin:.5em 0;padding-left:10px;color:var(--muted)}.rtc a{color:var(--acc);text-decoration:underline}.rtc ul{list-style:disc;margin:.4em 0;padding-left:22px}.rtc ol{list-style:decimal;margin:.4em 0;padding-left:22px}
+input.sst{margin:2px 0 6px;font-size:.85rem}
+details summary{cursor:pointer;font-weight:600;margin-top:12px}
 </style>
 </head>
 <body>
@@ -52,20 +60,33 @@ small{color:var(--muted)}
 
 <main class="w">
 <section id="t-items">
-<div class="bar"><input id="q" type="search" placeholder="Rechercher un élément" aria-label="Rechercher"><select id="fs" aria-label="Statut"><option value="">Tous les statuts</option><option value="a_valider">À valider</option><option value="valide">Validés</option></select><button class="btn" id="new" type="button">Nouvel élément</button></div>
+<div class="bar"><input id="q" type="search" placeholder="Rechercher un élément" aria-label="Rechercher"><select id="fs" aria-label="Statut"><option value="">Tous les statuts</option><option value="a_valider">À valider</option><option value="valide">Validés</option></select><button class="ghost" id="pbtn" type="button" style="padding:7px 12px">Articles publiés</button><button class="btn" id="new" type="button">Nouvel élément</button></div>
+<div class="card" id="pp" hidden style="margin-bottom:18px"><h2>Articles publiés sur le journal <small id="ppc"></small></h2>
+<p><small>Lus sur le journal en ligne : articles publiés, articles à valider (brouillons de la collecte) et articles d’exemple de la maquette. Cochez ceux à importer, puis cliquez sur « Modifier » dans la liste des éléments.</small></p>
+<div class="row" id="ppt" style="margin-bottom:6px"></div>
+<label style="display:flex;gap:8px;align-items:flex-start;font-weight:400"><input type="checkbox" id="ppr" style="width:auto;margin-top:5px"> Remplacer aussi ma version locale des articles déjà présents dans l’éditeur (les modifications non publiées seraient perdues)</label>
+<ul id="ppl" style="margin-top:10px"></ul>
+<div class="row" style="margin-top:10px"><button class="btn" id="ppi" type="button">Importer la sélection</button><button class="ghost" id="ppa" type="button">Tout cocher</button><button class="ghost" id="ppx" type="button">Fermer</button></div>
+<p class="msg" id="ppm" role="status"></p></div>
 <div class="two">
 <div class="card"><h2>Éléments <small id="cnt"></small></h2><ul id="list"></ul><p id="none" hidden><small>Aucun élément. Créez-en un, ou importez le fichier de collecte dans l’onglet Publier.</small></p></div>
 <form class="card" id="f" autocomplete="off"><h2 id="ft">Nouvel élément</h2>
 <div class="cols"><div><label for="sec">Rubrique</label><select id="sec"></select></div><div><label for="kick">Étiquette (ex. France, Alerte critique)</label><input id="kick"></div></div>
 <label for="tit">Titre</label><input id="tit" required>
-<label for="res">1. L’information (chapô)</label><textarea id="res"></textarea>
-<label for="ana">2. L’analyse</label><textarea id="ana"></textarea>
-<label for="act">3. L’action (un point par ligne)</label><textarea id="act"></textarea>
+<p style="margin:12px 0 0"><small>Chaque section a un sous-titre modifiable (laissez-le vide pour garder le titre par défaut). Une section laissée vide n’apparaît pas dans l’article, et la numérotation s’adapte.</small></p>
+<label id="l-res">L’information (chapô)</label><input class="sst" id="s-res" placeholder="Sous-titre (par défaut : L’information)" aria-label="Sous-titre de l’information"><div class="rte" data-rte="res" data-l="l-res"></div>
+<label id="l-ana">L’analyse (facultatif)</label><input class="sst" id="s-ana" placeholder="Sous-titre (par défaut : L’analyse)" aria-label="Sous-titre de l’analyse"><div class="rte" data-rte="ana" data-l="l-ana"></div>
+<label for="act">L’action, un point par ligne (facultatif)</label><input class="sst" id="s-act" placeholder="Sous-titre (par défaut : L’action)" aria-label="Sous-titre de l’action"><textarea id="act"></textarea>
+<label id="l-con">Conclusion (facultatif)</label><input class="sst" id="s-con" placeholder="Sous-titre (par défaut : Conclusion)" aria-label="Sous-titre de la conclusion"><div class="rte" data-rte="con" data-l="l-con"></div>
+<details id="aud"><summary>Auteur (facultatif)</summary>
+<div class="cols"><div><label for="aun">Nom</label><input id="aun" placeholder="Prénom Nom"></div><div><label for="aur">Fonction ou présentation courte</label><input id="aur" placeholder="Consultant GRC, formateur…"></div></div>
+<label for="aul">Liens LinkedIn ou autres réseaux (un par ligne)</label><textarea id="aul" style="min-height:56px" placeholder="https://www.linkedin.com/in/…"></textarea>
+<label for="aup">Photo de l’auteur</label><input id="aup" type="file" accept="image/*">
+<div id="apw" hidden style="margin-top:8px"><img id="api" alt="" style="width:84px;height:84px;object-fit:cover;border-radius:50%;display:block"><button class="ghost" id="apx" type="button" style="margin-top:6px">Retirer la photo</button></div>
+<div class="row" style="margin-top:10px"><button class="ghost" id="adsv" type="button">Enregistrer comme auteur par défaut</button><button class="ghost" id="aduse" type="button">Utiliser l’auteur par défaut</button></div>
+</details>
 <div class="cols"><div><label for="src">Source</label><input id="src" placeholder="CERT-FR, CISA…"></div><div><label for="url">Adresse de la source</label><input id="url" type="url" placeholder="https://…"></div></div>
 <div class="cols"><div><label for="dat">Date</label><input id="dat" type="date"></div><div><label for="cri">Criticité</label><select id="cri"><option value="">—</option><option>Critique</option><option>Élevée</option><option>Moyenne</option><option>Faible</option></select></div></div>
-<label id="rll">Articles liés (en bas de la page de l’article)</label>
-<div class="rl" id="rl" role="group" aria-labelledby="rll"></div>
-<div class="row" style="align-items:center"><small id="rm"></small><button class="ghost" id="rauto" type="button" hidden>Remplir automatiquement</button></div>
 <label for="pho">Photo (facultatif)</label>
 <input id="pho" type="file" accept="image/*">
 <div id="phw" hidden style="margin-top:8px"><img id="phi" alt="" style="max-width:100%;max-height:170px;border-radius:4px;display:block"><button class="ghost" id="phx" type="button" style="margin-top:6px">Retirer la photo</button></div>
@@ -84,12 +105,18 @@ small{color:var(--muted)}
 <div class="card"><h2>Rédiger l’édition</h2>
 <p><small>Le fil continu reste alimenté au fil de l’eau. L’édition regroupe, chaque semaine, l’essentiel et une analyse. Elle devient un article de la rubrique Analyses.</small></p>
 <label for="per">Période</label><input id="per" value="semaine du 26 octobre au 1er novembre 2026">
-<label for="edi">L’analyse de la semaine</label><textarea id="edi" style="min-height:130px"></textarea>
+<label id="l-edi">L’analyse de la semaine</label><div class="rte" data-rte="edi" data-l="l-edi"></div>
 <label for="sur">À surveiller la semaine prochaine (un point par ligne)</label><textarea id="sur"></textarea>
 <div class="row" style="margin-top:14px"><button class="btn" id="mk" type="button">Créer l’article de synthèse</button></div>
 <p class="msg" id="em" role="status"></p></div>
 <div class="card pick"><h2>Éléments validés à retenir</h2><ul id="pick"></ul><p id="pnone" hidden><small>Aucun élément validé pour l’instant.</small></p></div>
 </div>
+<div class="card" style="margin-top:18px"><h2>Journal PDF</h2>
+<p><small>Assemble les articles validés de la période choisie (couverture, sommaire, articles par rubrique, avec le design du journal). Une page s’ouvre : utilisez son bouton « Enregistrer en PDF », puis choisissez « Enregistrer au format PDF » dans la fenêtre d’impression.</small></p>
+<div class="cols"><div><label for="pd1">Du</label><input id="pd1" type="date"></div><div><label for="pd2">Au</label><input id="pd2" type="date"></div></div>
+<p><small>Décochez les articles à écarter du journal.</small></p><div id="pdl"></div><p><small id="pdn"></small></p>
+<div class="row"><button class="btn" id="pdg" type="button">Générer le journal PDF</button></div>
+<p class="msg" id="pdm" role="status"></p></div>
 </section>
 
 <section id="t-ex" hidden>
@@ -119,13 +146,13 @@ small{color:var(--muted)}
 </main>
 
 <script>
-var SEC=['Actualités','Géopolitique','Cyber & numérique','Économie','Société','Analyses','CTF'],items=[],cur=null,pend=null,sel={},gone={},cfg={},tm=null,busy=false,again=false;
+var SEC=['Actualités','Géopolitique','Cyber & numérique','Économie','Société','Analyses','CTF','Notions cyber'],items=[],cur=null,pend=null,sel={},gone={},cfg={},tm=null,busy=false,again=false;
 var $=function(i){return document.getElementById(i)};
 function esc(t){return String(t==null?'':t).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function today(){return new Date().toISOString().slice(0,10)}
 function uid(){return 'r'+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
-function secOf(x){var k=x.section!=null?+x.section:SEC.indexOf(x.rubrique);return k>=0&&k<7?k:2}
-function norm(x){return{id:x.id||uid(),section:secOf(x),kicker:x.kicker||'',titre:String(x.titre||''),resume:x.resume||'',analyse:x.analyse||'',actions:Array.isArray(x.actions)?x.actions:(x.action?[x.action]:[]),source:x.source||'',url:x.url||'',date:x.date||'',criticite:x.criticite||'',image:x.image||'',imageData:x.imageData||'',sent:x.sent||'',credit:x.credit||'',alt:x.alt||'',related:Array.isArray(x.related)?x.related.map(String):null,statut:x.statut=='valide'?'valide':'a_valider'}}
+function secOf(x){var k=x.section!=null?+x.section:SEC.indexOf(x.rubrique);return k>=0&&k<SEC.length?k:2}
+function norm(x){return{id:x.id||uid(),section:secOf(x),kicker:x.kicker||'',titre:String(x.titre||''),resume:x.resume||'',analyse:x.analyse||'',conclusion:x.conclusion||'',stInfo:x.stInfo||'',stAna:x.stAna||'',stAct:x.stAct||'',stCon:x.stCon||'',auteur:x.auteur||'',auteurRole:x.auteurRole||'',auteurLiens:x.auteurLiens||'',auteurPhoto:x.auteurPhoto||'',auteurPhotoData:x.auteurPhotoData||'',sentA:x.sentA||'',actions:Array.isArray(x.actions)?x.actions:(x.action?[x.action]:[]),source:x.source||'',url:x.url||'',date:x.date||'',criticite:x.criticite||'',image:x.image||'',imageData:x.imageData||'',sent:x.sent||'',credit:x.credit||'',alt:x.alt||'',statut:x.statut=='valide'?'valide':'a_valider'}}
 function load(){try{items=JSON.parse(localStorage.getItem('cro-items')||'[]').map(norm)}catch(e){items=[]}try{gone=JSON.parse(localStorage.getItem('cro-gone')||'{}')}catch(e){gone={}}try{cfg=JSON.parse(localStorage.getItem('cro-cfg')||'{}')}catch(e){cfg={}}}
 function saveLocal(){try{localStorage.setItem('cro-items',JSON.stringify(items));localStorage.setItem('cro-gone',JSON.stringify(gone))}catch(e){$('fm').textContent='Attention : l’espace du navigateur est plein. Publiez, puis retirez des photos déjà envoyées.'}}
 function save(){saveLocal();if(cfg.auto&&cfg.token)schedule()}
@@ -139,14 +166,14 @@ $('list').innerHTML=v.map(function(x){return '<li><b>'+esc(x.titre)+'</b><span c
 }
 function fill(x){cur=x?x.id:null;x=x||norm({});
 $('ft').textContent=cur?'Modifier l’élément':'Nouvel élément';
-$('sec').value=x.section;$('kick').value=x.kicker;$('tit').value=x.titre;$('res').value=x.resume;$('ana').value=x.analyse;$('act').value=x.actions.join('\n');$('src').value=x.source;$('url').value=x.url;$('dat').value=x.date||today();$('cri').value=x.criticite;$('sta').value=x.statut;$('phc').value=x.credit;$('pha').value=x.alt;ph={imageData:x.imageData,image:x.image};showPh();rel=Array.isArray(x.related)?x.related.slice():null;relDraw();$('fm').textContent='';pvSend()}
+$('sec').value=x.section;$('kick').value=x.kicker;$('tit').value=x.titre;setR('res',x.resume);setR('ana',x.analyse);setR('con',x.conclusion);$('s-res').value=x.stInfo;$('s-ana').value=x.stAna;$('s-act').value=x.stAct;$('s-con').value=x.stCon;$('act').value=x.actions.join('\n');$('src').value=x.source;$('url').value=x.url;$('dat').value=x.date||today();$('cri').value=x.criticite;$('sta').value=x.statut;$('phc').value=x.credit;$('pha').value=x.alt;ph={imageData:x.imageData,image:x.image};showPh();aph={imageData:x.auteurPhotoData,path:x.auteurPhoto};$('aun').value=x.auteur;$('aur').value=x.auteurRole;$('aul').value=x.auteurLiens;$('aud').open=!!(x.auteur||x.auteurRole||x.auteurLiens||x.auteurPhoto||x.auteurPhotoData);showAph();$('fm').textContent='';pvSend()}
 $('list').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var id=b.getAttribute('data-id'),a=b.getAttribute('data-a'),x=items.filter(function(i){return i.id==id})[0];if(!x)return;
 if(a=='e'){fill(x);$('f').scrollIntoView()}
 if(a=='t'){x.statut=x.statut=='valide'?'a_valider':'valide';save()}
 if(a=='d'){if(pend==id){items=items.filter(function(i){return i.id!=id});gone[id]=1;pend=null;save();if(cur==id)fill(null)}else pend=id}
 if(a!='d')pend=null;drawList();drawPick()});
 $('f').addEventListener('submit',function(e){e.preventDefault();
-var x=norm({id:cur,section:$('sec').value,kicker:$('kick').value.trim(),titre:$('tit').value.trim(),resume:$('res').value.trim(),analyse:$('ana').value.trim(),actions:$('act').value.split('\n').map(function(l){return l.trim()}).filter(Boolean),source:$('src').value.trim(),url:$('url').value.trim(),date:$('dat').value,criticite:$('cri').value,related:rel,image:ph.image,imageData:ph.imageData,credit:$('phc').value.trim(),alt:$('pha').value.trim(),sent:sentFor(),statut:$('sta').value});
+var x=norm({id:cur,section:$('sec').value,kicker:$('kick').value.trim(),titre:$('tit').value.trim(),resume:getR('res'),analyse:getR('ana'),conclusion:getR('con'),stInfo:$('s-res').value.trim(),stAna:$('s-ana').value.trim(),stAct:$('s-act').value.trim(),stCon:$('s-con').value.trim(),auteur:$('aun').value.trim(),auteurRole:$('aur').value.trim(),auteurLiens:lines($('aul').value).join('\n'),auteurPhoto:aph.path,auteurPhotoData:aph.imageData,sentA:sentAFor(),actions:$('act').value.split('\n').map(function(l){return l.trim()}).filter(Boolean),source:$('src').value.trim(),url:$('url').value.trim(),date:$('dat').value,criticite:$('cri').value,image:ph.image,imageData:ph.imageData,credit:$('phc').value.trim(),alt:$('pha').value.trim(),sent:sentFor(),statut:$('sta').value});
 if(!x.titre){$('fm').textContent='Le titre est obligatoire.';return}
 var i=items.map(function(t){return t.id}).indexOf(x.id);if(i>-1)items[i]=x;else items.unshift(x);delete gone[x.id];
 save();cur=x.id;$('ft').textContent='Modifier l’élément';$('fm').textContent=x.statut=='valide'?'Enregistré. Il sera publié au prochain envoi.':'Enregistré. Non publié tant qu’il n’est pas validé.';drawList();drawPick()});
@@ -162,7 +189,7 @@ $('pick').addEventListener('change',function(e){sel[e.target.getAttribute('data-
 $('mk').addEventListener('click',function(){
 var per=$('per').value.trim(),ch=items.filter(function(x){return sel[x.id]&&x.statut=='valide'});
 if(!per){$('em').textContent='Indiquez la période.';return}
-var x=norm({id:'edition-'+per.toLowerCase().replace(/[^a-z0-9]+/g,'-'),section:5,kicker:'Édition de la semaine',titre:'Édition de la semaine : '+per,resume:('À retenir : '+ch.map(function(c){return c.titre}).join(' · ')).slice(0,380),analyse:$('edi').value.trim(),actions:$('sur').value.split('\n').map(function(l){return l.trim()}).filter(Boolean),source:'Rédaction',date:today(),statut:'valide'});
+var x=norm({id:'edition-'+per.toLowerCase().replace(/[^a-z0-9]+/g,'-'),section:5,kicker:'Édition de la semaine',titre:'Édition de la semaine : '+per,resume:('À retenir : '+ch.map(function(c){return c.titre}).join(' · ')).slice(0,380),analyse:getR('edi'),actions:$('sur').value.split('\n').map(function(l){return l.trim()}).filter(Boolean),source:'Rédaction',date:today(),statut:'valide'});
 var i=items.map(function(t){return t.id}).indexOf(x.id);if(i>-1)items[i]=x;else items.unshift(x);delete gone[x.id];
 save();$('em').textContent='Article de synthèse enregistré et validé ('+ch.length+' élément'+(ch.length>1?'s':'')+' retenu'+(ch.length>1?'s':'')+'). Allez dans Publier pour l’envoyer au journal.';drawList()});
 
@@ -179,12 +206,12 @@ save();$('im').textContent=n+' élément'+(n>1?'s':'')+' importé'+(n>1?'s':'')+
 document.querySelector('.tabs').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
 [].forEach.call(document.querySelectorAll('.tabs button'),function(t){t.setAttribute('aria-selected',t==b?'true':'false')});
 ['items','ed','ex'].forEach(function(k){$('t-'+k).hidden=k!=b.getAttribute('data-t')});
-if(b.getAttribute('data-t')=='ex')drawOut();if(b.getAttribute('data-t')=='ed')drawPick()});
+if(b.getAttribute('data-t')=='ex')drawOut();if(b.getAttribute('data-t')=='ed'){drawPick();pdfCount()}});
 function cst(t){$('cmsg').textContent=t}
 function enc(t){return btoa(unescape(encodeURIComponent(t)))}
 function dec(t){return decodeURIComponent(escape(atob(t.replace(/\s/g,''))))}
-function api(m,body,path){var u='https://api.github.com/repos/'+encodeURIComponent(cfg.owner)+'/'+encodeURIComponent(cfg.repo)+'/contents/'+(path||cfg.path).split('/').map(encodeURIComponent).join('/')+(m=='GET'?'?ref='+encodeURIComponent(cfg.branch):'');
-return fetch(u,{method:m,headers:{'Accept':'application/vnd.github+json','Authorization':'Bearer '+cfg.token,'X-GitHub-Api-Version':'2022-11-28'},body:body?JSON.stringify(body):undefined})}
+function api(m,body,path){var u='https://api.github.com/repos/'+encodeURIComponent(cfg.owner)+'/'+encodeURIComponent(cfg.repo)+'/contents/'+(path||cfg.path).split('/').map(encodeURIComponent).join('/')+(m=='GET'?'?ref='+encodeURIComponent(cfg.branch)+'&_='+Date.now():'');
+return fetch(u,{method:m,cache:'no-store',headers:{'Accept':'application/vnd.github+json','Authorization':'Bearer '+cfg.token,'X-GitHub-Api-Version':'2022-11-28'},body:body?JSON.stringify(body):undefined})}
 function merge(rem){var ids={},n=0;items.forEach(function(x){ids[x.id]=1});(Array.isArray(rem)?rem:[]).forEach(function(x){if(!x||!x.titre)return;var y=norm(x);if(!ids[y.id]&&!gone[y.id]){items.push(y);ids[y.id]=1;n++}});return n}
 async function sync(push){
 if(!cfg.token||!cfg.owner||!cfg.repo){cst('Renseignez d’abord la connexion au journal.');return}
@@ -215,16 +242,16 @@ var ph={imageData:'',image:''},pvView='article',pvLoaded=false,pvT=null;
 function lines(t){return t.split('\n').map(function(l){return l.trim()}).filter(Boolean)}
 function siteBase(){return 'https://'+(cfg.owner||'twagirumukiza')+'.github.io/'+(cfg.repo||'cyber-risk-observer')+'/'}
 function sentFor(){var o=items.filter(function(i){return i.id==cur})[0];return o&&o.imageData===ph.imageData?o.sent:''}
-function pubJson(){return JSON.stringify(items.filter(function(x){return x.statut=='valide'}).map(function(x){var y={};Object.keys(x).forEach(function(k){if(k!='imageData'&&k!='sent')y[k]=x[k]});return y}),null,1)}
+function pubJson(){return JSON.stringify(items.filter(function(x){return x.statut=='valide'}).map(function(x){var y={};Object.keys(x).forEach(function(k){if(k!='imageData'&&k!='sent'&&k!='auteurPhotoData'&&k!='sentA')y[k]=x[k]});return y}),null,1)}
 function hsh(s){var n=0;for(var i=0;i<s.length;i+=97)n=(n*31+s.charCodeAt(i))|0;return n+':'+s.length}
 function showPh(){var u=ph.imageData||(ph.image?siteBase()+ph.image:'');$('phw').hidden=!u;if(u)$('phi').src=u;else $('phi').removeAttribute('src');$('pho').value=''}
-function shrink(file,cb){var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){
+function shrink(file,cb,mw){mw=mw||1200;var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){
 function go(mw,q){var w=Math.min(mw,im.width),h=Math.round(im.height*w/im.width),c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(im,0,0,w,h);return c.toDataURL('image/jpeg',q)}
-var d=go(1200,.8);if(d.length>400000)d=go(900,.7);cb(d)};im.onerror=function(){cb(null)};im.src=r.result};r.onerror=function(){cb(null)};r.readAsDataURL(file)}
+var d=go(mw,.8);if(d.length>400000)d=go(Math.min(900,mw),.7);cb(d)};im.onerror=function(){cb(null)};im.src=r.result};r.onerror=function(){cb(null)};r.readAsDataURL(file)}
 $('pho').addEventListener('change',function(){var f=this.files[0];if(!f)return;if(!/^image\//.test(f.type)){$('fm').textContent='Ce fichier n’est pas une image.';return}
 shrink(f,function(d){if(!d){$('fm').textContent='Image illisible.';return}ph.imageData=d;showPh();$('fm').textContent='Photo ajoutée (environ '+Math.round(d.length*.75/1024)+' Ko après réduction). Pensez à indiquer le crédit.';pvQueue()})});
 $('phx').addEventListener('click',function(){ph={imageData:'',image:''};showPh();pvQueue()});
-function draft(){return{section:+$('sec').value,kicker:$('kick').value.trim(),titre:$('tit').value.trim(),resume:$('res').value.trim(),analyse:$('ana').value.trim(),actions:lines($('act').value),source:$('src').value.trim(),url:$('url').value.trim(),related:rel,image:ph.imageData||ph.image,credit:$('phc').value.trim(),alt:$('pha').value.trim()}}
+function draft(){return{section:+$('sec').value,kicker:$('kick').value.trim(),titre:$('tit').value.trim(),resume:getR('res'),analyse:getR('ana'),conclusion:getR('con'),stInfo:$('s-res').value.trim(),stAna:$('s-ana').value.trim(),stAct:$('s-act').value.trim(),stCon:$('s-con').value.trim(),auteur:$('aun').value.trim(),auteurRole:$('aur').value.trim(),auteurLiens:lines($('aul').value).join('\n'),auteurPhoto:aph.imageData||aph.path,actions:lines($('act').value),source:$('src').value.trim(),url:$('url').value.trim(),image:ph.imageData||ph.image,credit:$('phc').value.trim(),alt:$('pha').value.trim()}}
 function pvSend(){if(!pvLoaded||$('pv').hidden)return;try{$('pvf').contentWindow.postMessage({type:'cro-preview',view:pvView,item:draft()},location.origin)}catch(e){}}
 function pvQueue(){clearTimeout(pvT);pvT=setTimeout(pvSend,400)}
 $('pvb').addEventListener('click',function(){$('pv').hidden=false;var u=siteBase()+'?preview=1',f=$('pvf');if(f.getAttribute('data-u')!=u){pvLoaded=false;f.setAttribute('data-u',u);f.src=u}else pvSend();$('pv').scrollIntoView()});
@@ -232,23 +259,116 @@ $('pvf').addEventListener('load',function(){if(this.getAttribute('data-u')){pvLo
 $('pvx').addEventListener('click',function(){$('pv').hidden=true});
 $('pv').addEventListener('click',function(e){var b=e.target.closest('[data-v]');if(!b)return;pvView=b.getAttribute('data-v');[].forEach.call($('pv').querySelectorAll('[data-v]'),function(t){t.setAttribute('aria-pressed',t==b?'true':'false')});pvSend()});
 $('f').addEventListener('input',pvQueue);
-async function uploadImages(){for(var i=0;i<items.length;i++){var x=items[i];if(x.statut!='valide'||!x.imageData)continue;var hh=hsh(x.imageData);if(x.image&&x.sent==hh)continue;
-var p='images/'+x.id.replace(/[^\w.-]/g,'-')+'.jpg',sha;cst('Envoi de la photo de « '+x.titre.slice(0,40)+' »…');
-var g=await api('GET',null,p);if(g.ok)sha=(await g.json()).sha;
-var b={message:'Journal : photo',content:x.imageData.split(',')[1],branch:cfg.branch};if(sha)b.sha=sha;
-var w=await api('PUT',b,p);if(!w.ok){var e=await w.json().catch(function(){return{}});throw new Error(w.status+' '+(e.message||''))}
-x.image=p;x.sent=hh;saveLocal()}}
-var rel=null;
-function relAuto(){var s=+$('sec').value;return items.filter(function(x){return x.statut=='valide'&&x.section==s&&x.id!=cur}).slice(0,3).map(function(x){return x.id})}
-function relDraw(){var s=+$('sec').value,on=rel||relAuto(),st=$('rl').scrollTop,
-c=items.filter(function(x){return x.id!=cur}).sort(function(a,b){return (a.section==s?0:1)-(b.section==s?0:1)});
-$('rl').innerHTML=c.length?c.map(function(x){return '<label><input type="checkbox" data-id="'+esc(x.id)+'"'+(on.indexOf(x.id)>-1?' checked':'')+'><span>'+esc(x.titre)+'<br><small>'+SEC[x.section]+(x.statut=='valide'?'':' · non publié')+'</small></span></label>'}).join(''):'<small>Aucun autre article pour l’instant.</small>';
-$('rl').scrollTop=st;
-$('rm').textContent=rel?'Mode manuel : '+rel.length+' article'+(rel.length>1?'s':'')+' choisi'+(rel.length>1?'s':'')+'.':'Mode automatique : les articles les plus récents de la rubrique.';$('rauto').hidden=!rel}
-$('rl').addEventListener('change',function(){rel=[].map.call($('rl').querySelectorAll('input:checked'),function(i){return i.getAttribute('data-id')});relDraw();pvQueue()});
-$('rauto').addEventListener('click',function(){rel=null;relDraw();pvQueue()});
-$('sec').addEventListener('change',function(){if(!rel)relDraw()});
-load();showCfg();fill(null);drawList();drawPick();
+async function putImg(p,data,label){var sha;cst('Envoi de la photo de « '+label+' »…');var g=await api('GET',null,p);if(g.ok)sha=(await g.json()).sha;var b={message:'Journal : photo',content:data.split(',')[1],branch:cfg.branch};if(sha)b.sha=sha;var w=await api('PUT',b,p);if(!w.ok){var e=await w.json().catch(function(){return{}});throw new Error(w.status+' '+(e.message||''))}}
+async function uploadImages(){for(var i=0;i<items.length;i++){var x=items[i];if(x.statut!='valide')continue;
+if(x.imageData){var hh=hsh(x.imageData);if(!(x.image&&x.sent==hh)){var p='images/'+x.id.replace(/[^\w.-]/g,'-')+'.jpg';await putImg(p,x.imageData,x.titre.slice(0,40));x.image=p;x.sent=hh;saveLocal()}}
+if(x.auteurPhotoData){var h2=fnv(x.auteurPhotoData);if(!(x.auteurPhoto&&x.sentA==h2)){var p2='images/auteur-'+h2+'.jpg';await putImg(p2,x.auteurPhotoData,'l’auteur');x.auteurPhoto=p2;x.sentA=h2;saveLocal()}}}}
+
+var OKT={P:1,BR:1,STRONG:1,B:1,EM:1,I:1,U:1,A:1,UL:1,OL:1,LI:1,H3:1,H4:1,BLOCKQUOTE:1},DROPT={SCRIPT:1,STYLE:1,IFRAME:1,OBJECT:1,EMBED:1,SVG:1,MATH:1,TEMPLATE:1,NOSCRIPT:1,FORM:1,INPUT:1,BUTTON:1,TEXTAREA:1,SELECT:1,LINK:1,META:1};
+function safeUrl(u){u=String(u||'').trim();return /^(https?:\/\/|mailto:)/i.test(u)?u:''}
+function cleanN(n,o){[].forEach.call(n.childNodes,function(c){if(c.nodeType==3){o.appendChild(document.createTextNode(c.nodeValue));return}if(c.nodeType!=1)return;var t=c.tagName;if(DROPT[t])return;if(t=='DIV')t='P';if(!OKT[t]){cleanN(c,o);return}var e=document.createElement(t.toLowerCase());if(t=='A'){var h=safeUrl(c.getAttribute('href'));if(!h){cleanN(c,o);return}e.setAttribute('href',h);e.setAttribute('rel','noopener noreferrer');e.setAttribute('target','_blank')}cleanN(c,e);o.appendChild(e)})}
+function sanitize(h){var d=new DOMParser().parseFromString('<body>'+h,'text/html'),o=document.createElement('div');cleanN(d.body,o);return o.innerHTML}
+function rich(t){t=String(t==null?'':t);if(!t.trim())return '';if(/<\/?[a-z][^>]*>/i.test(t))return sanitize(t);return t.split(/\n{2,}/).map(function(p){return '<p>'+esc(p.trim()).replace(/\n/g,'<br>')+'</p>'}).join('')}
+function getR(id){var h=sanitize($(id).innerHTML).replace(/<p>(<br>)?<\/p>/g,'').trim(),t=h.replace(/<[^>]*>/g,'').trim();return(t||/<(ul|ol|blockquote)/.test(h))?h:''}
+function setR(id,t){$(id).innerHTML=rich(t||'')}
+var RB=[['bold','<b>G</b>','Gras'],['italic','<i>I</i>','Italique'],['h3','Titre','Intertitre'],['insertUnorderedList','• Liste','Liste à puces'],['insertOrderedList','1. Liste','Liste numérotée'],['blockquote','« Citation','Citation'],['link','Lien','Insérer un lien'],['unlink','Sans lien','Retirer le lien'],['removeFormat','Effacer','Effacer la mise en forme']];
+function rteInit(){try{document.execCommand('defaultParagraphSeparator',false,'p')}catch(e){}
+[].forEach.call(document.querySelectorAll('[data-rte]'),function(w){var id=w.getAttribute('data-rte');w.innerHTML='<div class="rtb" role="toolbar" aria-label="Mise en forme">'+RB.map(function(b){return '<button type="button" data-c="'+b[0]+'" title="'+b[2]+'" aria-label="'+b[2]+'">'+b[1]+'</button>'}).join('')+'</div><div class="rtc" id="'+id+'" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="'+w.getAttribute('data-l')+'"></div>'})}
+var rsel=null;
+document.addEventListener('selectionchange',function(){var s=getSelection();if(s.rangeCount){var n=s.anchorNode,c=n&&(n.nodeType==1?n:n.parentNode);if(c&&c.closest&&c.closest('.rtc'))rsel=s.getRangeAt(0).cloneRange()}});
+function rrestore(ed){if(rsel&&ed.contains(rsel.commonAncestorContainer)){var s=getSelection();s.removeAllRanges();s.addRange(rsel)}}
+document.addEventListener('mousedown',function(e){if(e.target.closest&&e.target.closest('.rtb button'))e.preventDefault()});
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.rtb button');if(!b)return;var ed=b.closest('.rte').querySelector('.rtc'),c=b.getAttribute('data-c');ed.focus();rrestore(ed);
+if(c=='link'){var u=prompt('Adresse du lien (https://…)','https://');if(!u)return;u=u.trim();if(!/^(https?:\/\/|mailto:)/i.test(u)){alert('Le lien doit commencer par https://');return}ed.focus();rrestore(ed);document.execCommand('createLink',false,u)}
+else if(c=='h3'||c=='blockquote'){var on=String(document.queryCommandValue('formatBlock')).toLowerCase()==c;document.execCommand('formatBlock',false,on?'p':c)}
+else document.execCommand(c,false,null);
+ed.dispatchEvent(new Event('input',{bubbles:true}))});
+document.addEventListener('paste',function(e){var ed=e.target.closest&&e.target.closest('.rtc');if(!ed)return;e.preventDefault();var t=(e.clipboardData||window.clipboardData).getData('text/plain');document.execCommand('insertText',false,t)});
+function fnv(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return(h>>>0).toString(16)+s.length.toString(16)}
+var aph={imageData:'',path:''};
+function showAph(){var u=aph.imageData||(aph.path?siteBase()+aph.path:'');$('apw').hidden=!u;if(u)$('api').src=u;else $('api').removeAttribute('src');$('aup').value=''}
+function sentAFor(){var o=items.filter(function(i){return i.id==cur})[0];return o&&o.auteurPhotoData===aph.imageData?o.sentA:''}
+$('aup').addEventListener('change',function(){var f=this.files[0];if(!f)return;if(!/^image\//.test(f.type)){$('fm').textContent='Ce fichier n’est pas une image.';return}shrink(f,function(d){if(!d){$('fm').textContent='Image illisible.';return}aph.imageData=d;aph.path='';showAph();pvQueue()},400)});
+$('apx').addEventListener('click',function(){aph={imageData:'',path:''};showAph();pvQueue()});
+$('adsv').addEventListener('click',function(){try{localStorage.setItem('cro-author',JSON.stringify({auteur:$('aun').value.trim(),role:$('aur').value.trim(),liens:$('aul').value,imageData:aph.imageData,path:aph.path}));$('fm').textContent='Auteur par défaut enregistré.'}catch(e){$('fm').textContent='Enregistrement impossible (espace du navigateur plein).'}});
+$('aduse').addEventListener('click',function(){var a;try{a=JSON.parse(localStorage.getItem('cro-author')||'null')}catch(e){a=null}if(!a){$('fm').textContent='Aucun auteur par défaut : enregistrez-en un d’abord.';return}$('aun').value=a.auteur||'';$('aur').value=a.role||'';$('aul').value=a.liens||'';aph={imageData:a.imageData||'',path:a.path||''};showAph();pvQueue();$('fm').textContent='Auteur par défaut appliqué.'});
+
+function ld(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
+function fmtD(d){try{return new Date(d+'T12:00:00').toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})}catch(e){return d}}
+var pdx={};
+function wkRange(){var a=$('pd1').value,b=$('pd2').value;return items.filter(function(x){return x.statut=='valide'&&x.date&&(!a||x.date>=a)&&(!b||x.date<=b)}).sort(function(p,q){var ep=p.kicker=='Édition de la semaine'?0:1,eq=q.kicker=='Édition de la semaine'?0:1;return ep-eq||p.section-q.section||(q.date||'').localeCompare(p.date||'')})}
+function wkItems(){return wkRange().filter(function(x){return !pdx[x.id]})}
+function pdfNum(){var n=wkItems().length;$('pdn').textContent=n+' article'+(n>1?'s':'')+' retenu'+(n>1?'s':'')+' pour le journal.'}
+function pdfCount(){$('pdl').innerHTML=wkRange().map(function(x){return '<label style="display:flex;gap:8px;align-items:flex-start;font-weight:400;margin:4px 0"><input type="checkbox" data-id="'+esc(x.id)+'" style="width:auto;margin-top:5px"'+(pdx[x.id]?'':' checked')+'><span>'+esc(x.titre)+' <small>· '+esc(SEC[x.section])+' · '+esc(x.date)+'</small></span></label>'}).join('');pdfNum()}
+$('pdl').addEventListener('change',function(e){var i=e.target.getAttribute('data-id');if(!i)return;if(e.target.checked)delete pdx[i];else pdx[i]=1;pdfNum()});
+function pdfHtml(list){
+var a=$('pd1').value,b=$('pd2').value,per=(a&&b)?'du '+fmtD(a)+' au '+fmtD(b):(b?'jusqu’au '+fmtD(b):a?'depuis le '+fmtD(a):'');
+function grp(x){return x.kicker=='Édition de la semaine'?'Édition de la semaine':SEC[x.section]}
+function img(x,d,p){var u=x[d]||(x[p]?siteBase()+x[p]:'');return /^(data:image\/|https:\/\/)/.test(u)?u:''}
+var toc='',last=null;list.forEach(function(x,i){var g=grp(x);if(g!==last){toc+=(last!==null?'</ul>':'')+'<h3>'+esc(g)+'</h3><ul>';last=g}toc+='<li><a href="#a'+i+'">'+esc(x.titre)+'</a></li>'});toc+='</ul>';
+var body='';last=null;
+list.forEach(function(x,i){var g=grp(x),ph=img(x,'imageData','image'),ap=img(x,'auteurPhotoData','auteurPhoto'),ls=String(x.auteurLiens||'').split('\n').map(safeUrl).filter(function(l){return /^https?:/i.test(l)}).slice(0,6);
+if(g!==last){body+='<div class="band">'+esc(g)+'</div>';last=g}
+var inf=rich(x.resume),ana=rich(x.analyse),con=rich(x.conclusion),ac=(x.actions||[]).filter(Boolean),nn=0,HH=function(t,d,u){return t||(u?(++nn)+'. '+d:d)},h1=inf?HH(x.stInfo,'L’information',1):'',h2=ana?HH(x.stAna,'L’analyse',1):'',h3=ac.length?HH(x.stAct,'L’action',1):'',h4=con?HH(x.stCon,'Conclusion'):'';
+body+='<article class="a" id="a'+i+'"><div class="k">'+esc(x.kicker||SEC[x.section])+'</div><h2>'+esc(x.titre)+'</h2><p class="meta">'+esc(SEC[x.section])+' · '+esc(fmtD(x.date))+(x.auteur?' · Par '+esc(x.auteur):'')+(x.criticite?' · Criticité : '+esc(x.criticite):'')+'</p>'
++(ph?'<figure><img src="'+esc(ph)+'" alt="'+esc(x.alt||'')+'">'+(x.credit?'<figcaption>Photo : '+esc(x.credit)+'</figcaption>':'')+'</figure>':'')
++(inf?'<div class="lv"><h4>'+esc(h1)+'</h4>'+inf+'</div>':'')
++(ana?'<div class="lv l2"><h4>'+esc(h2)+'</h4>'+ana+'</div>':'')
++(ac.length?'<div class="lv l3"><h4>'+esc(h3)+'</h4><ul>'+ac.map(function(t){return '<li>'+esc(t)+'</li>'}).join('')+'</ul></div>':'')
++(con?'<div class="lv l4"><h4>'+esc(h4)+'</h4>'+con+'</div>':'')
++((x.auteur||ap||ls.length)?'<div class="au">'+(ap?'<img src="'+esc(ap)+'" alt="">':'')+'<div>'+(x.auteur?'<b>'+esc(x.auteur)+'</b>':'')+(x.auteurRole?'<span>'+esc(x.auteurRole)+'</span>':'')+(ls.length?'<span>'+ls.map(function(l){return '<a href="'+esc(l)+'">'+esc(l.replace(/^https?:\/\/(www\.)?/,''))+'</a>'}).join(' · ')+'</span>':'')+'</div></div>':'')
++((x.source||x.url)?'<p class="src"><b>Source :</b> '+(/^https?:\/\//.test(x.url||'')?'<a href="'+esc(x.url)+'">'+esc(x.source||x.url)+'</a>':esc(x.source))+'</p>':'')
++'</article>'});
+var css='@page{size:A4;margin:16mm 14mm 18mm;@bottom-center{content:"Cyber Risk Observer · " counter(page);font:8pt sans-serif;color:#666}}*{box-sizing:border-box}body{margin:0;font:10.5pt/1.5 "IBM Plex Sans",system-ui,sans-serif;color:#121212;background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}a{color:inherit}'
++'.bar{position:sticky;top:0;z-index:9;background:#fff4b3;padding:10px 14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;font:14px system-ui}.bar button{background:#052962;color:#fff;border:0;border-radius:6px;padding:9px 16px;font:600 14px system-ui;cursor:pointer}'
++'.doc{max-width:820px;margin:0 auto;padding:16px}.cover{background:#052962;color:#fff;min-height:250mm;padding:20mm 16mm;display:flex;flex-direction:column;justify-content:space-between;break-after:page;page-break-after:always}'
++'.cover .tag{color:#ffe500;font:700 15pt "Source Serif 4",Georgia,serif}.cover h1{font:700 46pt/.95 "Source Serif 4",Georgia,serif;margin:10mm 0 0;letter-spacing:-.02em}.cover .per{font:600 17pt "Source Serif 4",Georgia,serif;margin:0}.cover small{opacity:.85;font-size:10pt}'
++'.toc{break-after:page;page-break-after:always}.toc h2{font:700 22pt "Source Serif 4",Georgia,serif;margin:0 0 8mm;color:#052962}.toc h3{font:700 12pt "Source Serif 4",Georgia,serif;margin:6mm 0 2mm;color:#c70000}.toc ul{margin:0;padding-left:5mm}.toc li{margin:1mm 0}.toc a{text-decoration:none}'
++'.band{background:#0a3a85;color:#fff;font:700 15pt "Source Serif 4",Georgia,serif;padding:3mm 5mm;margin:8mm 0 4mm;break-after:avoid}'
++'.a{padding:0 0 6mm;margin:0 0 6mm;border-bottom:1px solid #ddd}.k{color:#c70000;font:600 10pt "Source Serif 4",Georgia,serif}.a h2{font:700 20pt/1.15 "Source Serif 4",Georgia,serif;margin:1mm 0 2mm;break-after:avoid}.meta{color:#5f5f5f;font-size:9pt;margin:0 0 4mm}'
++'figure{margin:0 0 5mm}figure img{width:100%;max-height:80mm;object-fit:cover;display:block}figcaption{font-size:8pt;color:#5f5f5f;margin-top:1mm}'
++'.lv{border-left:4px solid #0a3a85;padding:0 0 0 4mm;margin:0 0 4mm}.lv h4{font:700 12pt "Source Serif 4",Georgia,serif;margin:0 0 1mm}.lv p{margin:0 0 2mm}.lv.l2{border-color:#c70000}.lv.l3{border-color:#1f7a3b}.lv.l4{border-color:#b4580a}.lv ul,.lv ol{margin:1mm 0;padding-left:6mm}.lv blockquote{margin:2mm 0;padding-left:4mm;border-left:2px solid #ccc;color:#555}.lv h3{font:700 11pt "Source Serif 4",Georgia,serif;margin:3mm 0 1mm}'
++'.au{display:flex;gap:4mm;align-items:center;border:1px solid #ccc;border-radius:3mm;padding:3mm;margin:0 0 4mm;break-inside:avoid}.au img{width:16mm;height:16mm;border-radius:50%;object-fit:cover}.au b{display:block;font:700 11pt "Source Serif 4",Georgia,serif}.au span{display:block;font-size:9pt;color:#555}.src{font-size:9pt;background:#eee;padding:2mm 3mm;margin:0;break-inside:avoid}.lv{break-inside:avoid}'
++'.foot{font-size:9pt;color:#666;text-align:center;margin-top:8mm}@media print{.bar{display:none}.doc{max-width:none;padding:0}}';
+return '<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cyber Risk Observer – Journal '+esc(per)+'</title><link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"><style>'+css+'</style></head><body>'
++'<div class="bar"><button type="button" onclick="(document.fonts?document.fonts.ready:Promise.resolve()).then(function(){print()})">Enregistrer en PDF</button><span>Dans la fenêtre qui s’ouvre, choisissez « Enregistrer au format PDF » (désactivez « En-têtes et pieds de page » si proposé).</span></div>'
++'<div class="doc"><section class="cover"><div><div class="tag">Veille cyber, géopolitique et GRC</div><h1>Cyber Risk<br>Observer</h1></div><div><p class="per">Journal '+esc(per)+'</p><p>'+list.length+' article'+(list.length>1?'s':'')+' validé'+(list.length>1?'s':'')+'</p><small>Cyber Risk Observer – by twagirumukiza</small></div></section>'
++'<section class="toc"><h2>Sommaire</h2>'+toc+'</section>'+body+'<p class="foot">Cyber Risk Observer – by twagirumukiza · Journal '+esc(per)+'</p></div></body></html>'}
+function pdfOpen(){var list=wkItems();if(!list.length){$('pdm').textContent='Aucun article validé sur cette période.';return}
+var h=pdfHtml(list),w=null;try{w=window.open('','_blank')}catch(e){}
+if(w){w.document.open();w.document.write(h);w.document.close();$('pdm').textContent='Journal ouvert dans un nouvel onglet ('+list.length+' article'+(list.length>1?'s':'')+').'}
+else{var u=URL.createObjectURL(new Blob([h],{type:'text/html'})),a=document.createElement('a');a.href=u;a.download='journal-cyber-risk-observer.html';document.body.appendChild(a);a.click();a.remove();$('pdm').textContent='Les fenêtres sont bloquées : le journal a été téléchargé en fichier HTML. Ouvrez-le, puis enregistrez-le en PDF.'}}
+(function(){var t=new Date(),f=new Date();f.setDate(t.getDate()-6);$('pd2').value=ld(t);$('pd1').value=ld(f)})();
+$('pd1').addEventListener('input',pdfCount);$('pd2').addEventListener('input',pdfCount);$('pdg').addEventListener('click',pdfOpen);
+
+var pubList=[];
+function strip(x){var y={};Object.keys(x).forEach(function(k){if(k!='imageData'&&k!='sent'&&k!='auteurPhotoData'&&k!='sentA')y[k]=x[k]});return JSON.stringify(y)}
+async function fetchPub(){try{var r=await fetch(siteBase()+'data/items.json?_='+Date.now(),{cache:'no-store'});if(r.ok){var d=await r.json();if(Array.isArray(d))return d}}catch(e){}
+if(cfg.token&&cfg.owner&&cfg.repo){var r2=await api('GET');if(r2.ok){var j=await r2.json();return JSON.parse(dec(j.content))}}
+throw new Error('Le journal est injoignable (vérifiez le compte et le dépôt dans l’onglet Publier).')}
+var PT={pub:'publié',val:'à valider / brouillon',ex:'exemple'},PTL={pub:'Publiés',val:'À valider',ex:'Exemples'};
+function ptype(x){return /^exemple-/.test(x.id)?'ex':(x.statut=='valide'?'pub':'val')}
+async function fetchSamples(){try{var r=await fetch(siteBase()+'index.html?_='+Date.now(),{cache:'no-store'});if(!r.ok)return[];var t=await r.text(),m=/var A=(\[\s*\[[\s\S]*?\]\s*\]);/.exec(t);if(!m)return[];var a=JSON.parse(m[1]);
+return a.filter(Array.isArray).map(function(e,i){return norm({id:'exemple-'+i,section:e[0],kicker:e[1],titre:e[2],resume:e[3],date:ld(new Date()),statut:'a_valider'})})}catch(e){return[]}}
+function drawPub(){$('ppc').textContent='('+pubList.length+')';
+var cn={pub:0,val:0,ex:0};pubList.forEach(function(x){cn[ptype(x)]++});
+$('ppt').innerHTML=['pub','val','ex'].filter(function(t){return cn[t]}).map(function(t){return '<label style="display:flex;gap:6px;align-items:center;font-weight:600;margin:0 14px 0 0"><input type="checkbox" data-tt="'+t+'" style="width:auto" checked> '+PTL[t]+' ('+cn[t]+')</label>'}).join('');
+$('ppl').innerHTML=pubList.map(function(x){var l=items.filter(function(i){return i.id==x.id})[0],t=ptype(x),st=!l?'nouveau':(strip(l)==strip(x)?'déjà dans l’éditeur':'version locale différente');return '<li><label style="display:flex;gap:8px;align-items:flex-start;font-weight:400;margin:0"><input type="checkbox" data-id="'+esc(x.id)+'" data-t="'+t+'" style="width:auto;margin-top:5px"'+(l?'':' checked')+'><span><b>'+esc(x.titre)+'</b><br><small>'+PT[t]+' · '+esc(SEC[x.section])+(x.date&&t!='ex'?' · '+esc(x.date):'')+' · '+st+'</small></span></label></li>'}).join('')}
+$('ppt').addEventListener('change',function(e){var t=e.target.getAttribute('data-tt');if(!t)return;[].forEach.call($('ppl').querySelectorAll('input[data-t="'+t+'"]'),function(c){c.checked=e.target.checked})});
+$('pbtn').addEventListener('click',async function(){$('pp').hidden=false;$('ppm').textContent='Chargement…';$('ppl').innerHTML='';$('ppt').innerHTML='';$('ppc').textContent='';
+var d=[],err='';try{d=await fetchPub()}catch(e){err=e.message}
+var sm=await fetchSamples(),o={pub:0,val:1,ex:2};
+pubList=d.filter(function(x){return x&&x.titre}).map(norm).concat(sm).sort(function(a,b){return o[ptype(a)]-o[ptype(b)]||(b.date||'').localeCompare(a.date||'')});
+drawPub();$('ppm').textContent=pubList.length?'':(err?'Échec : '+err:'Aucun article trouvé sur le journal.');
+$('pp').scrollIntoView()});
+$('ppa').addEventListener('click',function(){[].forEach.call($('ppl').querySelectorAll('input'),function(c){c.checked=true})});
+$('ppx').addEventListener('click',function(){$('pp').hidden=true});
+$('ppi').addEventListener('click',function(){var rep=$('ppr').checked,n=0,u=0;
+[].forEach.call($('ppl').querySelectorAll('input:checked'),function(c){var id=c.getAttribute('data-id'),x=pubList.filter(function(p){return p.id==id})[0];if(!x)return;var k=items.map(function(t){return t.id}).indexOf(id);
+if(k<0){items.push(x);n++}else if(rep){items[k]=x;u++}delete gone[id]});
+saveLocal();drawList();drawPick();drawOut();drawPub();
+$('ppm').textContent=(n||u)?n+' importé'+(n>1?'s':'')+(u?', '+u+' remplacé'+(u>1?'s':''):'')+'. Cliquez sur « Modifier » dans la liste des éléments, puis « Enregistrer » pour republier.':'Rien à importer : cochez au moins un article (ou la case « Remplacer »).'});
+rteInit();load();showCfg();fill(null);drawList();drawPick();pdfCount();
 </script>
 </body>
 </html>
