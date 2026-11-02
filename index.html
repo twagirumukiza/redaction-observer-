@@ -59,7 +59,13 @@ details summary{cursor:pointer;font-weight:600;margin-top:12px}
 
 <main class="w">
 <section id="t-items">
-<div class="bar"><input id="q" type="search" placeholder="Rechercher un élément" aria-label="Rechercher"><select id="fs" aria-label="Statut"><option value="">Tous les statuts</option><option value="a_valider">À valider</option><option value="valide">Validés</option></select><button class="btn" id="new" type="button">Nouvel élément</button></div>
+<div class="bar"><input id="q" type="search" placeholder="Rechercher un élément" aria-label="Rechercher"><select id="fs" aria-label="Statut"><option value="">Tous les statuts</option><option value="a_valider">À valider</option><option value="valide">Validés</option></select><button class="ghost" id="pbtn" type="button" style="padding:7px 12px">Articles publiés</button><button class="btn" id="new" type="button">Nouvel élément</button></div>
+<div class="card" id="pp" hidden style="margin-bottom:18px"><h2>Articles publiés sur le journal <small id="ppc"></small></h2>
+<p><small>Lus directement sur le journal en ligne. Cochez ceux à importer dans l’éditeur, puis cliquez sur « Modifier » dans la liste des éléments.</small></p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-weight:400"><input type="checkbox" id="ppr" style="width:auto;margin-top:5px"> Remplacer aussi ma version locale des articles déjà présents dans l’éditeur (les modifications non publiées seraient perdues)</label>
+<ul id="ppl" style="margin-top:10px"></ul>
+<div class="row" style="margin-top:10px"><button class="btn" id="ppi" type="button">Importer la sélection</button><button class="ghost" id="ppa" type="button">Tout cocher</button><button class="ghost" id="ppx" type="button">Fermer</button></div>
+<p class="msg" id="ppm" role="status"></p></div>
 <div class="two">
 <div class="card"><h2>Éléments <small id="cnt"></small></h2><ul id="list"></ul><p id="none" hidden><small>Aucun élément. Créez-en un, ou importez le fichier de collecte dans l’onglet Publier.</small></p></div>
 <form class="card" id="f" autocomplete="off"><h2 id="ft">Nouvel élément</h2>
@@ -105,7 +111,7 @@ details summary{cursor:pointer;font-weight:600;margin-top:12px}
 <div class="card" style="margin-top:18px"><h2>Journal PDF</h2>
 <p><small>Assemble les articles validés de la période choisie (couverture, sommaire, articles par rubrique, avec le design du journal). Une page s’ouvre : utilisez son bouton « Enregistrer en PDF », puis choisissez « Enregistrer au format PDF » dans la fenêtre d’impression.</small></p>
 <div class="cols"><div><label for="pd1">Du</label><input id="pd1" type="date"></div><div><label for="pd2">Au</label><input id="pd2" type="date"></div></div>
-<p><small id="pdn"></small></p>
+<p><small>Décochez les articles à écarter du journal.</small></p><div id="pdl"></div><p><small id="pdn"></small></p>
 <div class="row"><button class="btn" id="pdg" type="button">Générer le journal PDF</button></div>
 <p class="msg" id="pdm" role="status"></p></div>
 </section>
@@ -286,8 +292,12 @@ $('aduse').addEventListener('click',function(){var a;try{a=JSON.parse(localStora
 
 function ld(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
 function fmtD(d){try{return new Date(d+'T12:00:00').toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})}catch(e){return d}}
-function wkItems(){var a=$('pd1').value,b=$('pd2').value;return items.filter(function(x){return x.statut=='valide'&&x.date&&(!a||x.date>=a)&&(!b||x.date<=b)}).sort(function(p,q){var ep=p.kicker=='Édition de la semaine'?0:1,eq=q.kicker=='Édition de la semaine'?0:1;return ep-eq||p.section-q.section||(q.date||'').localeCompare(p.date||'')})}
-function pdfCount(){var n=wkItems().length;$('pdn').textContent=n+' article'+(n>1?'s':'')+' validé'+(n>1?'s':'')+' sur cette période.'}
+var pdx={};
+function wkRange(){var a=$('pd1').value,b=$('pd2').value;return items.filter(function(x){return x.statut=='valide'&&x.date&&(!a||x.date>=a)&&(!b||x.date<=b)}).sort(function(p,q){var ep=p.kicker=='Édition de la semaine'?0:1,eq=q.kicker=='Édition de la semaine'?0:1;return ep-eq||p.section-q.section||(q.date||'').localeCompare(p.date||'')})}
+function wkItems(){return wkRange().filter(function(x){return !pdx[x.id]})}
+function pdfNum(){var n=wkItems().length;$('pdn').textContent=n+' article'+(n>1?'s':'')+' retenu'+(n>1?'s':'')+' pour le journal.'}
+function pdfCount(){$('pdl').innerHTML=wkRange().map(function(x){return '<label style="display:flex;gap:8px;align-items:flex-start;font-weight:400;margin:4px 0"><input type="checkbox" data-id="'+esc(x.id)+'" style="width:auto;margin-top:5px"'+(pdx[x.id]?'':' checked')+'><span>'+esc(x.titre)+' <small>· '+esc(SEC[x.section])+' · '+esc(x.date)+'</small></span></label>'}).join('');pdfNum()}
+$('pdl').addEventListener('change',function(e){var i=e.target.getAttribute('data-id');if(!i)return;if(e.target.checked)delete pdx[i];else pdx[i]=1;pdfNum()});
 function pdfHtml(list){
 var a=$('pd1').value,b=$('pd2').value,per=(a&&b)?'du '+fmtD(a)+' au '+fmtD(b):(b?'jusqu’au '+fmtD(b):a?'depuis le '+fmtD(a):'');
 function grp(x){return x.kicker=='Édition de la semaine'?'Édition de la semaine':SEC[x.section]}
@@ -327,6 +337,23 @@ if(w){w.document.open();w.document.write(h);w.document.close();$('pdm').textCont
 else{var u=URL.createObjectURL(new Blob([h],{type:'text/html'})),a=document.createElement('a');a.href=u;a.download='journal-cyber-risk-observer.html';document.body.appendChild(a);a.click();a.remove();$('pdm').textContent='Les fenêtres sont bloquées : le journal a été téléchargé en fichier HTML. Ouvrez-le, puis enregistrez-le en PDF.'}}
 (function(){var t=new Date(),f=new Date();f.setDate(t.getDate()-6);$('pd2').value=ld(t);$('pd1').value=ld(f)})();
 $('pd1').addEventListener('input',pdfCount);$('pd2').addEventListener('input',pdfCount);$('pdg').addEventListener('click',pdfOpen);
+
+var pubList=[];
+function strip(x){var y={};Object.keys(x).forEach(function(k){if(k!='imageData'&&k!='sent'&&k!='auteurPhotoData'&&k!='sentA')y[k]=x[k]});return JSON.stringify(y)}
+async function fetchPub(){try{var r=await fetch(siteBase()+'data/items.json?_='+Date.now(),{cache:'no-store'});if(r.ok){var d=await r.json();if(Array.isArray(d))return d}}catch(e){}
+if(cfg.token&&cfg.owner&&cfg.repo){var r2=await api('GET');if(r2.ok){var j=await r2.json();return JSON.parse(dec(j.content))}}
+throw new Error('Le journal est injoignable (vérifiez le compte et le dépôt dans l’onglet Publier).')}
+function drawPub(){$('ppc').textContent='('+pubList.length+')';$('ppl').innerHTML=pubList.map(function(x){var l=items.filter(function(i){return i.id==x.id})[0],st=!l?'nouveau':(strip(l)==strip(x)?'déjà dans l’éditeur':'version locale différente');return '<li><label style="display:flex;gap:8px;align-items:flex-start;font-weight:400;margin:0"><input type="checkbox" data-id="'+esc(x.id)+'" style="width:auto;margin-top:5px"'+(l?'':' checked')+'><span><b>'+esc(x.titre)+'</b><br><small>'+esc(SEC[x.section])+(x.date?' · '+esc(x.date):'')+' · '+st+'</small></span></label></li>'}).join('')}
+$('pbtn').addEventListener('click',async function(){$('pp').hidden=false;$('ppm').textContent='Chargement…';$('ppl').innerHTML='';$('ppc').textContent='';
+try{var d=await fetchPub();pubList=d.filter(function(x){return x&&x.titre&&x.statut=='valide'}).map(norm).sort(function(a,b){return(b.date||'').localeCompare(a.date||'')});drawPub();$('ppm').textContent=pubList.length?'':'Aucun article publié pour l’instant sur le journal.'}catch(e){$('ppm').textContent='Échec : '+e.message}
+$('pp').scrollIntoView()});
+$('ppa').addEventListener('click',function(){[].forEach.call($('ppl').querySelectorAll('input'),function(c){c.checked=true})});
+$('ppx').addEventListener('click',function(){$('pp').hidden=true});
+$('ppi').addEventListener('click',function(){var rep=$('ppr').checked,n=0,u=0;
+[].forEach.call($('ppl').querySelectorAll('input:checked'),function(c){var id=c.getAttribute('data-id'),x=pubList.filter(function(p){return p.id==id})[0];if(!x)return;var k=items.map(function(t){return t.id}).indexOf(id);
+if(k<0){items.push(x);n++}else if(rep){items[k]=x;u++}delete gone[id]});
+saveLocal();drawList();drawPick();drawOut();drawPub();
+$('ppm').textContent=(n||u)?n+' importé'+(n>1?'s':'')+(u?', '+u+' remplacé'+(u>1?'s':''):'')+'. Cliquez sur « Modifier » dans la liste des éléments, puis « Enregistrer » pour republier.':'Rien à importer : cochez au moins un article (ou la case « Remplacer »).'});
 rteInit();load();showCfg();fill(null);drawList();drawPick();pdfCount();
 </script>
 </body>
