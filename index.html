@@ -47,6 +47,7 @@ small{color:var(--muted)}
 .rtc{padding:8px 10px;min-height:96px;outline:0;overflow-wrap:anywhere;line-height:1.5}
 .rtc:focus{box-shadow:inset 0 0 0 2px var(--acc)}
 .rtc p{margin:0 0 .6em}.rtc h3,.rtc h4{font:700 1.05rem var(--head);margin:.4em 0}.rtc blockquote{border-left:3px solid var(--line);margin:.5em 0;padding-left:10px;color:var(--muted)}.rtc a{color:var(--acc);text-decoration:underline}.rtc ul{list-style:disc;margin:.4em 0;padding-left:22px}.rtc ol{list-style:decimal;margin:.4em 0;padding-left:22px}
+input.sst{margin:2px 0 6px;font-size:.85rem}
 details summary{cursor:pointer;font-weight:600;margin-top:12px}
 </style>
 </head>
@@ -72,10 +73,11 @@ details summary{cursor:pointer;font-weight:600;margin-top:12px}
 <form class="card" id="f" autocomplete="off"><h2 id="ft">Nouvel élément</h2>
 <div class="cols"><div><label for="sec">Rubrique</label><select id="sec"></select></div><div><label for="kick">Étiquette (ex. France, Alerte critique)</label><input id="kick"></div></div>
 <label for="tit">Titre</label><input id="tit" required>
-<label id="l-res">1. L’information (chapô)</label><div class="rte" data-rte="res" data-l="l-res"></div>
-<label id="l-ana">2. L’analyse</label><div class="rte" data-rte="ana" data-l="l-ana"></div>
-<label for="act">3. L’action (un point par ligne)</label><textarea id="act"></textarea>
-<label id="l-con">Conclusion (facultatif)</label><div class="rte" data-rte="con" data-l="l-con"></div>
+<p style="margin:12px 0 0"><small>Chaque section a un sous-titre modifiable (laissez-le vide pour garder le titre par défaut). Une section laissée vide n’apparaît pas dans l’article, et la numérotation s’adapte.</small></p>
+<label id="l-res">L’information (chapô)</label><input class="sst" id="s-res" placeholder="Sous-titre (par défaut : L’information)" aria-label="Sous-titre de l’information"><div class="rte" data-rte="res" data-l="l-res"></div>
+<label id="l-ana">L’analyse (facultatif)</label><input class="sst" id="s-ana" placeholder="Sous-titre (par défaut : L’analyse)" aria-label="Sous-titre de l’analyse"><div class="rte" data-rte="ana" data-l="l-ana"></div>
+<label for="act">L’action, un point par ligne (facultatif)</label><input class="sst" id="s-act" placeholder="Sous-titre (par défaut : L’action)" aria-label="Sous-titre de l’action"><textarea id="act"></textarea>
+<label id="l-con">Conclusion (facultatif)</label><input class="sst" id="s-con" placeholder="Sous-titre (par défaut : Conclusion)" aria-label="Sous-titre de la conclusion"><div class="rte" data-rte="con" data-l="l-con"></div>
 <details id="aud"><summary>Auteur (facultatif)</summary>
 <div class="cols"><div><label for="aun">Nom</label><input id="aun" placeholder="Prénom Nom"></div><div><label for="aur">Fonction ou présentation courte</label><input id="aur" placeholder="Consultant GRC, formateur…"></div></div>
 <label for="aul">Liens LinkedIn ou autres réseaux (un par ligne)</label><textarea id="aul" style="min-height:56px" placeholder="https://www.linkedin.com/in/…"></textarea>
@@ -150,7 +152,7 @@ function esc(t){return String(t==null?'':t).replace(/[&<>"']/g,function(c){retur
 function today(){return new Date().toISOString().slice(0,10)}
 function uid(){return 'r'+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
 function secOf(x){var k=x.section!=null?+x.section:SEC.indexOf(x.rubrique);return k>=0&&k<SEC.length?k:2}
-function norm(x){return{id:x.id||uid(),section:secOf(x),kicker:x.kicker||'',titre:String(x.titre||''),resume:x.resume||'',analyse:x.analyse||'',conclusion:x.conclusion||'',auteur:x.auteur||'',auteurRole:x.auteurRole||'',auteurLiens:x.auteurLiens||'',auteurPhoto:x.auteurPhoto||'',auteurPhotoData:x.auteurPhotoData||'',sentA:x.sentA||'',actions:Array.isArray(x.actions)?x.actions:(x.action?[x.action]:[]),source:x.source||'',url:x.url||'',date:x.date||'',criticite:x.criticite||'',image:x.image||'',imageData:x.imageData||'',sent:x.sent||'',credit:x.credit||'',alt:x.alt||'',statut:x.statut=='valide'?'valide':'a_valider'}}
+function norm(x){return{id:x.id||uid(),section:secOf(x),kicker:x.kicker||'',titre:String(x.titre||''),resume:x.resume||'',analyse:x.analyse||'',conclusion:x.conclusion||'',stInfo:x.stInfo||'',stAna:x.stAna||'',stAct:x.stAct||'',stCon:x.stCon||'',auteur:x.auteur||'',auteurRole:x.auteurRole||'',auteurLiens:x.auteurLiens||'',auteurPhoto:x.auteurPhoto||'',auteurPhotoData:x.auteurPhotoData||'',sentA:x.sentA||'',actions:Array.isArray(x.actions)?x.actions:(x.action?[x.action]:[]),source:x.source||'',url:x.url||'',date:x.date||'',criticite:x.criticite||'',image:x.image||'',imageData:x.imageData||'',sent:x.sent||'',credit:x.credit||'',alt:x.alt||'',statut:x.statut=='valide'?'valide':'a_valider'}}
 function load(){try{items=JSON.parse(localStorage.getItem('cro-items')||'[]').map(norm)}catch(e){items=[]}try{gone=JSON.parse(localStorage.getItem('cro-gone')||'{}')}catch(e){gone={}}try{cfg=JSON.parse(localStorage.getItem('cro-cfg')||'{}')}catch(e){cfg={}}}
 function saveLocal(){try{localStorage.setItem('cro-items',JSON.stringify(items));localStorage.setItem('cro-gone',JSON.stringify(gone))}catch(e){$('fm').textContent='Attention : l’espace du navigateur est plein. Publiez, puis retirez des photos déjà envoyées.'}}
 function save(){saveLocal();if(cfg.auto&&cfg.token)schedule()}
@@ -164,14 +166,14 @@ $('list').innerHTML=v.map(function(x){return '<li><b>'+esc(x.titre)+'</b><span c
 }
 function fill(x){cur=x?x.id:null;x=x||norm({});
 $('ft').textContent=cur?'Modifier l’élément':'Nouvel élément';
-$('sec').value=x.section;$('kick').value=x.kicker;$('tit').value=x.titre;setR('res',x.resume);setR('ana',x.analyse);setR('con',x.conclusion);$('act').value=x.actions.join('\n');$('src').value=x.source;$('url').value=x.url;$('dat').value=x.date||today();$('cri').value=x.criticite;$('sta').value=x.statut;$('phc').value=x.credit;$('pha').value=x.alt;ph={imageData:x.imageData,image:x.image};showPh();aph={imageData:x.auteurPhotoData,path:x.auteurPhoto};$('aun').value=x.auteur;$('aur').value=x.auteurRole;$('aul').value=x.auteurLiens;$('aud').open=!!(x.auteur||x.auteurRole||x.auteurLiens||x.auteurPhoto||x.auteurPhotoData);showAph();$('fm').textContent='';pvSend()}
+$('sec').value=x.section;$('kick').value=x.kicker;$('tit').value=x.titre;setR('res',x.resume);setR('ana',x.analyse);setR('con',x.conclusion);$('s-res').value=x.stInfo;$('s-ana').value=x.stAna;$('s-act').value=x.stAct;$('s-con').value=x.stCon;$('act').value=x.actions.join('\n');$('src').value=x.source;$('url').value=x.url;$('dat').value=x.date||today();$('cri').value=x.criticite;$('sta').value=x.statut;$('phc').value=x.credit;$('pha').value=x.alt;ph={imageData:x.imageData,image:x.image};showPh();aph={imageData:x.auteurPhotoData,path:x.auteurPhoto};$('aun').value=x.auteur;$('aur').value=x.auteurRole;$('aul').value=x.auteurLiens;$('aud').open=!!(x.auteur||x.auteurRole||x.auteurLiens||x.auteurPhoto||x.auteurPhotoData);showAph();$('fm').textContent='';pvSend()}
 $('list').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var id=b.getAttribute('data-id'),a=b.getAttribute('data-a'),x=items.filter(function(i){return i.id==id})[0];if(!x)return;
 if(a=='e'){fill(x);$('f').scrollIntoView()}
 if(a=='t'){x.statut=x.statut=='valide'?'a_valider':'valide';save()}
 if(a=='d'){if(pend==id){items=items.filter(function(i){return i.id!=id});gone[id]=1;pend=null;save();if(cur==id)fill(null)}else pend=id}
 if(a!='d')pend=null;drawList();drawPick()});
 $('f').addEventListener('submit',function(e){e.preventDefault();
-var x=norm({id:cur,section:$('sec').value,kicker:$('kick').value.trim(),titre:$('tit').value.trim(),resume:getR('res'),analyse:getR('ana'),conclusion:getR('con'),auteur:$('aun').value.trim(),auteurRole:$('aur').value.trim(),auteurLiens:lines($('aul').value).join('\n'),auteurPhoto:aph.path,auteurPhotoData:aph.imageData,sentA:sentAFor(),actions:$('act').value.split('\n').map(function(l){return l.trim()}).filter(Boolean),source:$('src').value.trim(),url:$('url').value.trim(),date:$('dat').value,criticite:$('cri').value,image:ph.image,imageData:ph.imageData,credit:$('phc').value.trim(),alt:$('pha').value.trim(),sent:sentFor(),statut:$('sta').value});
+var x=norm({id:cur,section:$('sec').value,kicker:$('kick').value.trim(),titre:$('tit').value.trim(),resume:getR('res'),analyse:getR('ana'),conclusion:getR('con'),stInfo:$('s-res').value.trim(),stAna:$('s-ana').value.trim(),stAct:$('s-act').value.trim(),stCon:$('s-con').value.trim(),auteur:$('aun').value.trim(),auteurRole:$('aur').value.trim(),auteurLiens:lines($('aul').value).join('\n'),auteurPhoto:aph.path,auteurPhotoData:aph.imageData,sentA:sentAFor(),actions:$('act').value.split('\n').map(function(l){return l.trim()}).filter(Boolean),source:$('src').value.trim(),url:$('url').value.trim(),date:$('dat').value,criticite:$('cri').value,image:ph.image,imageData:ph.imageData,credit:$('phc').value.trim(),alt:$('pha').value.trim(),sent:sentFor(),statut:$('sta').value});
 if(!x.titre){$('fm').textContent='Le titre est obligatoire.';return}
 var i=items.map(function(t){return t.id}).indexOf(x.id);if(i>-1)items[i]=x;else items.unshift(x);delete gone[x.id];
 save();cur=x.id;$('ft').textContent='Modifier l’élément';$('fm').textContent=x.statut=='valide'?'Enregistré. Il sera publié au prochain envoi.':'Enregistré. Non publié tant qu’il n’est pas validé.';drawList();drawPick()});
@@ -249,7 +251,7 @@ var d=go(mw,.8);if(d.length>400000)d=go(Math.min(900,mw),.7);cb(d)};im.onerror=f
 $('pho').addEventListener('change',function(){var f=this.files[0];if(!f)return;if(!/^image\//.test(f.type)){$('fm').textContent='Ce fichier n’est pas une image.';return}
 shrink(f,function(d){if(!d){$('fm').textContent='Image illisible.';return}ph.imageData=d;showPh();$('fm').textContent='Photo ajoutée (environ '+Math.round(d.length*.75/1024)+' Ko après réduction). Pensez à indiquer le crédit.';pvQueue()})});
 $('phx').addEventListener('click',function(){ph={imageData:'',image:''};showPh();pvQueue()});
-function draft(){return{section:+$('sec').value,kicker:$('kick').value.trim(),titre:$('tit').value.trim(),resume:getR('res'),analyse:getR('ana'),conclusion:getR('con'),auteur:$('aun').value.trim(),auteurRole:$('aur').value.trim(),auteurLiens:lines($('aul').value).join('\n'),auteurPhoto:aph.imageData||aph.path,actions:lines($('act').value),source:$('src').value.trim(),url:$('url').value.trim(),image:ph.imageData||ph.image,credit:$('phc').value.trim(),alt:$('pha').value.trim()}}
+function draft(){return{section:+$('sec').value,kicker:$('kick').value.trim(),titre:$('tit').value.trim(),resume:getR('res'),analyse:getR('ana'),conclusion:getR('con'),stInfo:$('s-res').value.trim(),stAna:$('s-ana').value.trim(),stAct:$('s-act').value.trim(),stCon:$('s-con').value.trim(),auteur:$('aun').value.trim(),auteurRole:$('aur').value.trim(),auteurLiens:lines($('aul').value).join('\n'),auteurPhoto:aph.imageData||aph.path,actions:lines($('act').value),source:$('src').value.trim(),url:$('url').value.trim(),image:ph.imageData||ph.image,credit:$('phc').value.trim(),alt:$('pha').value.trim()}}
 function pvSend(){if(!pvLoaded||$('pv').hidden)return;try{$('pvf').contentWindow.postMessage({type:'cro-preview',view:pvView,item:draft()},location.origin)}catch(e){}}
 function pvQueue(){clearTimeout(pvT);pvT=setTimeout(pvSend,400)}
 $('pvb').addEventListener('click',function(){$('pv').hidden=false;var u=siteBase()+'?preview=1',f=$('pvf');if(f.getAttribute('data-u')!=u){pvLoaded=false;f.setAttribute('data-u',u);f.src=u}else pvSend();$('pv').scrollIntoView()});
@@ -307,13 +309,13 @@ var toc='',last=null;list.forEach(function(x,i){var g=grp(x);if(g!==last){toc+=(
 var body='';last=null;
 list.forEach(function(x,i){var g=grp(x),ph=img(x,'imageData','image'),ap=img(x,'auteurPhotoData','auteurPhoto'),ls=String(x.auteurLiens||'').split('\n').map(safeUrl).filter(function(l){return /^https?:/i.test(l)}).slice(0,6);
 if(g!==last){body+='<div class="band">'+esc(g)+'</div>';last=g}
-var inf=rich(x.resume),ana=rich(x.analyse),con=rich(x.conclusion),ac=(x.actions||[]).filter(Boolean);
+var inf=rich(x.resume),ana=rich(x.analyse),con=rich(x.conclusion),ac=(x.actions||[]).filter(Boolean),nn=0,HH=function(t,d,u){return t||(u?(++nn)+'. '+d:d)},h1=inf?HH(x.stInfo,'L’information',1):'',h2=ana?HH(x.stAna,'L’analyse',1):'',h3=ac.length?HH(x.stAct,'L’action',1):'',h4=con?HH(x.stCon,'Conclusion'):'';
 body+='<article class="a" id="a'+i+'"><div class="k">'+esc(x.kicker||SEC[x.section])+'</div><h2>'+esc(x.titre)+'</h2><p class="meta">'+esc(SEC[x.section])+' · '+esc(fmtD(x.date))+(x.auteur?' · Par '+esc(x.auteur):'')+(x.criticite?' · Criticité : '+esc(x.criticite):'')+'</p>'
 +(ph?'<figure><img src="'+esc(ph)+'" alt="'+esc(x.alt||'')+'">'+(x.credit?'<figcaption>Photo : '+esc(x.credit)+'</figcaption>':'')+'</figure>':'')
-+(inf?'<div class="lv"><h4>1. L’information</h4>'+inf+'</div>':'')
-+(ana?'<div class="lv l2"><h4>2. L’analyse</h4>'+ana+'</div>':'')
-+(ac.length?'<div class="lv l3"><h4>3. L’action</h4><ul>'+ac.map(function(t){return '<li>'+esc(t)+'</li>'}).join('')+'</ul></div>':'')
-+(con?'<div class="lv l4"><h4>Conclusion</h4>'+con+'</div>':'')
++(inf?'<div class="lv"><h4>'+esc(h1)+'</h4>'+inf+'</div>':'')
++(ana?'<div class="lv l2"><h4>'+esc(h2)+'</h4>'+ana+'</div>':'')
++(ac.length?'<div class="lv l3"><h4>'+esc(h3)+'</h4><ul>'+ac.map(function(t){return '<li>'+esc(t)+'</li>'}).join('')+'</ul></div>':'')
++(con?'<div class="lv l4"><h4>'+esc(h4)+'</h4>'+con+'</div>':'')
 +((x.auteur||ap||ls.length)?'<div class="au">'+(ap?'<img src="'+esc(ap)+'" alt="">':'')+'<div>'+(x.auteur?'<b>'+esc(x.auteur)+'</b>':'')+(x.auteurRole?'<span>'+esc(x.auteurRole)+'</span>':'')+(ls.length?'<span>'+ls.map(function(l){return '<a href="'+esc(l)+'">'+esc(l.replace(/^https?:\/\/(www\.)?/,''))+'</a>'}).join(' · ')+'</span>':'')+'</div></div>':'')
 +((x.source||x.url)?'<p class="src"><b>Source :</b> '+(/^https?:\/\//.test(x.url||'')?'<a href="'+esc(x.url)+'">'+esc(x.source||x.url)+'</a>':esc(x.source))+'</p>':'')
 +'</article>'});
