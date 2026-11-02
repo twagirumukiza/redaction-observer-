@@ -61,7 +61,8 @@ details summary{cursor:pointer;font-weight:600;margin-top:12px}
 <section id="t-items">
 <div class="bar"><input id="q" type="search" placeholder="Rechercher un élément" aria-label="Rechercher"><select id="fs" aria-label="Statut"><option value="">Tous les statuts</option><option value="a_valider">À valider</option><option value="valide">Validés</option></select><button class="ghost" id="pbtn" type="button" style="padding:7px 12px">Articles publiés</button><button class="btn" id="new" type="button">Nouvel élément</button></div>
 <div class="card" id="pp" hidden style="margin-bottom:18px"><h2>Articles publiés sur le journal <small id="ppc"></small></h2>
-<p><small>Lus directement sur le journal en ligne. Cochez ceux à importer dans l’éditeur, puis cliquez sur « Modifier » dans la liste des éléments.</small></p>
+<p><small>Lus sur le journal en ligne : articles publiés, articles à valider (brouillons de la collecte) et articles d’exemple de la maquette. Cochez ceux à importer, puis cliquez sur « Modifier » dans la liste des éléments.</small></p>
+<div class="row" id="ppt" style="margin-bottom:6px"></div>
 <label style="display:flex;gap:8px;align-items:flex-start;font-weight:400"><input type="checkbox" id="ppr" style="width:auto;margin-top:5px"> Remplacer aussi ma version locale des articles déjà présents dans l’éditeur (les modifications non publiées seraient perdues)</label>
 <ul id="ppl" style="margin-top:10px"></ul>
 <div class="row" style="margin-top:10px"><button class="btn" id="ppi" type="button">Importer la sélection</button><button class="ghost" id="ppa" type="button">Tout cocher</button><button class="ghost" id="ppx" type="button">Fermer</button></div>
@@ -343,9 +344,20 @@ function strip(x){var y={};Object.keys(x).forEach(function(k){if(k!='imageData'&
 async function fetchPub(){try{var r=await fetch(siteBase()+'data/items.json?_='+Date.now(),{cache:'no-store'});if(r.ok){var d=await r.json();if(Array.isArray(d))return d}}catch(e){}
 if(cfg.token&&cfg.owner&&cfg.repo){var r2=await api('GET');if(r2.ok){var j=await r2.json();return JSON.parse(dec(j.content))}}
 throw new Error('Le journal est injoignable (vérifiez le compte et le dépôt dans l’onglet Publier).')}
-function drawPub(){$('ppc').textContent='('+pubList.length+')';$('ppl').innerHTML=pubList.map(function(x){var l=items.filter(function(i){return i.id==x.id})[0],st=!l?'nouveau':(strip(l)==strip(x)?'déjà dans l’éditeur':'version locale différente');return '<li><label style="display:flex;gap:8px;align-items:flex-start;font-weight:400;margin:0"><input type="checkbox" data-id="'+esc(x.id)+'" style="width:auto;margin-top:5px"'+(l?'':' checked')+'><span><b>'+esc(x.titre)+'</b><br><small>'+esc(SEC[x.section])+(x.date?' · '+esc(x.date):'')+' · '+st+'</small></span></label></li>'}).join('')}
-$('pbtn').addEventListener('click',async function(){$('pp').hidden=false;$('ppm').textContent='Chargement…';$('ppl').innerHTML='';$('ppc').textContent='';
-try{var d=await fetchPub();pubList=d.filter(function(x){return x&&x.titre&&x.statut=='valide'}).map(norm).sort(function(a,b){return(b.date||'').localeCompare(a.date||'')});drawPub();$('ppm').textContent=pubList.length?'':'Aucun article publié pour l’instant sur le journal.'}catch(e){$('ppm').textContent='Échec : '+e.message}
+var PT={pub:'publié',val:'à valider / brouillon',ex:'exemple'},PTL={pub:'Publiés',val:'À valider',ex:'Exemples'};
+function ptype(x){return /^exemple-/.test(x.id)?'ex':(x.statut=='valide'?'pub':'val')}
+async function fetchSamples(){try{var r=await fetch(siteBase()+'index.html?_='+Date.now(),{cache:'no-store'});if(!r.ok)return[];var t=await r.text(),m=/var A=(\[\s*\[[\s\S]*?\]\s*\]);/.exec(t);if(!m)return[];var a=JSON.parse(m[1]);
+return a.filter(Array.isArray).map(function(e,i){return norm({id:'exemple-'+i,section:e[0],kicker:e[1],titre:e[2],resume:e[3],date:ld(new Date()),statut:'a_valider'})})}catch(e){return[]}}
+function drawPub(){$('ppc').textContent='('+pubList.length+')';
+var cn={pub:0,val:0,ex:0};pubList.forEach(function(x){cn[ptype(x)]++});
+$('ppt').innerHTML=['pub','val','ex'].filter(function(t){return cn[t]}).map(function(t){return '<label style="display:flex;gap:6px;align-items:center;font-weight:600;margin:0 14px 0 0"><input type="checkbox" data-tt="'+t+'" style="width:auto" checked> '+PTL[t]+' ('+cn[t]+')</label>'}).join('');
+$('ppl').innerHTML=pubList.map(function(x){var l=items.filter(function(i){return i.id==x.id})[0],t=ptype(x),st=!l?'nouveau':(strip(l)==strip(x)?'déjà dans l’éditeur':'version locale différente');return '<li><label style="display:flex;gap:8px;align-items:flex-start;font-weight:400;margin:0"><input type="checkbox" data-id="'+esc(x.id)+'" data-t="'+t+'" style="width:auto;margin-top:5px"'+(l?'':' checked')+'><span><b>'+esc(x.titre)+'</b><br><small>'+PT[t]+' · '+esc(SEC[x.section])+(x.date&&t!='ex'?' · '+esc(x.date):'')+' · '+st+'</small></span></label></li>'}).join('')}
+$('ppt').addEventListener('change',function(e){var t=e.target.getAttribute('data-tt');if(!t)return;[].forEach.call($('ppl').querySelectorAll('input[data-t="'+t+'"]'),function(c){c.checked=e.target.checked})});
+$('pbtn').addEventListener('click',async function(){$('pp').hidden=false;$('ppm').textContent='Chargement…';$('ppl').innerHTML='';$('ppt').innerHTML='';$('ppc').textContent='';
+var d=[],err='';try{d=await fetchPub()}catch(e){err=e.message}
+var sm=await fetchSamples(),o={pub:0,val:1,ex:2};
+pubList=d.filter(function(x){return x&&x.titre}).map(norm).concat(sm).sort(function(a,b){return o[ptype(a)]-o[ptype(b)]||(b.date||'').localeCompare(a.date||'')});
+drawPub();$('ppm').textContent=pubList.length?'':(err?'Échec : '+err:'Aucun article trouvé sur le journal.');
 $('pp').scrollIntoView()});
 $('ppa').addEventListener('click',function(){[].forEach.call($('ppl').querySelectorAll('input'),function(c){c.checked=true})});
 $('ppx').addEventListener('click',function(){$('pp').hidden=true});
