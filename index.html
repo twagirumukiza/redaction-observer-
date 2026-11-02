@@ -179,8 +179,8 @@ if(b.getAttribute('data-t')=='ex')drawOut();if(b.getAttribute('data-t')=='ed')dr
 function cst(t){$('cmsg').textContent=t}
 function enc(t){return btoa(unescape(encodeURIComponent(t)))}
 function dec(t){return decodeURIComponent(escape(atob(t.replace(/\s/g,''))))}
-function api(m,body,path){var u='https://api.github.com/repos/'+encodeURIComponent(cfg.owner)+'/'+encodeURIComponent(cfg.repo)+'/contents/'+(path||cfg.path).split('/').map(encodeURIComponent).join('/')+(m=='GET'?'?ref='+encodeURIComponent(cfg.branch):'');
-return fetch(u,{method:m,headers:{'Accept':'application/vnd.github+json','Authorization':'Bearer '+cfg.token,'X-GitHub-Api-Version':'2022-11-28'},body:body?JSON.stringify(body):undefined})}
+function api(m,body,path){var u='https://api.github.com/repos/'+encodeURIComponent(cfg.owner)+'/'+encodeURIComponent(cfg.repo)+'/contents/'+(path||cfg.path).split('/').map(encodeURIComponent).join('/')+(m=='GET'?'?ref='+encodeURIComponent(cfg.branch)+'&_='+Date.now():'');
+return fetch(u,{method:m,cache:'no-store',headers:{'Accept':'application/vnd.github+json','Authorization':'Bearer '+cfg.token,'X-GitHub-Api-Version':'2022-11-28'},body:body?JSON.stringify(body):undefined})}
 function merge(rem){var ids={},n=0;items.forEach(function(x){ids[x.id]=1});(Array.isArray(rem)?rem:[]).forEach(function(x){if(!x||!x.titre)return;var y=norm(x);if(!ids[y.id]&&!gone[y.id]){items.push(y);ids[y.id]=1;n++}});return n}
 async function sync(push){
 if(!cfg.token||!cfg.owner||!cfg.repo){cst('Renseignez d’abord la connexion au journal.');return}
