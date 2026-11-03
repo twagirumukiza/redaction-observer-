@@ -54,6 +54,7 @@ input.sst{margin:2px 0 6px;font-size:.85rem}
 details summary{cursor:pointer;font-weight:600;margin-top:12px}
 .mwl{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}.mwi{width:150px;font-size:12px}.mwi img{width:100%;height:90px;object-fit:cover;border-radius:4px;display:block}.mwi input{width:100%;margin:4px 0;font-size:12px}.mwa{display:inline-block;border:1px dashed var(--line);border-radius:6px;padding:6px 10px;cursor:pointer;font-size:13px;font-weight:600;margin:4px 0 8px}
 #list li.gh{padding:16px 0 4px;border-top:0}#list li.gh h3{margin:0;font-size:1.05rem;border-bottom:2px solid var(--line);padding-bottom:4px}#list li.gh small{font-weight:400}#list button[disabled]{opacity:.4;cursor:default}
+.rtc .tip{border-bottom:1.5px dotted #c70000;background:rgba(255,229,0,.25);cursor:help}
 </style>
 </head>
 <body>
@@ -77,6 +78,7 @@ details summary{cursor:pointer;font-weight:600;margin-top:12px}
 <div class="card"><h2>Éléments <small id="cnt"></small></h2><ul id="list"></ul><p id="none" hidden><small>Aucun élément. Créez-en un, ou importez le fichier de collecte dans l’onglet Publier.</small></p></div>
 <form class="card" id="f" autocomplete="off"><h2 id="ft">Nouvel élément</h2>
 <div class="cols"><div><label for="sec">Rubrique</label><select id="sec"></select></div><div><label for="kick">Étiquette (ex. France, Alerte critique)</label><input id="kick"></div></div>
+<small id="lxh" hidden>Lexique : le titre est le terme ou le sigle, « Étiquette » sa forme développée, « L’information » sa définition. Les autres champs ne sont pas utilisés.</small>
 <label for="tit">Titre</label><input id="tit" required>
 <p style="margin:12px 0 0"><small>Chaque section a un sous-titre modifiable (laissez-le vide pour garder le titre par défaut). Une section laissée vide n’apparaît pas dans l’article, et la numérotation s’adapte.</small></p>
 <label id="l-int">Introduction (facultatif)</label><input class="sst" id="s-int" placeholder="Sous-titre (facultatif, aucun par défaut)" aria-label="Sous-titre de l’introduction"><div class="rte" data-rte="int" data-l="l-int"></div>
@@ -84,6 +86,7 @@ details summary{cursor:pointer;font-weight:600;margin-top:12px}
 <label id="l-ana">L’analyse (facultatif)</label><input class="sst" id="s-ana" placeholder="Sous-titre (par défaut : L’analyse)" aria-label="Sous-titre de l’analyse"><div class="rte" data-rte="ana" data-l="l-ana"></div><div class="mw" data-m="ana"></div>
 <label for="act">L’action, un point par ligne (facultatif ; lien : [texte](https://…))</label><input class="sst" id="s-act" placeholder="Sous-titre (par défaut : L’action)" aria-label="Sous-titre de l’action"><textarea id="act"></textarea><div class="mw" data-m="act"></div><div id="parts"></div><div class="row" style="margin:8px 0"><button class="ghost" id="padd" type="button">+ Ajouter une partie à l’article</button> <button class="ghost" id="padd2" type="button">+ Ajouter une partie Action</button></div>
 <label id="l-con">Conclusion (facultatif)</label><input class="sst" id="s-con" placeholder="Sous-titre (par défaut : Conclusion)" aria-label="Sous-titre de la conclusion"><div class="rte" data-rte="con" data-l="l-con"></div><div class="mw" data-m="con"></div>
+
 <div id="ord" style="border:1px solid var(--line);border-radius:6px;padding:10px;margin:12px 0"><b>Ordre des parties dans l’article</b><br><small>Montez ou descendez chaque partie. L’introduction reste en tête.</small><ol id="ordl" style="list-style:none;padding:0;margin:6px 0 0"></ol></div>
 <label for="lku">Pour aller plus loin : liens utiles (facultatif)</label><textarea id="lku" style="min-height:64px" placeholder="Titre du lien | https://…&#10;ou simplement https://…"></textarea>
 <small>Un lien par ligne. Dans les textes, sélectionnez des mots puis cliquez sur « Lien ». Dans l’action, écrivez [texte](https://…).</small>
@@ -174,8 +177,9 @@ details summary{cursor:pointer;font-weight:600;margin-top:12px}
 </section>
 </main>
 
+<dialog id="tipd" style="max-width:520px;width:92vw;border:1px solid var(--line);border-radius:8px;padding:16px"><form method="dialog" id="tipf"><b>Infobulle</b><p>Terme ou expression : « <span id="tipt"></span> »</p><label for="tipl">Reprendre une entrée du lexique</label><select id="tipl"></select><label for="tipx">Explication affichée au lecteur</label><textarea id="tipx" maxlength="500" style="min-height:90px"></textarea><label id="tipal" style="display:flex;gap:8px;align-items:center;font-weight:400"><input type="checkbox" id="tipa" style="width:auto"> Ajouter aussi ce terme au lexique (rubrique Lexique)</label><div class="row" style="margin-top:12px"><button class="btn" type="submit" value="ok">Valider</button><button class="ghost" type="submit" value="cancel" formnovalidate>Annuler</button></div></form></dialog>
 <script>
-var SEC=['Actualités','Géopolitique','Cyber & numérique','Économie','Société','Analyses','CTF','Notions cyber'],items=[],cur=null,pend=null,sel={},gone={},cfg={},tm=null,busy=false,again=false;
+var SEC=['Actualités','Géopolitique','Cyber & numérique','Économie','Société','Analyses','CTF','Notions cyber','Lexique'],items=[],cur=null,pend=null,sel={},gone={},cfg={},tm=null,busy=false,again=false;
 var $=function(i){return document.getElementById(i)};
 function esc(t){return String(t==null?'':t).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function today(){return new Date().toISOString().slice(0,10)}
@@ -199,12 +203,12 @@ var pub=items.filter(function(x){return x.section==s&&x.statut=='valide'}).sort(
 vg=g.filter(function(x){return x.statut=='valide'}).sort(posSort),ng=g.filter(function(x){return x.statut!='valide'}).sort(function(a,b){return(b.date||'').localeCompare(a.date||'')});
 h+='<li class="gh"><h3>'+esc(nm)+' <small>('+g.length+')</small></h3></li>';
 vg.concat(ng).forEach(function(x){var ok=x.statut=='valide',k=pub.indexOf(x);
-h+='<li><b>'+esc(x.titre)+'</b><span class="b '+x.statut+'">'+(ok?'Validé':'À valider')+'</span>'+(ok?' <span class="b" title="Position dans la rubrique sur le site">Position '+(k+1)+' sur '+pub.length+'</span>':'')+'<br><small>'+(x.kicker?esc(x.kicker)+' · ':'')+(x.date?esc(x.date):'')+'</small><div class="row">'+(ok?'<button class="ghost" data-a="mu" data-id="'+x.id+'" aria-label="Monter sur le site"'+(k<1?' disabled':'')+'>↑ Monter</button><button class="ghost" data-a="md" data-id="'+x.id+'" aria-label="Descendre sur le site"'+(k>=pub.length-1?' disabled':'')+'>↓ Descendre</button>':'')+'<button class="ghost" data-a="e" data-id="'+x.id+'">Modifier</button><button class="ghost" data-a="t" data-id="'+x.id+'">'+(ok?'Retirer du journal':'Valider')+'</button><button class="ghost" data-a="d" data-id="'+x.id+'">'+(pend==x.id?'Confirmer la suppression':'Supprimer')+'</button></div></li>'})});
+h+='<li><b>'+esc(x.titre)+'</b><span class="b '+x.statut+'">'+(ok?'Validé':'À valider')+'</span>'+(ok&&s!=8?' <span class="b" title="Position dans la rubrique sur le site">Position '+(k+1)+' sur '+pub.length+'</span>':'')+'<br><small>'+(x.kicker?esc(x.kicker)+' · ':'')+(x.date?esc(x.date):'')+'</small><div class="row">'+(ok&&s!=8?'<button class="ghost" data-a="mu" data-id="'+x.id+'" aria-label="Monter sur le site"'+(k<1?' disabled':'')+'>↑ Monter</button><button class="ghost" data-a="md" data-id="'+x.id+'" aria-label="Descendre sur le site"'+(k>=pub.length-1?' disabled':'')+'>↓ Descendre</button>':'')+'<button class="ghost" data-a="e" data-id="'+x.id+'">Modifier</button><button class="ghost" data-a="t" data-id="'+x.id+'">'+(ok?'Retirer du journal':'Valider')+'</button><button class="ghost" data-a="d" data-id="'+x.id+'">'+(pend==x.id?'Confirmer la suppression':'Supprimer')+'</button></div></li>'})});
 $('list').innerHTML=h;
 }
 function fill(x){cur=x?x.id:null;x=x||norm({});
 $('ft').textContent=cur?'Modifier l’élément':'Nouvel élément';
-$('sec').value=x.section;$('kick').value=x.kicker;$('tit').value=x.titre;setR('int',x.intro);$('s-int').value=x.stIntro;setR('res',x.resume);setR('ana',x.analyse);setR('con',x.conclusion);$('s-res').value=x.stInfo;$('s-ana').value=x.stAna;$('s-act').value=x.stAct;$('s-con').value=x.stCon;imv={pos:x.imgPos,x:x.imgX,y:x.imgY,z:x.imgZ};$('lku').value=x.liensUtiles;$('act').value=x.actions.join('\n');$('src').value=x.source;$('url').value=x.url;$('dat').value=x.date||today();$('cri').value=x.criticite;$('sta').value=x.statut;$('phc').value=x.credit;$('pha').value=x.alt;ph={imageData:x.imageData,image:x.image};cph={d:x.imageCarteData,p:x.imageCarte};cm=(x.imageCarte||x.imageCarteData)?'a':'m';cv={x:x.cX,y:x.cY,z:x.cZ};MED=medCopy(x.medias);PAR=parCopy(x.parties);ORD=Array.isArray(x.ordre)?x.ordre.slice():[];mwDraw();parDraw();showPh();rel=Array.isArray(x.related)?x.related.slice():null;relDraw();aph={imageData:x.auteurPhotoData,path:x.auteurPhoto};$('aun').value=x.auteur;$('aur').value=x.auteurRole;$('aul').value=x.auteurLiens;$('aud').open=!!(x.auteur||x.auteurRole||x.auteurLiens||x.auteurPhoto||x.auteurPhotoData);showAph();$('fm').textContent='';pvSend()}
+$('sec').value=x.section;lxHint();$('kick').value=x.kicker;$('tit').value=x.titre;setR('int',x.intro);$('s-int').value=x.stIntro;setR('res',x.resume);setR('ana',x.analyse);setR('con',x.conclusion);$('s-res').value=x.stInfo;$('s-ana').value=x.stAna;$('s-act').value=x.stAct;$('s-con').value=x.stCon;imv={pos:x.imgPos,x:x.imgX,y:x.imgY,z:x.imgZ};$('lku').value=x.liensUtiles;$('act').value=x.actions.join('\n');$('src').value=x.source;$('url').value=x.url;$('dat').value=x.date||today();$('cri').value=x.criticite;$('sta').value=x.statut;$('phc').value=x.credit;$('pha').value=x.alt;ph={imageData:x.imageData,image:x.image};cph={d:x.imageCarteData,p:x.imageCarte};cm=(x.imageCarte||x.imageCarteData)?'a':'m';cv={x:x.cX,y:x.cY,z:x.cZ};MED=medCopy(x.medias);PAR=parCopy(x.parties);ORD=Array.isArray(x.ordre)?x.ordre.slice():[];mwDraw();parDraw();showPh();rel=Array.isArray(x.related)?x.related.slice():null;relDraw();aph={imageData:x.auteurPhotoData,path:x.auteurPhoto};$('aun').value=x.auteur;$('aur').value=x.auteurRole;$('aul').value=x.auteurLiens;$('aud').open=!!(x.auteur||x.auteurRole||x.auteurLiens||x.auteurPhoto||x.auteurPhotoData);showAph();$('fm').textContent='';pvSend()}
 $('list').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var id=b.getAttribute('data-id'),a=b.getAttribute('data-a'),x=items.filter(function(i){return i.id==id})[0];if(!x)return;
 if(a=='e'){fill(x);$('f').scrollIntoView()}
 if(a=='t'){x.statut=x.statut=='valide'?'a_valider':'valide';save()}
@@ -308,12 +312,12 @@ var ms=allImgs(x);for(var q=0;q<ms.length;q++){var m=ms[q];if(m.imageData){var h
 
 var OKT={P:1,BR:1,STRONG:1,B:1,EM:1,I:1,U:1,A:1,UL:1,OL:1,LI:1,H3:1,H4:1,BLOCKQUOTE:1},DROPT={SCRIPT:1,STYLE:1,IFRAME:1,OBJECT:1,EMBED:1,SVG:1,MATH:1,TEMPLATE:1,NOSCRIPT:1,FORM:1,INPUT:1,BUTTON:1,TEXTAREA:1,SELECT:1,LINK:1,META:1};
 function safeUrl(u){u=String(u||'').trim();return /^(https?:\/\/|mailto:)/i.test(u)?u:''}
-function cleanN(n,o){[].forEach.call(n.childNodes,function(c){if(c.nodeType==3){o.appendChild(document.createTextNode(c.nodeValue));return}if(c.nodeType!=1)return;var t=c.tagName;if(DROPT[t])return;if(t=='DIV')t='P';if(!OKT[t]){cleanN(c,o);return}var e=document.createElement(t.toLowerCase());if(t=='A'){var h=safeUrl(c.getAttribute('href'));if(!h){cleanN(c,o);return}e.setAttribute('href',h);e.setAttribute('rel','noopener noreferrer');e.setAttribute('target','_blank')}cleanN(c,e);o.appendChild(e)})}
+function cleanN(n,o){[].forEach.call(n.childNodes,function(c){if(c.nodeType==3){o.appendChild(document.createTextNode(c.nodeValue));return}if(c.nodeType!=1)return;var t=c.tagName;if(DROPT[t])return;if(t=='DIV')t='P';if(t=='SPAN'){var tp=(c.getAttribute('data-tip')||'').replace(/\s+/g,' ').trim().slice(0,500);if(c.classList&&c.classList.contains('tip')&&tp){var sp=document.createElement('span');sp.className='tip';sp.setAttribute('data-tip',tp);var lx=c.getAttribute('data-lex');if(lx&&/^[\w.-]{1,60}$/.test(lx))sp.setAttribute('data-lex',lx);cleanN(c,sp);o.appendChild(sp)}else cleanN(c,o);return}if(!OKT[t]){cleanN(c,o);return}var e=document.createElement(t.toLowerCase());if(t=='A'){var h=safeUrl(c.getAttribute('href'));if(!h){cleanN(c,o);return}e.setAttribute('href',h);e.setAttribute('rel','noopener noreferrer');e.setAttribute('target','_blank')}cleanN(c,e);o.appendChild(e)})}
 function sanitize(h){var d=new DOMParser().parseFromString('<body>'+h,'text/html'),o=document.createElement('div');cleanN(d.body,o);return o.innerHTML}
 function rich(t){t=String(t==null?'':t);if(!t.trim())return '';if(/<\/?[a-z][^>]*>/i.test(t))return sanitize(t);return t.split(/\n{2,}/).map(function(p){return '<p>'+esc(p.trim()).replace(/\n/g,'<br>')+'</p>'}).join('')}
 function getR(id){var h=sanitize($(id).innerHTML).replace(/<p>(<br>)?<\/p>/g,'').trim(),t=h.replace(/<[^>]*>/g,'').trim();return(t||/<(ul|ol|blockquote)/.test(h))?h:''}
 function setR(id,t){$(id).innerHTML=rich(t||'')}
-var RB=[['bold','<b>G</b>','Gras'],['italic','<i>I</i>','Italique'],['h3','Titre','Intertitre'],['insertUnorderedList','• Liste','Liste à puces'],['insertOrderedList','1. Liste','Liste numérotée'],['blockquote','« Citation','Citation'],['link','Lien','Insérer un lien'],['unlink','Sans lien','Retirer le lien'],['removeFormat','Effacer','Effacer la mise en forme']];
+var RB=[['tip','ⓘ Infobulle','Ajouter une infobulle explicative sur le texte sélectionné'],['untip','Sans infobulle','Retirer l’infobulle'],['bold','<b>G</b>','Gras'],['italic','<i>I</i>','Italique'],['h3','Titre','Intertitre'],['insertUnorderedList','• Liste','Liste à puces'],['insertOrderedList','1. Liste','Liste numérotée'],['blockquote','« Citation','Citation'],['link','Lien','Insérer un lien'],['unlink','Sans lien','Retirer le lien'],['removeFormat','Effacer','Effacer la mise en forme']];
 function rteInit(){try{document.execCommand('defaultParagraphSeparator',false,'p')}catch(e){}
 [].forEach.call(document.querySelectorAll('[data-rte]'),function(w){var id=w.getAttribute('data-rte');w.innerHTML='<div class="rtb" role="toolbar" aria-label="Mise en forme">'+RB.map(function(b){return '<button type="button" data-c="'+b[0]+'" title="'+b[2]+'" aria-label="'+b[2]+'">'+b[1]+'</button>'}).join('')+'</div><div class="rtc" id="'+id+'" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="'+w.getAttribute('data-l')+'"></div>'})}
 var rsel=null;
@@ -321,11 +325,33 @@ document.addEventListener('selectionchange',function(){var s=getSelection();if(s
 function rrestore(ed){if(rsel&&ed.contains(rsel.commonAncestorContainer)){var s=getSelection();s.removeAllRanges();s.addRange(rsel)}}
 document.addEventListener('mousedown',function(e){if(e.target.closest&&e.target.closest('.rtb button'))e.preventDefault()});
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.rtb button');if(!b)return;var ed=b.closest('.rte').querySelector('.rtc'),c=b.getAttribute('data-c');ed.focus();rrestore(ed);
+if(c=='tip'||c=='untip'){tipCmd(ed,c);return}
 if(c=='link'){var tx=(rsel&&ed.contains(rsel.commonAncestorContainer))?rsel.toString():'';var u=prompt('Adresse du lien (https://…)','https://');if(!u)return;u=u.trim();if(!/^(https?:\/\/|mailto:)/i.test(u)){alert('Le lien doit commencer par https://');return}var lt='';if(!tx)lt=prompt('Texte du lien (affiché dans l’article)','')||u;ed.focus();rrestore(ed);if(tx)document.execCommand('createLink',false,u);else document.execCommand('insertHTML',false,'<a href="'+esc(u)+'">'+esc(lt)+'</a>')}
 else if(c=='h3'||c=='blockquote'){var on=String(document.queryCommandValue('formatBlock')).toLowerCase()==c;document.execCommand('formatBlock',false,on?'p':c)}
 else document.execCommand(c,false,null);
 ed.dispatchEvent(new Event('input',{bubbles:true}))});
 document.addEventListener('paste',function(e){var ed=e.target.closest&&e.target.closest('.rtc');if(!ed)return;e.preventDefault();var t=(e.clipboardData||window.clipboardData).getData('text/plain');document.execCommand('insertText',false,t)});
+
+function lxHint(){$('lxh').hidden=$('sec').value!='8'}
+$('sec').addEventListener('change',lxHint);
+function lxItems(){return items.filter(function(x){return x.section==8}).sort(function(a,b){return a.titre.localeCompare(b.titre,'fr')})}
+var tipS=null;
+function tipCmd(ed,c){var sel=rsel&&ed.contains(rsel.commonAncestorContainer)?rsel.cloneRange():null,n=sel&&sel.startContainer,ex=n&&(n.nodeType==1?n:n.parentNode).closest?(n.nodeType==1?n:n.parentNode).closest('.tip'):null;if(ex&&!ed.contains(ex))ex=null;
+if(c=='untip'){if(!ex){alert('Placez le curseur dans un terme muni d’une infobulle.');return}var p=ex.parentNode;while(ex.firstChild)p.insertBefore(ex.firstChild,ex);p.removeChild(ex);ed.dispatchEvent(new Event('input',{bubbles:true}));return}
+if(!ex&&(!sel||sel.collapsed)){alert('Sélectionnez d’abord, dans le texte, le terme ou l’expression à expliquer.');return}
+var txt=ex?ex.textContent:sel.toString();if(!ex){var fr=sel.cloneContents();if(fr.querySelector('p,li,ul,ol,h3,h4,blockquote,.tip')){alert('Sélectionnez un terme ou une expression dans un seul paragraphe, sans autre infobulle.');return}}
+tipS={ed:ed,sel:sel,ex:ex,txt:txt.trim()};$('tipt').textContent=tipS.txt;
+$('tipl').innerHTML='<option value="">— Aucune : explication libre —</option>'+lxItems().map(function(x){return '<option value="'+esc(x.id)+'">'+esc(x.titre)+'</option>'}).join('');
+$('tipl').value=ex&&ex.getAttribute('data-lex')&&lxItems().some(function(x){return x.id==ex.getAttribute('data-lex')})?ex.getAttribute('data-lex'):'';
+$('tipx').value=ex?ex.getAttribute('data-tip')||'':'';$('tipa').checked=false;$('tipal').hidden=!!$('tipl').value;$('tipd').showModal();$('tipx').focus()}
+$('tipl').addEventListener('change',function(){var x=items.filter(function(i){return i.id==$('tipl').value})[0];$('tipal').hidden=!!x;if(x)$('tipx').value=plain(x.resume).slice(0,500)});
+$('tipf').addEventListener('submit',function(ev){var v=ev.submitter&&ev.submitter.value;if(v!='ok'||!tipS)return;var s=tipS,ex=$('tipx').value.replace(/\s+/g,' ').trim(),lex=$('tipl').value;
+if(!ex){ev.preventDefault();$('tipx').focus();return}
+if(!lex&&$('tipa').checked){var it=norm({section:8,titre:s.txt.slice(0,80),resume:'<p>'+esc(ex)+'</p>',statut:'valide',date:today()});items.unshift(it);lex=it.id;save();drawList()}
+var sp;if(s.ex){sp=s.ex}else{sp=document.createElement('span');sp.className='tip';sp.appendChild(s.sel.extractContents());s.sel.insertNode(sp)}
+sp.setAttribute('data-tip',ex);if(lex)sp.setAttribute('data-lex',lex);else sp.removeAttribute('data-lex');
+s.ed.dispatchEvent(new Event('input',{bubbles:true}));tipS=null});
+document.addEventListener('mouseover',function(e){var t=e.target.closest&&e.target.closest('.rtc .tip');if(t)t.title=t.getAttribute('data-tip')||''});
 var IMG={tete:{r:'21:8',w:1680,h:640,ar:21/8},gauche:{r:'4:3',w:1200,h:900,ar:4/3},droite:{r:'4:3',w:1200,h:900,ar:4/3},milieu:{r:'16:9',w:1280,h:720,ar:16/9}};
 function clamp(v,a,b){return Math.min(b,Math.max(a,v))}
 function imgSt(im){im.style.objectPosition=imv.x+'% '+imv.y+'%';im.style.transform=imv.z>1?'scale('+imv.z+')':'';im.style.transformOrigin=imv.x+'% '+imv.y+'%'}
@@ -397,7 +423,7 @@ $('aduse').addEventListener('click',function(){var a;try{a=JSON.parse(localStora
 function ld(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
 function fmtD(d){try{return new Date(d+'T12:00:00').toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})}catch(e){return d}}
 var pdx={};
-function wkRange(){var a=$('pd1').value,b=$('pd2').value;return items.filter(function(x){return x.statut=='valide'&&x.date&&(!a||x.date>=a)&&(!b||x.date<=b)}).sort(function(p,q){var ep=p.kicker=='Édition de la semaine'?0:1,eq=q.kicker=='Édition de la semaine'?0:1;return ep-eq||p.section-q.section||(q.date||'').localeCompare(p.date||'')})}
+function wkRange(){var a=$('pd1').value,b=$('pd2').value;return items.filter(function(x){return x.statut=='valide'&&x.section!=8&&x.date&&(!a||x.date>=a)&&(!b||x.date<=b)}).sort(function(p,q){var ep=p.kicker=='Édition de la semaine'?0:1,eq=q.kicker=='Édition de la semaine'?0:1;return ep-eq||p.section-q.section||(q.date||'').localeCompare(p.date||'')})}
 function wkItems(){return wkRange().filter(function(x){return !pdx[x.id]})}
 function pdfNum(){var n=wkItems().length;$('pdn').textContent=n+' article'+(n>1?'s':'')+' retenu'+(n>1?'s':'')+' pour le journal.'}
 function pdfCount(){$('pdl').innerHTML=wkRange().map(function(x){return '<label style="display:flex;gap:8px;align-items:flex-start;font-weight:400;margin:4px 0"><input type="checkbox" data-id="'+esc(x.id)+'" style="width:auto;margin-top:5px"'+(pdx[x.id]?'':' checked')+'><span>'+esc(x.titre)+' <small>· '+esc(SEC[x.section])+' · '+esc(x.date)+'</small></span></label>'}).join('');pdfNum()}
