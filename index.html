@@ -39,7 +39,7 @@ small{color:var(--muted)}
 
 #obl li{padding:9px 0;border-top:1px solid var(--line);display:flex;gap:10px;align-items:center;justify-content:space-between}#obl li.grp{display:block;border:0;padding:6px 0}.obk{display:flex;gap:8px;align-items:center;margin:6px 0;flex-wrap:wrap}.obk input[type=text]{flex:1;min-width:160px;width:auto}.obk input[type=color]{width:44px;height:36px;padding:2px;flex:0 0 44px;cursor:pointer}#obres details{margin:8px 0}#obres ul{list-style:disc;padding-left:20px;margin:6px 0}#obres li{padding:2px 0}
 .obr{border:1px solid var(--line);border-radius:6px;padding:8px;margin:8px 0;background:var(--bg)}.obr .top{display:flex;gap:8px;align-items:center}.obr .top input[type=text]{flex:1}.obr label.w1{display:inline-flex;gap:6px;align-items:center;font-weight:400;margin:6px 0 0}.obr label.w1 input{width:auto}.obr textarea{margin-top:6px;min-height:54px}
-.row{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.ctl li{padding:9px 0;border-top:1px solid var(--line);display:flex;gap:10px;align-items:center;justify-content:space-between}.ctl li:first-child{border-top:0}.ctl .past{opacity:.55}.ctr{display:flex;gap:8px;margin:6px 0;align-items:center}.ctr input:first-child{flex:1}.ctr input[type=number],.ctr input.pt{width:110px;flex:0 0 110px}.row{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .msg{color:var(--ok);margin:8px 0 0;min-height:1.4em}
 .pick label{display:flex;gap:8px;align-items:flex-start;font-weight:400;margin:0}.pick input{width:auto;margin-top:5px}
@@ -67,7 +67,7 @@ details summary{cursor:pointer;font-weight:600;margin-top:12px}
 <header><div class="w">
 <h1>Rédaction · Cyber Risk Observer</h1>
 <p>Page privée, sans lien depuis le journal : elle sert à préparer et mettre à jour son contenu.</p>
-<div class="tabs" role="tablist"><button type="button" role="tab" data-t="items" aria-selected="true">Éléments</button><button type="button" role="tab" data-t="ia" aria-selected="false">Importer un article</button><button type="button" role="tab" data-t="br" aria-selected="false">Brouillons</button><button type="button" role="tab" data-t="pg" aria-selected="false">Programmés</button><button type="button" role="tab" data-t="ac" aria-selected="false">Archivés</button><button type="button" role="tab" data-t="ed" aria-selected="false">Édition de la semaine</button><button type="button" role="tab" data-t="ob" aria-selected="false">Observatoire</button><button type="button" role="tab" data-t="ex" aria-selected="false">Publier</button><button type="button" role="tab" data-t="vl" aria-selected="false">Veille</button></div>
+<div class="tabs" role="tablist"><button type="button" role="tab" data-t="items" aria-selected="true">Éléments</button><button type="button" role="tab" data-t="ia" aria-selected="false">Importer un article</button><button type="button" role="tab" data-t="br" aria-selected="false">Brouillons</button><button type="button" role="tab" data-t="pg" aria-selected="false">Programmés</button><button type="button" role="tab" data-t="ac" aria-selected="false">Archivés</button><button type="button" role="tab" data-t="ed" aria-selected="false">Édition de la semaine</button><button type="button" role="tab" data-t="ct" aria-selected="false">CTF</button><button type="button" role="tab" data-t="ob" aria-selected="false">Observatoire</button><button type="button" role="tab" data-t="ex" aria-selected="false">Publier</button><button type="button" role="tab" data-t="vl" aria-selected="false">Veille</button></div>
 </div></header>
 
 <main class="w">
@@ -168,6 +168,27 @@ details summary{cursor:pointer;font-weight:600;margin-top:12px}
 <div class="row" id="vt" aria-label="Sujets en vue" style="margin-bottom:8px"></div>
 <label style="display:flex;gap:8px;align-items:center;font-weight:400"><input type="checkbox" id="vh" checked style="width:auto"> Masquer les sujets déjà traités ou écartés</label>
 <ul id="vlist" style="margin-top:8px"></ul><p class="msg" id="vm" role="status"></p></div>
+</section>
+<section id="t-ct" hidden>
+<div class="card"><h2>Rubrique CTF <small id="ctfc"></small></h2>
+<p><small>Calendrier, classement, conseils pour débuter et writeups de la rubrique « CTF » du journal. Tout se modifie ici : ajout, modification, suppression. Les données sont enregistrées dans <code>data/ctf.json</code> du dépôt du journal, avec la même connexion que « Publier ». Une modification est conservée sur cet appareil ; elle part dans le journal quand vous publiez.</small></p>
+<div class="bar"><button class="btn" id="ctfweb" type="button">⟳ Mettre à jour depuis internet</button><button class="ghost" id="ctfpub" type="button">Publier la rubrique CTF</button><button class="ghost" id="ctfpull" type="button">Récupérer la version du journal</button></div>
+<p class="msg" id="ctfm" role="status"></p><div id="ctfres"></div></div>
+<div class="card" style="margin-top:18px"><h2>Textes de la page</h2>
+<label for="ctfin">Introduction</label><textarea id="ctfin"></textarea>
+<label for="ctfdb">Conseil « Débuter »</label><textarea id="ctfdb"></textarea>
+<label for="ctfcs">Catégories de writeups (séparées par des virgules)</label><input id="ctfcs" placeholder="Web, Crypto, Forensic, Reverse, Pwn">
+<div class="row" style="margin-top:12px"><button class="btn" id="ctftx" type="button">Enregistrer les textes</button></div></div>
+<div class="card" style="margin-top:18px"><h2>Calendrier <small id="ctfcn"></small></h2><div class="row" style="margin:0 0 8px"><button class="btn" id="ctfac" type="button">+ Ajouter une compétition</button></div><ul id="ctfcl" class="ctl"></ul></div>
+<div class="card" style="margin-top:18px"><h2>Classement</h2>
+<label for="ctfct">Titre du classement</label><input id="ctfct" placeholder="Classement de la saison">
+<label style="display:flex;gap:8px;align-items:center;font-weight:400"><input type="checkbox" id="ctfca" style="width:auto"> Mettre à jour automatiquement (classement mondial CTFtime)</label>
+<div id="ctfrk"></div><div class="row"><button class="ghost" id="ctfra" type="button">+ Ajouter une équipe</button></div>
+<div class="row" style="margin-top:12px"><button class="btn" id="ctfrs" type="button">Enregistrer le classement</button></div></div>
+<div class="card" style="margin-top:18px"><h2>Writeups <small id="ctfwn"></small></h2><div class="row" style="margin:0 0 8px"><button class="btn" id="ctfaw" type="button">+ Ajouter un writeup</button></div><ul id="ctfwl" class="ctl"></ul></div>
+<div class="card" id="ctffm" hidden style="margin-top:18px"><h2 id="ctfft"></h2><div id="ctfff"></div>
+<div class="row" style="margin-top:14px"><button class="btn" id="ctfsv" type="button">Enregistrer</button><button class="ghost" id="ctfcx" type="button">Annuler</button><button class="ghost" id="ctfdl" type="button" style="margin-left:auto;color:#b42318">Supprimer</button></div></div>
+<datalist id="ctfdf"><option value="équipes"><option value="individuel"><option value="Jeopardy · en ligne"><option value="attaque-défense"></datalist><datalist id="ctfdn"><option value="débutant"><option value="intermédiaire"><option value="avancé"><option value="tous niveaux"></datalist><datalist id="ctfdc"></datalist>
 </section>
 <section id="t-ob" hidden>
 <div class="card"><h2>Threat Actors Observatory <small id="obc"></small></h2>
@@ -288,7 +309,7 @@ drawUn();urDraw();
 }
 document.addEventListener('toggle',function(e){var d=e.target;if(d.matches&&d.matches('details[data-k]')){ACC[d.getAttribute('data-k')]=d.open?1:0;accSave()}},true);
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.accb button');if(!b)return;var c=$(b.parentNode.getAttribute('data-for')),o=b.getAttribute('data-ex')=='1';[].forEach.call(c.querySelectorAll('details[data-k]'),function(d){d.open=o;ACC[d.getAttribute('data-k')]=o?1:0});accSave()});
-function showTab(k){[].forEach.call(document.querySelectorAll('.tabs button'),function(t){t.setAttribute('aria-selected',t.getAttribute('data-t')==k?'true':'false')});['items','ia','br','pg','ac','ed','ob','ex','vl'].forEach(function(n){$('t-'+n).hidden=n!=k});if(k=='ex')drawOut();if(k=='ed'){drawPick();pdfCount()}if(k=='vl')vlLoad();if(k=='ob')obShow()}
+function showTab(k){[].forEach.call(document.querySelectorAll('.tabs button'),function(t){t.setAttribute('aria-selected',t.getAttribute('data-t')==k?'true':'false')});['items','ia','br','pg','ac','ed','ct','ob','ex','vl'].forEach(function(n){$('t-'+n).hidden=n!=k});if(k=='ex')drawOut();if(k=='ed'){drawPick();pdfCount()}if(k=='vl')vlLoad();if(k=='ob')obShow();if(k=='ct')ctShow()}
 function fill(x){cur=x?x.id:null;x=x||norm({statut:'brouillon'});
 $('ft').textContent=cur?'Modifier l’élément':'Nouvel élément';
 $('sec').value=x.section;lxHint();$('kick').value=x.kicker;$('tit').value=x.titre;setR('int',x.intro);$('s-int').value=x.stIntro;setR('res',x.resume);setR('ana',x.analyse);setR('con',x.conclusion);$('s-res').value=x.stInfo;$('s-ana').value=x.stAna;$('s-act').value=x.stAct;$('s-con').value=x.stCon;imv={pos:x.imgPos,x:x.imgX,y:x.imgY,z:x.imgZ};$('lku').value=x.liensUtiles;setR('act',x.actionsHtml||(x.actions.length?'<ul>'+x.actions.map(function(l){return '<li>'+iaInl(l)+'</li>'}).join('')+'</ul>':''));$('src').value=x.source;$('url').value=x.url;$('dat').value=x.date||today();$('cri').value=x.criticite;$('sta').value=x.statut;$('phc').value=x.credit;$('pha').value=x.alt;ph={imageData:x.imageData,image:x.image};cph={d:x.imageCarteData,p:x.imageCarte};cm=(x.imageCarte||x.imageCarteData)?'a':'m';cv={x:x.cX,y:x.cY,z:x.cZ};MED=medCopy(x.medias);PAR=parCopy(x.parties);ORD=Array.isArray(x.ordre)?x.ordre.slice():[];mwDraw();parDraw();showPh();rel=Array.isArray(x.related)?x.related.slice():null;relDraw();aph={imageData:x.auteurPhotoData,path:x.auteurPhoto};$('aun').value=x.auteur;$('aur').value=x.auteurRole;$('aul').value=x.auteurLiens;$('aud').open=!!(x.auteur||x.auteurRole||x.auteurLiens||x.auteurPhoto||x.auteurPhotoData);showAph();$('fm').textContent='';pvSend()}
@@ -759,7 +780,7 @@ var OBSEED={"maj":"2026-11-05","notice":"Les dates indiquent une première activ
 function obClone(o){return JSON.parse(JSON.stringify(o))}
 function obLoad(){try{OB=JSON.parse(localStorage.getItem('cro-ob')||'null')}catch(e){OB=null}if(!OB||!Array.isArray(OB.acteurs))OB=obClone(OBSEED);if(!Array.isArray(OB.cats)||!OB.cats.length)OB.cats=obClone(OBSEED.cats)}
 function obStore(){OB.maj=new Date().toISOString().slice(0,10);try{localStorage.setItem('cro-ob',JSON.stringify(OB))}catch(e){}}
-function obMsg(t){$('obm').textContent=t}
+function obMsg(t){var m=$('obm');m.textContent=t;m.style.color=/^Échec|impossible/i.test(t)?'#b42318':''}
 function obSlug(t){return String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'acteur'}
 function obShow(){if(!OB)obLoad();obList();$('obno').value=OB.notice||'';$('obtt').value=(OB.ttp||[]).map(function(r){return r.join(' | ')}).join('\n');$('obvv').value=(OB.veille||[]).map(function(r){return r.join(' | ')}).join('\n')}
 function obList(){var q=$('obq').value.trim().toLowerCase(),c=$('obf').value,h='',f=$('obf'),cv=f.value;
@@ -830,6 +851,72 @@ catch(e){obMsg('Échec : '+e.message)}
 b.disabled=false}
 $('obweb').addEventListener('click',obWeb);
 $('obres').addEventListener('click',function(e){var b=e.target.closest('[data-nw]');if(!b)return;var g=OBNEW[+b.getAttribute('data-nw')];if(!g)return;obEdit(null);$('obnom').value=g.nom;$('obal').value=(g.alias||[])[0]||'';[].forEach.call($('obch').querySelectorAll('.obr'),function(r){if(/^Identifiant MITRE/i.test(r.querySelector('input[type=text]').value))r.querySelector('textarea').value=g.id+' — '+g.url})});
+
+var CTSEED={"maj":"2026-11-05","intro":"Actualité des Capture The Flag : compétitions, classements et corrigés commentés.","debuter":"Choisissez une catégorie, une plateforme d’entraînement et documentez chaque résolution : c’est la meilleure façon de progresser.","classTitre":"Classement de la saison","classAuto":true,"cats":["Web","Crypto","Forensic","Reverse","Pwn"],"calendrier":[{"id":"c1","nom":"CTF d’automne en ligne","date":"2026-11-08","duree":"24 h","format":"équipes","niveau":"tous niveaux","ex":1},{"id":"c2","nom":"Défi forensic du week-end","date":"2026-11-14","duree":"48 h","format":"individuel","niveau":"intermédiaire","ex":1},{"id":"c3","nom":"CTF inter-écoles","date":"2026-11-21","duree":"12 h","format":"équipes","niveau":"débutant","ex":1},{"id":"c4","nom":"Attaque-défense régional","date":"2026-12-05","duree":"8 h","format":"équipes","niveau":"avancé","ex":1},{"id":"c5","nom":"Hackathon sécurité web","date":"2026-12-12","duree":"24 h","format":"équipes","niveau":"intermédiaire","ex":1}],"classement":[{"equipe":"Zéro Jour","points":4820,"ex":1},{"equipe":"Pointeur Nul","points":4510,"ex":1},{"equipe":"Rootine","points":4105,"ex":1},{"equipe":"Chiffre Impair","points":3960,"ex":1},{"equipe":"Ping Pong","points":3720,"ex":1}],"writeups":[{"id":"w1","cat":"Web","titre":"Injection SQL jusqu’à l’exécution de code","niveau":"Intermédiaire","ex":1},{"id":"w2","cat":"Crypto","titre":"Un chiffrement RSA mal paramétré","niveau":"Débutant","ex":1},{"id":"w3","cat":"Forensic","titre":"Retrouver un fichier supprimé dans une capture mémoire","niveau":"Intermédiaire","ex":1},{"id":"w4","cat":"Reverse","titre":"Déobfusquer un binaire en trois étapes","niveau":"Avancé","ex":1},{"id":"w5","cat":"Pwn","titre":"Dépassement de tampon : premiers pas","niveau":"Avancé","ex":1},{"id":"w6","cat":"Web","titre":"Contourner une authentification par jeton","niveau":"Débutant","ex":1}]},CTF=null,ctK=null,ctId=null;
+var CTD={cal:{t:'compétition',key:'calendrier',f:[['nom','Nom de la compétition'],['date','Date de début','date'],['duree','Durée (ex. 24 h)'],['format','Format','text','ctfdf'],['niveau','Niveau','text','ctfdn'],['url','Lien (facultatif)','url']],title:'nom'},
+wu:{t:'writeup',key:'writeups',f:[['cat','Catégorie (Web, Crypto…)','text','ctfdc'],['titre','Titre'],['niveau','Niveau','text','ctfdn'],['url','Lien (facultatif)','url']],title:'titre'}};
+function ctLoad(){try{CTF=JSON.parse(localStorage.getItem('cro-ctf')||'null')}catch(e){CTF=null}if(!CTF||typeof CTF!='object')CTF=obClone(CTSEED);['calendrier','classement','writeups'].forEach(function(k){if(!Array.isArray(CTF[k]))CTF[k]=[]});if(!Array.isArray(CTF.cats)||!CTF.cats.length)CTF.cats=obClone(CTSEED.cats)}
+function ctStore(){CTF.maj=new Date().toISOString().slice(0,10);try{localStorage.setItem('cro-ctf',JSON.stringify(CTF))}catch(e){}}
+function ctMsg(t){var m=$('ctfm');m.textContent=t;m.style.color=/^Échec|impossible/i.test(t)?'#b42318':''}
+function ctUid(p){return p+Date.now().toString(36)+Math.random().toString(36).slice(2,5)}
+function ctShow(){if(!CTF)ctLoad();$('ctfin').value=CTF.intro||'';$('ctfdb').value=CTF.debuter||'';$('ctfcs').value=(CTF.cats||[]).join(', ');$('ctfct').value=CTF.classTitre||'';$('ctfca').checked=CTF.classAuto!==false;ctList();ctRk()}
+function ctTag(x){return (x.ex?' <span class="b">exemple</span>':'')+(x.auto?' <span class="b prog">auto</span>':'')}
+function ctList(){var td=new Date().toISOString().slice(0,10),cs=CTF.calendrier.slice().sort(function(a,b){return String(a.date||'9').localeCompare(String(b.date||'9'))});
+$('ctfcl').innerHTML=cs.map(function(c){var pas=c.date&&c.date<td;return '<li class="'+(pas?'past':'')+'"><span><strong>'+esc(c.nom)+'</strong>'+ctTag(c)+(pas?' <small>(passée : masquée dans le journal)</small>':'')+'<br><small>'+esc([c.date,c.duree,c.format,c.niveau].filter(Boolean).join(' · '))+'</small></span><span class="row" style="margin:0"><button class="ghost" type="button" data-ce="cal:'+esc(c.id)+'">Modifier</button><button class="ghost" type="button" data-cd="cal:'+esc(c.id)+'">Supprimer</button></span></li>'}).join('')||'<li><small>Aucune compétition.</small></li>';
+var ws=CTF.writeups.slice();$('ctfwl').innerHTML=ws.map(function(w){return '<li><span><strong>'+esc(w.titre)+'</strong>'+ctTag(w)+'<br><small>'+esc([w.cat,w.niveau].filter(Boolean).join(' · '))+'</small></span><span class="row" style="margin:0"><button class="ghost" type="button" data-ce="wu:'+esc(w.id)+'">Modifier</button><button class="ghost" type="button" data-cd="wu:'+esc(w.id)+'">Supprimer</button></span></li>'}).join('')||'<li><small>Aucun writeup.</small></li>';
+$('ctfcn').textContent='('+CTF.calendrier.length+')';$('ctfwn').textContent='('+CTF.writeups.length+')';$('ctfc').textContent='('+CTF.calendrier.length+' compétitions · '+CTF.writeups.length+' writeups)';
+$('ctfdc').innerHTML=CTF.cats.map(function(c){return '<option value="'+esc(c)+'">'}).join('')}
+function ctRk(){$('ctfrk').innerHTML=CTF.classement.map(function(r){return ctRow(r.equipe,r.points)}).join('')||''}
+function ctRow(e,p){return '<div class="ctr"><input type="text" placeholder="Équipe" aria-label="Équipe" value="'+esc(e||'')+'"><input class="pt" type="text" inputmode="decimal" placeholder="Points" aria-label="Points" value="'+esc(p==null?'':p)+'"><button class="ghost" type="button" data-rr="1" aria-label="Retirer">×</button></div>'}
+function ctEdit(k,id){var D=CTD[k],x=id?CTF[D.key].filter(function(y){return y.id==id})[0]:null;ctK=k;ctId=x?x.id:null;x=x||{};
+$('ctfft').textContent=(ctId?'Modifier la ':'Ajouter une ')+D.t;$('ctfff').innerHTML=D.f.map(function(f,i){return '<label for="ctff'+i+'">'+f[1]+'</label><input id="ctff'+i+'" type="'+(f[2]||'text')+'"'+(f[3]?' list="'+f[3]+'"':'')+' value="'+esc(x[f[0]]||'')+'">'}).join('');
+$('ctfdl').hidden=!ctId;$('ctffm').hidden=false;$('ctffm').scrollIntoView({behavior:'smooth',block:'start'});$('ctff0').focus()}
+function ctAuto(){if(cfg.auto!==false&&cfg.token){ctPub()}else ctMsg($('ctfm').textContent+' Pensez à « Publier la rubrique CTF ».')}
+function ctSaveItem(){var D=CTD[ctK],o={};D.f.forEach(function(f,i){o[f[0]]=$('ctff'+i).value.trim()});if(!o[D.title]){ctMsg('Renseignez le champ « '+D.f[D.f.map(function(f){return f[0]}).indexOf(D.title)][1]+' ».');return}
+if(o.url&&!/^https?:\/\//i.test(o.url)){ctMsg('Le lien doit commencer par http:// ou https://.');return}
+var L=CTF[D.key];if(ctId){CTF[D.key]=L.map(function(y){if(y.id!=ctId)return y;var n=Object.assign({},y,o);delete n.ex;return n})}else{o.id=ctUid(ctK=='cal'?'c':'w');L.push(o)}
+if(ctK=='wu'&&o.cat&&CTF.cats.indexOf(o.cat)<0)CTF.cats.push(o.cat);ctStore();ctList();$('ctffm').hidden=true;ctMsg('Enregistré.');ctAuto()}
+async function ctPub(){if(!cfg.token||!cfg.owner||!cfg.repo){ctMsg('Renseignez d’abord la connexion au journal (onglet Publier).');return}
+ctMsg('Publication en cours…');var P='data/ctf.json';
+try{for(var k=0;k<2;k++){var r=await api('GET',null,P),sha=null;if(r.ok){sha=(await r.json()).sha}else if(r.status!=404){var t=await r.json().catch(function(){return{}});throw new Error(r.status+' '+(t.message||''))}
+var body={message:'CTF : mise à jour depuis la rédaction',content:enc(JSON.stringify(CTF,null,1)),branch:cfg.branch};if(sha)body.sha=sha;
+var w=await api('PUT',body,P);if(w.ok){ctMsg('Rubrique CTF publiée à '+new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})+'. Le journal sera à jour dans 1 à 2 minutes.');return}
+var e2=await w.json().catch(function(){return{}});if(k==0&&(w.status==409||w.status==422))continue;throw new Error(w.status+' '+(e2.message||''))}}
+catch(e){ctMsg('Échec : '+e.message+(/401|403/.test(e.message)?' (vérifiez le jeton et ses droits)':'')+(/404/.test(e.message)?' (vérifiez le compte, le dépôt et la branche)':''))}}
+async function ctPull(){if(!confirm('Remplacer la version enregistrée sur cet appareil par celle du journal ?'))return;ctMsg('Récupération en cours…');
+try{var r=await fetch(siteBase()+'data/ctf.json?_='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error(r.status);var d=await r.json();if(!d||typeof d!='object')throw new Error('fichier invalide');CTF=d;ctLoadFix();ctStore();ctShow();ctMsg('Version du journal récupérée.')}catch(e){ctMsg('Récupération impossible : '+e.message+'. Le fichier data/ctf.json n’est peut-être pas encore publié ; la version intégrée à l’éditeur reste utilisable.')}}
+function ctLoadFix(){['calendrier','classement','writeups'].forEach(function(k){if(!Array.isArray(CTF[k]))CTF[k]=[]});if(!Array.isArray(CTF.cats)||!CTF.cats.length)CTF.cats=obClone(CTSEED.cats)}
+function ctApply(d){var n={c:0,w:0,r:0,x:0},td=new Date(Date.now()-7*864e5).toISOString().slice(0,10);
+var hasC=Array.isArray(d.calendrier)&&d.calendrier.length,hasR=Array.isArray(d.classement)&&d.classement.length,hasW=Array.isArray(d.writeups)&&d.writeups.length;
+function ex(k){var b=CTF[k].length;CTF[k]=CTF[k].filter(function(x){return !x.ex});n.x+=b-CTF[k].length}
+if(hasC){ex('calendrier');CTF.calendrier=CTF.calendrier.filter(function(x){return !(x.auto&&x.date&&x.date<td)});d.calendrier.forEach(function(e){var id='ct'+e.ct;if(CTF.calendrier.some(function(x){return x.id==id||(e.url&&x.url==e.url)||(x.nom==e.nom&&x.date==e.date)}))return;CTF.calendrier.push({id:id,nom:e.nom,date:e.date,duree:e.duree||'',format:e.format||'',niveau:e.niveau||'',url:e.url||'',auto:1});n.c++})}
+if(hasR&&CTF.classAuto!==false){ex('classement');CTF.classement=d.classement.map(function(r){return{equipe:r.equipe,points:r.points,pays:r.pays||'',auto:1}});if(d.classTitre)CTF.classTitre=d.classTitre;n.r=CTF.classement.length}
+if(hasW){ex('writeups');var au=CTF.writeups.filter(function(x){return x.auto});d.writeups.forEach(function(w){if(CTF.writeups.some(function(x){return x.id==w.id||(w.url&&x.url==w.url)}))return;CTF.writeups.unshift({id:w.id,cat:w.cat,titre:w.titre,niveau:w.niveau||'',url:w.url||'',auto:1});if(w.cat&&CTF.cats.indexOf(w.cat)<0)CTF.cats.push(w.cat);n.w++});var k=0;CTF.writeups=CTF.writeups.filter(function(x){if(!x.auto)return true;return ++k<=24})}
+return n}
+async function ctFetchRes(){var P='data/ctf-veille.json';try{if(cfg.token&&cfg.owner&&cfg.repo){var r=await api('GET',null,P);if(r.ok){var j=await r.json();return JSON.parse(dec(j.content))}if(r.status!=404)throw new Error(r.status)}else{var r2=await fetch(siteBase()+P+'?_='+Date.now(),{cache:'no-store'});if(r2.ok)return await r2.json()}}catch(e){}return null}
+async function ctWeb(){if(!CTF)ctLoad();var t0=Date.now(),b=$('ctfweb');b.disabled=true;$('ctfres').innerHTML='';ctMsg('Recherche sur internet en cours…');
+try{var launched=false,why='';
+if(cfg.token&&cfg.owner&&cfg.repo){try{var r=await fetch('https://api.github.com/repos/'+encodeURIComponent(cfg.owner)+'/'+encodeURIComponent(cfg.repo)+'/actions/workflows/ctf.yml/dispatches',{method:'POST',headers:{'Accept':'application/vnd.github+json','Authorization':'Bearer '+cfg.token,'X-GitHub-Api-Version':'2022-11-28'},body:JSON.stringify({ref:cfg.branch||'main'})});if(r.status==204)launched=true;else why=r.status==404?'le fichier .github/workflows/ctf.yml n’est pas encore dans le dépôt':(r.status==401||r.status==403)?'le jeton n’a pas le droit « Actions : lecture et écriture »':'erreur '+r.status}catch(e){why='connexion impossible'}}else why='connexion au journal non enregistrée (onglet Publier)';
+var d=null;
+if(launched){ctMsg('Recherche lancée sur GitHub : comptez 1 à 2 minutes…');for(var i=0;i<26;i++){await sleep(6000);d=await ctFetchRes();if(d&&d.maj&&Date.parse(d.maj)>=t0-90000)break;d=null}}
+var fresh=!!d;if(!d)d=await ctFetchRes();
+if(!d)throw new Error('aucun résultat disponible'+(why?' ('+why+')':'')+'. Sur GitHub : Actions > « CTF — mise à jour » > Run workflow, puis réessayez.');
+var n=ctApply(d),tot=n.c+n.w+n.r+n.x;if(tot){ctStore();ctShow()}
+var h='<p><strong>'+n.c+' compétition'+(n.c>1?'s':'')+' ajoutée'+(n.c>1?'s':'')+', '+n.w+' writeup'+(n.w>1?'s':'')+' ajouté'+(n.w>1?'s':'')+(n.r?', classement mis à jour ('+n.r+' équipes)':'')+(n.x?', '+n.x+' élément'+(n.x>1?'s':'')+' d’exemple remplacé'+(n.x>1?'s':''):'')+'.</strong> Données CTFtime du '+esc(d.maj?new Date(d.maj).toLocaleString('fr-FR',{dateStyle:'long',timeStyle:'short'}):'?')+(fresh?'.':' (dernière mise à jour automatique'+(why?' ; lancement immédiat impossible : '+esc(why):'')+').')+'</p><p><small>Vos éléments saisis à la main ne sont jamais modifiés. Les éléments marqués « auto » peuvent être supprimés ou modifiés ; le classement est remplacé à chaque mise à jour tant que la case « Mettre à jour automatiquement » est cochée.</small></p>';
+if(d.erreurs&&d.erreurs.length)h+='<p><small>Sources indisponibles : '+esc(d.erreurs.join(' ; '))+'</small></p>';
+$('ctfres').innerHTML=h;ctMsg('Mise à jour terminée.');if(tot)ctAuto()}
+catch(e){ctMsg('Échec : '+e.message)}
+b.disabled=false}
+$('ctfweb').addEventListener('click',ctWeb);$('ctfpub').addEventListener('click',function(){if(!CTF)ctLoad();ctPub()});$('ctfpull').addEventListener('click',ctPull);
+$('ctfac').addEventListener('click',function(){if(!CTF)ctLoad();ctEdit('cal',null)});$('ctfaw').addEventListener('click',function(){if(!CTF)ctLoad();ctEdit('wu',null)});
+$('t-ct').addEventListener('click',function(e){var b=e.target.closest('[data-ce]');if(b){var p=b.getAttribute('data-ce').split(':');ctEdit(p[0],p.slice(1).join(':'));return}
+b=e.target.closest('[data-cd]');if(b){var q=b.getAttribute('data-cd').split(':'),D=CTD[q[0]],id=q.slice(1).join(':'),x=CTF[D.key].filter(function(y){return y.id==id})[0];if(!x||!confirm('Supprimer « '+x[D.title]+' » ?'))return;CTF[D.key]=CTF[D.key].filter(function(y){return y.id!=id});ctStore();ctList();ctMsg('Supprimé.');ctAuto();return}
+b=e.target.closest('[data-rr]');if(b)b.closest('.ctr').remove()});
+$('ctfsv').addEventListener('click',ctSaveItem);$('ctfcx').addEventListener('click',function(){$('ctffm').hidden=true});
+$('ctfdl').addEventListener('click',function(){if(!ctId)return;var D=CTD[ctK],x=CTF[D.key].filter(function(y){return y.id==ctId})[0];if(!confirm('Supprimer « '+(x?x[D.title]:'')+' » ?'))return;CTF[D.key]=CTF[D.key].filter(function(y){return y.id!=ctId});ctStore();ctList();$('ctffm').hidden=true;ctMsg('Supprimé.');ctAuto()});
+$('ctftx').addEventListener('click',function(){CTF.intro=$('ctfin').value.trim();CTF.debuter=$('ctfdb').value.trim();var c=$('ctfcs').value.split(',').map(function(t){return t.trim()}).filter(Boolean);if(c.length)CTF.cats=c;ctStore();ctList();ctMsg('Textes enregistrés.');ctAuto()});
+$('ctfra').addEventListener('click',function(){var d=document.createElement('div');d.innerHTML=ctRow('','');$('ctfrk').appendChild(d.firstChild)});
+$('ctfrs').addEventListener('click',function(){CTF.classTitre=$('ctfct').value.trim();CTF.classAuto=$('ctfca').checked;CTF.classement=[].map.call($('ctfrk').querySelectorAll('.ctr'),function(r){var i=r.querySelectorAll('input');return{equipe:i[0].value.trim(),points:i[1].value.trim()}}).filter(function(r){return r.equipe});ctStore();ctRk();ctMsg('Classement enregistré.'+(CTF.classAuto?' Il sera remplacé à la prochaine mise à jour automatique.':''));ctAuto()});
 
 $('obpub').addEventListener('click',function(){if(!OB)obLoad();obPub()});$('obpull').addEventListener('click',obPull);
 
