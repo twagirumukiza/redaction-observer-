@@ -927,6 +927,7 @@ var CTSEED={"maj":"2026-11-05","intro":"Compétitions, classements et corrigés 
 var CTD={cal:{t:'compétition',key:'calendrier',f:[['nom','Nom de la compétition'],['date','Date de début','date'],['duree','Durée (ex. 24 h)'],['format','Format','text','ctfdf'],['niveau','Niveau','text','ctfdn'],['url','Site officiel du CTF (lien direct, facultatif)','url']],title:'nom'},
 wu:{t:'writeup',key:'writeups',f:[['cat','Catégorie (Web, Crypto…)','text','ctfdc'],['titre','Titre'],['niveau','Niveau','text','ctfdn'],['url','Lien vers l’article d’origine','url']],title:'titre'}};
 function ctLoad(){try{CTF=JSON.parse(localStorage.getItem('cro-ctf')||'null')}catch(e){CTF=null}if(!CTF||typeof CTF!='object')CTF=obClone(CTSEED);['calendrier','classement','writeups'].forEach(function(k){if(!Array.isArray(CTF[k]))CTF[k]=[]});if(!Array.isArray(CTF.cats)||!CTF.cats.length)CTF.cats=obClone(CTSEED.cats);if(!Array.isArray(CTF.sources))CTF.sources=obClone(CTSEED.sources);ctNoEx()}
+async function ctBoot(){var raw=null;try{raw=localStorage.getItem('cro-ctf')}catch(e){}if(raw)return;try{var r=await fetch(siteBase()+'data/ctf.json?_='+Date.now(),{cache:'no-store'});if(!r.ok)return;var d=await r.json();if(!d||typeof d!='object')return;try{if(localStorage.getItem('cro-ctf'))return}catch(e){}CTF=d;ctLoadFix();ctStore();if(!$('t-ct').hidden)ctShow()}catch(e){}}
 function ctNoEx(){['calendrier','classement','writeups'].forEach(function(k){CTF[k]=CTF[k].filter(function(x){return !x.ex})})}
 function ctStore(){CTF.maj=new Date().toISOString().slice(0,10);try{localStorage.setItem('cro-ctf',JSON.stringify(CTF))}catch(e){}}
 function ctMsg(t){var m=$('ctfm');m.textContent=t;m.style.color=/^Échec|impossible/i.test(t)?'#b42318':''}
@@ -996,6 +997,7 @@ $('ctfrs').addEventListener('click',function(){CTF.classTitre=$('ctfct').value.t
 
 $('obpub').addEventListener('click',function(){if(!OB)obLoad();obPub()});$('obpull').addEventListener('click',obPull);
 
+ctBoot();
 </script>
 </body>
 </html>
