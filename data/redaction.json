@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T11:36:15.088Z",
+ "maj": "2026-11-11T11:36:27.251Z",
  "items": [
   {
    "id": "ca43af01938e",
@@ -11,7 +11,7 @@
    "conclusion": "<p>Les multiples vulnérabilités d’OpenSSL identifiées par le CERT‑FR représentent un risque sérieux pour la disponibilité et la confidentialité des systèmes protégés par ce composant. Mettre en place un plan de mise à jour rapide, renforcer les contrôles et maintenir un registre clair constitue la meilleure réponse pour se conformer aux exigences réglementaires actuelles.</p>",
    "imgPos": "tete",
    "imgX": 50,
-   "imgY": 50,
+   "imgY": 29,
    "imgZ": 1,
    "liensUtiles": "",
    "intro": "<p>Le CERT‑FR a publié un avis sur plusieurs failles critiques d’<span class=\"tip\" data-tip=\"&lt;b&gt;OpenSSL&lt;/b&gt; est une boîte à outils logicielle open-source incontournable dédiée à la cryptographie et à la sécurisation des communications réseau.&amp;nbsp;&lt;p&gt;Fondée en 1998, elle implémente principalement les protocoles réseau&lt;b&gt; TLS &lt;/b&gt;(&lt;b&gt;Transport Layer Security&lt;/b&gt;) et son prédécesseur SSL, servant de fondation de sécurité pour la grande majorité des sites web modernes fonctionnant sous &lt;b&gt;HTTPS&lt;/b&gt;.&lt;/p&gt;\" data-lex=\"rmwc1hvrkd1qy\">OpenSSL</span>, affectant de nombreuses versions. Ces vulnérabilités permettent un déni de service, un vol de données confidentielles et un contournement de la politique de sécurité.</p>",
