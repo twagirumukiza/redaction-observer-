@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T22:48:37.569Z",
+ "maj": "2026-11-11T22:51:17.383Z",
  "items": [
   {
    "id": "rmwcnxn0fbyxd",
@@ -121,7 +121,7 @@
      "id": "rmwcnx9g805mc",
      "type": "texte",
      "titre": "3. Exemple concret pas à pas",
-     "texte": "<p>Alice veut envoyer à Bob un contrat de 50 Mo par courriel. Chiffrer 50 Mo en RSA serait très lent et même impossible directement (RSA ne traite que des blocs courts). Elle procède donc ainsi :</p><ul><li>Son logiciel génère aléatoirement une clé de session de 256 bits.</li></ul><p>Twagirumukiza · twagirumukiza.github.io/cyber-risk-observer Page 3 Cyber Risk Observer · Notions cyber Le chiffrement hybride</p><ul><li>Le contrat est chiffré avec AES-256 en mode authentifié (AES-GCM) à l’aide de cette clé :</li></ul><p>opération quasi instantanée.</p><ul><li>La clé de session de 32 octets est chiffrée avec la clé publique RSA (ou ECC) de Bob.</li><li>Le message envoyé contient : la clé de session chiffrée + le contrat chiffré.</li><li>Bob déchiffre la clé de session avec sa clé privée, puis le contrat avec cette clé. La clé de session</li></ul><p>est ensuite détruite.</p>",
+     "texte": "<p>Alice veut envoyer à Bob un contrat de 50 Mo par courriel. Chiffrer 50 Mo en RSA serait très lent et même impossible directement (RSA ne traite que des blocs courts). Elle procède donc ainsi :</p><ul><li>Son logiciel génère aléatoirement une clé de session de 256 bits.</li></ul><ul><li>Le contrat est chiffré avec AES-256 en mode authentifié (AES-GCM) à l’aide de cette clé :</li></ul><p>opération quasi instantanée.</p><ul><li>La clé de session de 32 octets est chiffrée avec la clé publique RSA (ou ECC) de Bob.</li><li>Le message envoyé contient : la clé de session chiffrée + le contrat chiffré.</li><li>Bob déchiffre la clé de session avec sa clé privée, puis le contrat avec cette clé. La clé de session</li></ul><p>est ensuite détruite.</p>",
      "imgs": []
     },
     {
