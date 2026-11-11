@@ -1,6 +1,150 @@
 {
- "maj": "2026-11-11T21:37:17.786Z",
+ "maj": "2026-11-11T22:00:43.989Z",
  "items": [
+  {
+   "id": "rmwcnxn0fbyxd",
+   "section": 7,
+   "kicker": "",
+   "titre": "Le chiffrement hybride",
+   "resume": "",
+   "analyse": "",
+   "conclusion": "",
+   "imgPos": "tete",
+   "imgX": 50,
+   "imgY": 50,
+   "imgZ": 1,
+   "liensUtiles": "",
+   "intro": "<p>NOTIONS CYBER</p>",
+   "stIntro": "",
+   "rang": null,
+   "une": 0,
+   "uneR": 0,
+   "uneJ": 0,
+   "uneD": "",
+   "uneRJ": 0,
+   "uneRD": "",
+   "encours": "",
+   "erreurIA": "",
+   "notip": 0,
+   "tipx": "",
+   "ordre": [],
+   "imageCarte": "",
+   "cX": 50,
+   "cY": 50,
+   "cZ": 1,
+   "medias": {
+    "info": [],
+    "ana": [],
+    "act": [],
+    "con": []
+   },
+   "parties": [
+    {
+     "id": "rmwcnx9g8fmur",
+     "type": "texte",
+     "titre": "Allier la rapidité du chiffrement symétrique et la praticité du chiffrement asymétrique",
+     "texte": "<p>L’essentiel en trois lignes Le chiffrement symétrique est rapide mais pose le problème de l’échange de la clé. Le chiffrement asymétrique résout cet échange mais il est lent. Le chiffrement hybride combine les deux : les données sont chiffrées avec une clé symétrique éphémère, et cette clé est elle-même protégée avec la clé publique du destinataire. C’est le mode de fonctionnement de HTTPS, de PGP, des VPN, des messageries sécurisées.</p>",
+     "imgs": []
+    },
+    {
+     "id": "rmwcnx9g80gc0",
+     "type": "texte",
+     "titre": "1. Rappel : deux familles de chiffrement",
+     "texte": "<p>Pour comprendre l’intérêt du chiffrement hybride, il faut d’abord rappeler les forces et les faiblesses de chacune des deux grandes familles de chiffrement.</p>",
+     "imgs": []
+    },
+    {
+     "id": "rmwcnx9g89cto",
+     "type": "texte",
+     "titre": "1.1 Le chiffrement symétrique",
+     "texte": "<p>Une même clé secrète sert à chiffrer et à déchiffrer. Alice et Bob doivent donc la posséder tous les deux. Les algorithmes (AES, ChaCha20) sont très rapides et adaptés aux gros volumes de données. La difficulté est de transmettre la clé en toute sécurité : si un attaquant l’intercepte, tout le secret est perdu.</p><p>Figure 1 – Chiffrement symétrique : la même clé secrète chiffre et déchiffre (Alice vers Bob).</p>",
+     "imgs": []
+    },
+    {
+     "id": "rmwcnx9g8fh0u",
+     "type": "texte",
+     "titre": "1.2 Le chiffrement asymétrique",
+     "texte": "<p>Chaque utilisateur possède une paire de clés : une clé publique , diffusable librement, et une clé privée , jamais partagée. Ce que l’une chiffre, seule l’autre peut le déchiffrer. Pour écrire à Bob, Alice chiffre avec la clé publique de Bob ; seul Bob, qui détient la clé privée correspondante, peut lire le message. Plus besoin de s’échanger un secret au préalable. En contrepartie, les algorithmes (RSA, courbes elliptiques) sont nettement plus lents et ne conviennent pas au chiffrement de gros volumes.</p><p>Twagirumukiza · twagirumukiza.github.io/cyber-risk-observer Page 1 Cyber Risk Observer · Notions cyber Le chiffrement hybride</p><p>Figure 2 – Chiffrement asymétrique, message d’Alice à Bob : chiffrement avec la clé publique de Bob, déchiffrement avec sa clé privée.</p><p>Figure 3 – Chiffrement asymétrique, message de Bob à Alice : Bob utilise cette fois la clé publique d’Alice.</p><p>Critère Symétrique Asymétrique</p><p>Clés Une seule clé secrète partagée Une paire : clé publique + clé privée</p><p>Vitesse Très rapide Lent (de l’ordre de centaines à milliers de fois plus lent)</p><p>Volume de Adapté aux gros volumes Adapté à de petits messages (une clé, données une signature)</p><p>Échange des Problématique : il faut un canal sûr Simple : la clé publique peut être clés diffusée</p><p>Exemples AES, ChaCha20 RSA, ECC (ECDH, ECDSA), Curve25519</p>",
+     "imgs": []
+    },
+    {
+     "id": "rmwcnx9g87xv7",
+     "type": "texte",
+     "titre": "2. Le principe du chiffrement hybride",
+     "texte": "<p>Le chiffrement hybride tire parti de la complémentarité des deux approches : le chiffrement asymétrique sert uniquement à transmettre une clé secrète , et le chiffrement</p><p>Twagirumukiza · twagirumukiza.github.io/cyber-risk-observer Page 2 Cyber Risk Observer · Notions cyber Le chiffrement hybride</p><p>symétrique protège les données elles-mêmes. On parle aussi d’ enveloppe numérique (« digital envelope ») : la clé symétrique est mise sous enveloppe avec la clé publique du destinataire.</p><p>Figure 4 – Chiffrement hybride, message d’Alice à Bob : les étapes 1 à 4. Schéma : Twagirumukiza Innocent.</p>",
+     "imgs": []
+    },
+    {
+     "id": "rmwcnx9g856n7",
+     "type": "texte",
+     "titre": "Les étapes, en suivant le schéma",
+     "texte": "<p>Étape Qui Ce qui se passe</p><p>1 Alice Elle génère une clé secrète à usage unique (clé de session) et chiffre ses données en clair avec un algorithme symétrique (ex. AES) : on obtient les données chiffrées.</p><p>2 Alice Elle chiffre cette clé de session avec la clé publique de Bob (algorithme asymétrique, ex. RSA ou échange sur courbe elliptique).</p><p>3 Alice → Bob Elle envoie à Bob les deux éléments : les données chiffrées et la clé de session chiffrée. Un espion qui intercepte le tout ne voit qu’un message inintelligible.</p><p>4 Bob Avec sa clé privée , il récupère la clé de session, puis déchiffre les données avec l’algorithme symétrique : le message redevient intelligible.</p><p>Pourquoi ça marche 1. Seule la petite clé de session passe par l’algorithme lent, les données volumineuses sont traitées par l’algorithme rapide. 2. La clé de session n’a jamais besoin d’être échangée à l’avance par un canal sûr. 3. La clé de session est à usage unique : sa compromission ne dévoile qu’un seul échange.</p>",
+     "imgs": []
+    },
+    {
+     "id": "rmwcnx9g805mc",
+     "type": "texte",
+     "titre": "3. Exemple concret pas à pas",
+     "texte": "<p>Alice veut envoyer à Bob un contrat de 50 Mo par courriel. Chiffrer 50 Mo en RSA serait très lent et même impossible directement (RSA ne traite que des blocs courts). Elle procède donc ainsi :</p><ul><li>Son logiciel génère aléatoirement une clé de session de 256 bits.</li></ul><p>Twagirumukiza · twagirumukiza.github.io/cyber-risk-observer Page 3 Cyber Risk Observer · Notions cyber Le chiffrement hybride</p><ul><li>Le contrat est chiffré avec AES-256 en mode authentifié (AES-GCM) à l’aide de cette clé :</li></ul><p>opération quasi instantanée.</p><ul><li>La clé de session de 32 octets est chiffrée avec la clé publique RSA (ou ECC) de Bob.</li><li>Le message envoyé contient : la clé de session chiffrée + le contrat chiffré.</li><li>Bob déchiffre la clé de session avec sa clé privée, puis le contrat avec cette clé. La clé de session</li></ul><p>est ensuite détruite.</p>",
+     "imgs": []
+    },
+    {
+     "id": "rmwcnx9g8m57a",
+     "type": "texte",
+     "titre": "4. Exemples d’utilisation",
+     "texte": "<p>Le chiffrement hybride est partout : il est probable que vous l’utilisiez des dizaines de fois par jour sans le savoir.</p><p>Usage Où intervient l’hybride ? Détails</p><p>HTTPS / TLS Le navigateur et le serveur négocient une clé de Cadenas du navigateur, (web) session grâce à la cryptographie asymétrique banque en ligne, achats, (échange de clés ECDHE, certificat du serveur). Le sites institutionnels. trafic est ensuite chiffré en AES-GCM ou ChaCha20-Poly1305.</p><p>Messagerie Le message est chiffré avec une clé symétrique Courriels sensibles, électronique aléatoire, laquelle est chiffrée avec la clé publique échanges juridiques, santé, chiffrée de chaque destinataire. journalisme. (PGP/GPG, S/MIME)</p><p>VPN (IPsec/IKEv2, Une phase d’établissement asymétrique Télétravail, interconnexion OpenVPN, (certificats ou clés publiques, échange de sites. WireGuard) Diffie-Hellman) fabrique les clés symétriques qui chiffrent le tunnel.</p><p>SSH Échange de clés asymétrique pour établir une Administration de serveurs, session, puis chiffrement symétrique de toute la transferts SFTP. session.</p><p>Messageries Des échanges de clés asymétriques Chiffrement de bout en bout. instantanées (Diffie-Hellman sur courbes elliptiques) renouvelés (Signal, très fréquemment, puis des clés symétriques pour WhatsApp…) les messages.</p><p>Chiffrement en Chaque objet est chiffré avec une clé de données Stockage cloud, bases de cloud (« envelope symétrique, elle-même chiffrée par une clé données chiffrées, rotation encryption », maîtresse stockée dans un service de gestion de de clés facilitée. KMS) clés ou un HSM.</p><p>Signature et Un document est chiffré en symétrique, la clé est Coffres-forts numériques, chiffrement de chiffrée pour chaque destinataire autorisé : data rooms, partage de documents plusieurs lecteurs sans rechiffrer tout le document. fichiers sécurisé.</p>",
+     "imgs": []
+    },
+    {
+     "id": "rmwcnx9g815yd",
+     "type": "texte",
+     "titre": "Exemple : une connexion HTTPS",
+     "texte": "<ul><li>Le navigateur contacte le site et reçoit son certificat (qui contient la clé publique du serveur).</li><li>Les deux parties réalisent un échange de clés asymétrique (ECDHE) et s’accordent sur un secret</li></ul><p>partagé , dont dérivent les clés de session.</p><ul><li>Toutes les données (pages, mots de passe, formulaires) sont ensuite chiffrées avec des clés</li></ul><p>symétriques temporaires.</p><p>Twagirumukiza · twagirumukiza.github.io/cyber-risk-observer Page 4 Cyber Risk Observer · Notions cyber Le chiffrement hybride</p>",
+     "imgs": []
+    },
+    {
+     "id": "rmwcnx9g8ank9",
+     "type": "texte",
+     "titre": "5. Avantages, limites et bonnes pratiques",
+     "texte": "<p>Avantages Limites / points de vigilance</p><p>Performance proche du symétrique, même La sécurité repose sur la protection de la clé sur de très gros volumes. privée : sa perte ou son vol est critique.</p><p>Pas besoin de canal sûr préalable pour Il faut s’assurer que la clé publique appartient bien partager un secret. au bon destinataire (certificats, PKI, empreintes) pour éviter l’attaque de l’homme du milieu.</p><p>Plusieurs destinataires possibles : la même La force du dispositif est celle de son maillon le plus clé de session est chiffrée pour chacun. faible : une clé RSA trop courte ou un aléa de mauvaise qualité ruinent l’ensemble.</p><p>Clé de session à usage unique : un incident Les algorithmes asymétriques actuels (RSA, ECC) ne compromet qu’un seul échange seront vulnérables à un ordinateur quantique (confidentialité persistante avec ECDHE). suffisamment puissant.</p>",
+     "imgs": []
+    },
+    {
+     "id": "rmwcnx9g84ycw",
+     "type": "texte",
+     "titre": "Bonnes pratiques",
+     "texte": "<ul><li>Utiliser des algorithmes et paramètres à jour : AES-256 (ou ChaCha20-Poly1305) en mode</li></ul><p>authentifié , RSA ≥ 3072 bits ou courbes elliptiques modernes (P-256, Curve25519).</p><ul><li>Générer les clés de session avec un générateur aléatoire cryptographiquement sûr, et ne jamais</li></ul><p>réutiliser une clé de session ou un nonce.</p><ul><li>Protéger les clés privées (HSM, coffre de clés, carte à puce), prévoir leur rotation et leur</li></ul><p>révocation.</p><ul><li>Vérifier l’authenticité des clés publiques via une PKI ou en contrôlant les empreintes.</li><li>Désactiver les protocoles et suites cryptographiques obsolètes (SSL, TLS 1.0/1.1, RC4, 3DES).</li><li>S’appuyer sur des bibliothèques éprouvées (OpenSSL, libsodium…) plutôt que sur une</li></ul><p>implémentation maison.</p>",
+     "imgs": []
+    },
+    {
+     "id": "rmwcnx9g8sd8r",
+     "type": "texte",
+     "titre": "Et demain : l’hybride post-quantique",
+     "texte": "<p>Face à la menace quantique, les navigateurs et les services web déploient désormais des échanges de clés dits hybrides post-quantiques , qui combinent un algorithme classique (X25519) et un algorithme post-quantique (ML-KEM, standardisé par le NIST). La logique est la même : si l’un des deux est cassé, l’autre protège encore la clé. Les données restent chiffrées en symétrique (AES-256), dont la sécurité est moins affectée par le calcul quantique.</p>",
+     "imgs": []
+    }
+   ],
+   "stInfo": "",
+   "stAna": "",
+   "stAct": "",
+   "stCon": "",
+   "auteur": "",
+   "auteurRole": "",
+   "auteurLiens": "",
+   "auteurPhoto": "",
+   "actions": [],
+   "actionsHtml": "",
+   "source": "",
+   "url": "",
+   "date": "2026-11-11",
+   "heure": "",
+   "criticite": "",
+   "image": "",
+   "credit": "",
+   "alt": "",
+   "related": null,
+   "statut": "brouillon"
+  },
   {
    "id": "rmwbg5wu9du76",
    "section": 1,
