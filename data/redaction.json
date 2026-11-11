@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T22:37:16.405Z",
+ "maj": "2026-11-11T22:37:31.751Z",
  "items": [
   {
    "id": "rmwcnxn0fbyxd",
@@ -156,7 +156,7 @@
      "id": "rmwcnx9g8sd8r",
      "type": "texte",
      "titre": "6. Lien avec la conformité",
-     "texte": "",
+     "texte": "<p>Le chiffrement est cité comme mesure de sécurité appropriée à l’article 32 du RGPD et fait partie</p><p>des mesures attendues par la directive NIS2 (politiques et procédures relatives à la cryptographie</p><p>et, le cas échéant, au chiffrement). Mettre en place un chiffrement hybride correctement géré (clés,</p><p>certificats, rotation) contribue directement à la protection des données en transit et au repos.</p>",
      "imgs": []
     }
    ],
