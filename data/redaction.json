@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T18:55:15.388Z",
+ "maj": "2026-11-11T18:55:23.438Z",
  "items": [
   {
    "id": "rmwcha1ga4zcq",
@@ -53,9 +53,12 @@
    "auteurLiens": "",
    "auteurPhoto": "",
    "actions": [
-    "● Renforcer l’authentification des messageries avec SPF, DKIM et DMARC. ● Conserver les courriels originaux et leurs en-têtes pour faciliter les investigations. ● Mettre en place des procédures de signalement et de coordination avec les autorités. ● Intégrer les menaces numériques dans les plans de continuité d’activité."
+    "● Renforcer l’authentification des messageries avec SPF, DKIM et DMARC.",
+    "● Conserver les courriels originaux et leurs en-têtes pour faciliter les investigations.",
+    "● Mettre en place des procédures de signalement et de coordination avec les autorités.",
+    "● Intégrer les menaces numériques dans les plans de continuité d’activité."
    ],
-   "actionsHtml": "<p>● Renforcer l’authentification des messageries avec SPF, DKIM et DMARC. ● Conserver les courriels originaux et leurs en-têtes pour faciliter les investigations. ● Mettre en place des procédures de signalement et de coordination avec les autorités. ● Intégrer les menaces numériques dans les plans de continuité d’activité.</p>",
+   "actionsHtml": "<p>● Renforcer l’authentification des messageries avec SPF, DKIM et DMARC.&nbsp;</p><p>● Conserver les courriels originaux et leurs en-têtes pour faciliter les investigations.&nbsp;</p><p>● Mettre en place des procédures de signalement et de coordination avec les autorités.&nbsp;</p><p>● Intégrer les menaces numériques dans les plans de continuité d’activité.</p>",
    "source": "",
    "url": "",
    "date": "2026-11-11",
