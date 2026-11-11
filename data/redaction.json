@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T22:18:11.088Z",
+ "maj": "2026-11-11T22:18:18.145Z",
  "items": [
   {
    "id": "rmwcnxn0fbyxd",
@@ -103,7 +103,12 @@
      "type": "texte",
      "titre": "2. Le principe du chiffrement hybride",
      "texte": "<p>Le chiffrement hybride tire parti de la complémentarité des deux approches : <b>le chiffrement asymétrique sert uniquement à transmettre une clé secrète , et le chiffrement symétrique protège les données elles-mêmes.&nbsp;</b></p><p>On parle aussi d’ enveloppe numérique (« digital envelope ») : la clé symétrique est mise sous enveloppe avec la clé publique du destinataire.</p>",
-     "imgs": []
+     "imgs": [
+      {
+       "image": "",
+       "legende": ""
+      }
+     ]
     },
     {
      "id": "rmwcnx9g856n7",
