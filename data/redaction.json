@@ -1,12 +1,12 @@
 {
- "maj": "2026-11-11T10:31:42.661Z",
+ "maj": "2026-11-11T10:37:26.096Z",
  "items": [
   {
-   "id": "9134dd9ee739",
-   "section": 1,
+   "id": "3e31a53a7042",
+   "section": 4,
    "kicker": "",
-   "titre": "EN DIRECT, guerre en Ukraine : un militaire américain, soupçonné d’espionnage au profit de la Russie, arrêté au Royaume-Uni",
-   "resume": "<p>Cet homme de 41 ans a été interpellé, mardi, par la police antiterroriste britannique. Par ailleurs, des négociations entre la Russie et l’Ukraine se tiennent mardi et mercredi aux Emirats arabes unis, dans le cadre d’une médiation américaine.</p>",
+   "titre": "Après un été de cyberattaques et un an de blocage, la loi « résilience » de retour à l’Assemblée nationale",
+   "resume": "<p>Rédaction par l’IA en cours… Ce brouillon se complétera tout seul (1 à 3 minutes) : gardez cette page ouverte ; vous pouvez créer d’autres brouillons.</p>",
    "analyse": "",
    "conclusion": "",
    "imgPos": "tete",
@@ -23,8 +23,8 @@
    "uneD": "",
    "uneRJ": 0,
    "uneRD": "",
-   "encours": "",
-   "erreurIA": "réponse de l’IA illisible",
+   "encours": "3e31a53a7042",
+   "erreurIA": "",
    "notip": 0,
    "tipx": "",
    "ordre": [],
@@ -49,9 +49,9 @@
    "auteurPhoto": "",
    "actions": [],
    "actionsHtml": "",
-   "source": "Le Monde International",
-   "url": "https://www.lemonde.fr/international/live/2026/11/10/en-direct-guerre-en-ukraine-un-militaire-americain-soupconne-d-espionnage-au-profit-de-la-russie-arrete-au-royaume-uni_6808609_3210.html",
-   "date": "2026-11-10",
+   "source": "Le Monde Pixels",
+   "url": "https://www.lemonde.fr/pixels/article/2026/11/09/apres-un-ete-de-cyberattaques-et-un-an-de-blocage-la-loi-resilience-de-retour-a-l-assemblee-nationale_6808612_4408996.html",
+   "date": "2026-11-09",
    "criticite": "",
    "image": "",
    "credit": "",
@@ -1495,6 +1495,6 @@
   "306be99284dc",
   "6f59863fe58c",
   "408ff287345d",
-  "3e31a53a7042"
+  "9134dd9ee739"
  ]
 }
