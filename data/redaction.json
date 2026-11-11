@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T22:23:16.197Z",
+ "maj": "2026-11-11T22:23:30.436Z",
  "items": [
   {
    "id": "rmwcnxn0fbyxd",
@@ -114,7 +114,7 @@
      "id": "rmwcnx9g856n7",
      "type": "texte",
      "titre": "Les étapes, en suivant le schéma",
-     "texte": "<table><tbody><tr><th>Étape</th><th>Qui&nbsp;</th><th>Ce qui se passe</th></tr><tr><td><b>1</b></td><td>Alice&nbsp;</td><td>Elle génère une clé secrète à usage unique (clé de session) et chiffre ses<br>données en clair avec un algorithme symétrique (ex. AES) : on obtient les<br>données chiffrées.<br><br></td></tr><tr><td><b>2</b></td><td>Alice&nbsp;</td><td>Elle chiffre cette clé de session avec la<b> clé publique de Bob</b> (algorithme<br>asymétrique, ex. RSA ou échange sur courbe elliptique).<br><br></td></tr><tr><td><b>3</b></td><td>Alice → Bob</td><td>Elle envoie à Bob les deux éléments : les données chiffrées et la clé de session<br>chiffrée. Un espion qui intercepte le tout ne voit qu’un message inintelligible.<br><br></td></tr><tr><td><b>4</b></td><td>Bob</td><td>Avec sa <b>clé privée</b>, il récupère la clé de session, puis déchiffre les données<br>avec l’algorithme symétrique : le message redevient intelligible.<br><br></td></tr></tbody></table><p><b>Pourquoi ça marche</b>&nbsp;</p><p>1. Seule la petite clé de session passe par l’algorithme lent, les données volumineuses sont traitées par l’algorithme rapide.&nbsp;</p><p>2. La clé de session n’a jamais besoin d’être échangée à l’avance par un canal sûr.&nbsp;</p><p>3. La clé de session est à usage unique : sa compromission ne dévoile qu’un seul échange.</p>",
+     "texte": "<table><tbody><tr><th>Étape</th><th>Qui&nbsp;</th><th>Ce qui se passe</th></tr><tr><td><b>1</b></td><td>Alice&nbsp;</td><td>Elle génère une clé secrète à usage unique (clé de session) et chiffre ses<br>données en clair avec un algorithme symétrique (ex. AES) : on obtient les<br>données chiffrées.<br><br></td></tr><tr><td><b>2</b></td><td>Alice&nbsp;</td><td>Elle chiffre cette clé de session avec la<b> clé publique de Bob</b> (algorithme<br>asymétrique, ex. RSA ou échange sur courbe elliptique).<br><br></td></tr><tr><td><b>3</b></td><td>Alice → Bob</td><td>Elle envoie à Bob les deux éléments : les données chiffrées et la clé de session<br>chiffrée. Un espion qui intercepte le tout ne voit qu’un message inintelligible.<br><br></td></tr><tr><td><b>4</b></td><td>Bob</td><td>Avec sa <b>clé privée</b>, il récupère la clé de session, puis déchiffre les données<br>avec l’algorithme symétrique : le message redevient intelligible.<br><br></td></tr></tbody></table><blockquote><b>Pourquoi ça marche</b>&nbsp;<br>1. Seule la petite clé de session passe par l’algorithme lent, les données volumineuses sont traitées par l’algorithme rapide.&nbsp;<br>2. La clé de session n’a jamais besoin d’être échangée à l’avance par un canal sûr.&nbsp;<br>3. La clé de session est à usage unique : sa compromission ne dévoile qu’un seul échange.</blockquote>",
      "imgs": []
     },
     {
