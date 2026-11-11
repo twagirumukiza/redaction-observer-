@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T22:00:43.989Z",
+ "maj": "2026-11-11T22:05:04.279Z",
  "items": [
   {
    "id": "rmwcnxn0fbyxd",
@@ -27,7 +27,24 @@
    "erreurIA": "",
    "notip": 0,
    "tipx": "",
-   "ordre": [],
+   "ordre": [
+    "info",
+    "ana",
+    "act",
+    "p:rmwcnx9g8fmur",
+    "p:rmwcnx9g80gc0",
+    "p:rmwcnx9g89cto",
+    "p:rmwcnx9g8fh0u",
+    "p:rmwcnx9g87xv7",
+    "p:rmwcnx9g856n7",
+    "p:rmwcnx9g805mc",
+    "p:rmwcnx9g8m57a",
+    "p:rmwcnx9g815yd",
+    "p:rmwcnx9g8ank9",
+    "p:rmwcnx9g84ycw",
+    "p:rmwcnx9g8sd8r",
+    "con"
+   ],
    "imageCarte": "",
    "cX": 50,
    "cY": 50,
@@ -43,7 +60,7 @@
      "id": "rmwcnx9g8fmur",
      "type": "texte",
      "titre": "Allier la rapidité du chiffrement symétrique et la praticité du chiffrement asymétrique",
-     "texte": "<p>L’essentiel en trois lignes Le chiffrement symétrique est rapide mais pose le problème de l’échange de la clé. Le chiffrement asymétrique résout cet échange mais il est lent. Le chiffrement hybride combine les deux : les données sont chiffrées avec une clé symétrique éphémère, et cette clé est elle-même protégée avec la clé publique du destinataire. C’est le mode de fonctionnement de HTTPS, de PGP, des VPN, des messageries sécurisées.</p>",
+     "texte": "<blockquote><b>L’essentiel en trois lignes Le chiffrement symétrique est rapide mais pose le problème de l’échange de la clé. Le chiffrement asymétrique résout cet échange mais il est lent. Le chiffrement hybride combine les deux : les données sont chiffrées avec une clé symétrique éphémère, et cette clé est elle-même protégée avec la clé publique du destinataire. C’est le mode de fonctionnement de HTTPS, de PGP, des VPN, des messageries sécurisées.</b></blockquote>",
      "imgs": []
     },
     {
