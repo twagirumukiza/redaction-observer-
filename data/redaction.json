@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T22:08:28.057Z",
+ "maj": "2026-11-11T22:08:43.525Z",
  "items": [
   {
    "id": "rmwcnxn0fbyxd",
@@ -86,7 +86,7 @@
      "id": "rmwcnx9g8fh0u",
      "type": "texte",
      "titre": "1.2 Le chiffrement asymétrique",
-     "texte": "<p>Chaque utilisateur possède<b> une paire de clés</b> : une clé <b>publique</b> , diffusable librement, et une clé privée , jamais partagée. Ce que l’une chiffre, seule l’autre peut le déchiffrer. Pour écrire à Bob, Alice chiffre avec la clé publique de Bob ; seul Bob, qui détient la clé privée correspondante, peut lire le message. Plus besoin de s’échanger un secret au préalable. En contrepartie, les algorithmes (RSA, courbes elliptiques) sont nettement plus lents et ne conviennent pas au chiffrement de gros volumes.</p><p>Twagirumukiza · twagirumukiza.github.io/cyber-risk-observer Page 1 Cyber Risk Observer · Notions cyber Le chiffrement hybride</p><p>Figure 2 – Chiffrement asymétrique, message d’Alice à Bob : chiffrement avec la clé publique de Bob, déchiffrement avec sa clé privée.</p><p>Figure 3 – Chiffrement asymétrique, message de Bob à Alice : Bob utilise cette fois la clé publique d’Alice.</p><p>Critère Symétrique Asymétrique</p><p>Clés Une seule clé secrète partagée Une paire : clé publique + clé privée</p><p>Vitesse Très rapide Lent (de l’ordre de centaines à milliers de fois plus lent)</p><p>Volume de Adapté aux gros volumes Adapté à de petits messages (une clé, données une signature)</p><p>Échange des Problématique : il faut un canal sûr Simple : la clé publique peut être clés diffusée</p><p>Exemples AES, ChaCha20 RSA, ECC (ECDH, ECDSA), Curve25519</p>",
+     "texte": "<p>Chaque utilisateur possède<b> une paire de clés</b> : une clé <b>publique</b> , diffusable librement, et une <b>clé privée </b>, jamais partagée. Ce que l’une chiffre, seule l’autre peut le déchiffrer. Pour écrire à Bob, Alice chiffre avec la clé publique de Bob ; seul Bob, qui détient la clé privée correspondante, peut lire le message. Plus besoin de s’échanger un secret au préalable. En contrepartie, les algorithmes (RSA, courbes elliptiques) sont nettement plus lents et ne conviennent pas au chiffrement de gros volumes.</p><p>Twagirumukiza · twagirumukiza.github.io/cyber-risk-observer Page 1 Cyber Risk Observer · Notions cyber Le chiffrement hybride</p><p>Figure 2 – Chiffrement asymétrique, message d’Alice à Bob : chiffrement avec la clé publique de Bob, déchiffrement avec sa clé privée.</p><p>Figure 3 – Chiffrement asymétrique, message de Bob à Alice : Bob utilise cette fois la clé publique d’Alice.</p><p>Critère Symétrique Asymétrique</p><p>Clés Une seule clé secrète partagée Une paire : clé publique + clé privée</p><p>Vitesse Très rapide Lent (de l’ordre de centaines à milliers de fois plus lent)</p><p>Volume de Adapté aux gros volumes Adapté à de petits messages (une clé, données une signature)</p><p>Échange des Problématique : il faut un canal sûr Simple : la clé publique peut être clés diffusée</p><p>Exemples AES, ChaCha20 RSA, ECC (ECDH, ECDSA), Curve25519</p>",
      "imgs": []
     },
     {
