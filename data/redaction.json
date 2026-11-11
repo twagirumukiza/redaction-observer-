@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T10:38:52.872Z",
+ "maj": "2026-11-11T10:41:46.912Z",
  "items": [
   {
    "id": "3e31a53a7042",
@@ -27,7 +27,12 @@
    "erreurIA": "",
    "notip": 0,
    "tipx": "",
-   "ordre": [],
+   "ordre": [
+    "info",
+    "ana",
+    "act",
+    "con"
+   ],
    "imageCarte": "",
    "cX": 50,
    "cY": 50,
@@ -47,7 +52,15 @@
    "auteurRole": "",
    "auteurLiens": "",
    "auteurPhoto": "",
-   "actions": [],
+   "actions": [
+    "Mettre à jour les procédures internes pour intégrer les exigences de la loi «résilience» en matière d’évaluation des risques.",
+    "Effectuer un audit de conformité avec les directives européennes transposées, afin d’identifier les écarts potentiels.",
+    "Renforcer la stratégie de chiffrement des communications internes en excluant tout dispositif de porte dérobée.",
+    "Organiser des formations destinées aux équipes de sécurité et aux responsables de la conformité sur les nouvelles obligations légales.",
+    "Établir un plan de test de résilience incluant des exercices de cyberattaque simulée et de récupération après sinistre.",
+    "Consulter régulièrement l’ANSSI pour le suivi des recommandations et des évolutions réglementaires.",
+    "Intégrer les exigences légales dans le cadre de gouvernance des contrats avec les fournisseurs et partenaires."
+   ],
    "actionsHtml": "<ul><li>Mettre à jour les procédures internes pour intégrer les exigences de la loi «résilience» en matière d’évaluation des risques.</li><li>Effectuer un audit de conformité avec les directives européennes transposées, afin d’identifier les écarts potentiels.</li><li>Renforcer la stratégie de chiffrement des communications internes en excluant tout dispositif de porte dérobée.</li><li>Organiser des formations destinées aux équipes de sécurité et aux responsables de la conformité sur les nouvelles obligations légales.</li><li>Établir un plan de test de résilience incluant des exercices de cyberattaque simulée et de récupération après sinistre.</li><li>Consulter régulièrement l’ANSSI pour le suivi des recommandations et des évolutions réglementaires.</li><li>Intégrer les exigences légales dans le cadre de gouvernance des contrats avec les fournisseurs et partenaires.</li></ul>",
    "source": "Le Monde Pixels",
    "url": "https://www.lemonde.fr/pixels/article/2026/11/09/apres-un-ete-de-cyberattaques-et-un-an-de-blocage-la-loi-resilience-de-retour-a-l-assemblee-nationale_6808612_4408996.html",
