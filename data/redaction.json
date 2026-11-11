@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T22:34:46.051Z",
+ "maj": "2026-11-11T22:34:51.870Z",
  "items": [
   {
    "id": "rmwcnxn0fbyxd",
@@ -149,7 +149,7 @@
      "id": "rmwcnx9g84ycw",
      "type": "texte",
      "titre": "Bonnes pratiques",
-     "texte": "<ul><li>Utiliser des algorithmes et paramètres à jour : AES-256 (ou ChaCha20-Poly1305) en mode<b>authentifié</b> , RSA ≥ 3072 bits ou courbes elliptiques modernes (P-256, Curve25519).</li></ul><ul><li>Générer les clés de session avec un générateur aléatoire cryptographiquement sûr, et ne jamais</li></ul><p>réutiliser une clé de session ou un nonce.</p><ul><li>Protéger les clés privées (HSM, coffre de clés, carte à puce), prévoir leur rotation et leur</li></ul><p>révocation.</p><ul><li>Vérifier l’authenticité des clés publiques via une PKI ou en contrôlant les empreintes.</li><li>Désactiver les protocoles et suites cryptographiques obsolètes (SSL, TLS 1.0/1.1, RC4, 3DES).</li><li>S’appuyer sur des bibliothèques éprouvées (OpenSSL, libsodium…) plutôt que sur une</li></ul><p>implémentation maison.</p>",
+     "texte": "<ul><li>Utiliser des algorithmes et paramètres à jour : AES-256 (ou ChaCha20-Poly1305) en mode&nbsp;<b>authentifié</b> , RSA ≥ 3072 bits ou courbes elliptiques modernes (P-256, Curve25519).</li></ul><ul><li>Générer les clés de session avec un générateur aléatoire cryptographiquement sûr, et ne jamais réutiliser une clé de session ou un nonce.</li></ul><ul><li>Protéger les clés privées (HSM, coffre de clés, carte à puce), prévoir leur rotation et leur</li></ul><p>révocation.</p><ul><li>Vérifier l’authenticité des clés publiques via une PKI ou en contrôlant les empreintes.</li><li>Désactiver les protocoles et suites cryptographiques obsolètes (SSL, TLS 1.0/1.1, RC4, 3DES).</li><li>S’appuyer sur des bibliothèques éprouvées (OpenSSL, libsodium…) plutôt que sur une</li></ul><p>implémentation maison.</p>",
      "imgs": []
     },
     {
