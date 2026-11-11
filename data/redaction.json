@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T22:11:02.706Z",
+ "maj": "2026-11-11T22:11:10.059Z",
  "items": [
   {
    "id": "rmwcnxn0fbyxd",
@@ -86,7 +86,7 @@
      "id": "rmwcnx9g8fh0u",
      "type": "texte",
      "titre": "1.2 Le chiffrement asymétrique",
-     "texte": "<p>Chaque utilisateur possède<b> une paire de clés</b> : une clé <b>publique</b> , diffusable librement, et une <b>clé privée </b>, jamais partagée. Ce que l’une chiffre, seule l’autre peut le déchiffrer. Pour écrire à Bob, Alice chiffre avec la<b> clé publique de Bob</b> ; seul Bob, qui détient la clé privée correspondante, peut lire le message. Plus besoin de s’échanger un secret au préalable. En contrepartie, les algorithmes (RSA, courbes elliptiques) sont nettement plus lents et ne conviennent pas au chiffrement de gros volumes.</p><table><tbody><tr><th>Critère</th><th><br></th><th><br></th></tr><tr><td><br></td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td></tr></tbody></table><p>&nbsp;Symétrique Asymétrique</p><p>Clés Une seule clé secrète partagée Une paire : clé publique + clé privée</p><p>Vitesse Très rapide Lent (de l’ordre de centaines à milliers de fois plus lent)</p><p>Volume de Adapté aux gros volumes Adapté à de petits messages (une clé, données une signature)</p><p>Échange des Problématique : il faut un canal sûr Simple : la clé publique peut être clés diffusée</p><p>Exemples AES, ChaCha20 RSA, ECC (ECDH, ECDSA), Curve25519</p>",
+     "texte": "<p>Chaque utilisateur possède<b> une paire de clés</b> : une clé <b>publique</b> , diffusable librement, et une <b>clé privée </b>, jamais partagée. Ce que l’une chiffre, seule l’autre peut le déchiffrer. Pour écrire à Bob, Alice chiffre avec la<b> clé publique de Bob</b> ; seul Bob, qui détient la clé privée correspondante, peut lire le message. Plus besoin de s’échanger un secret au préalable. En contrepartie, les algorithmes (RSA, courbes elliptiques) sont nettement plus lents et ne conviennent pas au chiffrement de gros volumes.</p><table><tbody><tr><th>Critère</th><th>&nbsp;Symétrique</th><th><br></th></tr><tr><td><br></td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td></tr></tbody></table><p>&nbsp;</p><p>Clés Une seule clé secrète partagée Une paire : clé publique + clé privée</p><p>Vitesse Très rapide Lent (de l’ordre de centaines à milliers de fois plus lent)</p><p>Volume de Adapté aux gros volumes Adapté à de petits messages (une clé, données une signature)</p><p>Échange des Problématique : il faut un canal sûr Simple : la clé publique peut être clés diffusée</p><p>Exemples AES, ChaCha20 RSA, ECC (ECDH, ECDSA), Curve25519</p>",
      "imgs": []
     },
     {
