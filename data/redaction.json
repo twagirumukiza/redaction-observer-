@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T10:54:15.148Z",
+ "maj": "2026-11-11T10:54:34.239Z",
  "items": [
   {
    "id": "a037fef67890",
@@ -14,7 +14,7 @@
    "imgY": 50,
    "imgZ": 1,
    "liensUtiles": "",
-   "intro": "<p>Un soir, Beget, un des plus gros hébergeurs russes, a vu son cloud totalement effacé par un logiciel wiper. Les services désormais doivent être reconstructifs, depuis l'infrastructure jusqu'aux données clients.</p>",
+   "intro": "<p>Un soir, <b>Beget</b>, un des plus gros hébergeurs russes, a vu son cloud totalement effacé par un logiciel wiper. Les services désormais doivent être reconstructifs, depuis l'infrastructure jusqu'aux données clients.</p>",
    "stIntro": "",
    "rang": null,
    "une": 0,
