@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T22:32:57.727Z",
+ "maj": "2026-11-11T22:33:05.953Z",
  "items": [
   {
    "id": "rmwcnxn0fbyxd",
@@ -142,7 +142,7 @@
      "id": "rmwcnx9g8ank9",
      "type": "texte",
      "titre": "5. Avantages, limites et bonnes pratiques",
-     "texte": "<table><tbody><tr><th>Avantages</th><th>Limites / points de vigilance</th></tr><tr><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td></tr></tbody></table>",
+     "texte": "<table><tbody><tr><th>Avantages</th><th>Limites / points de vigilance</th></tr><tr><td>Performance proche du symétrique, même<br>sur de très gros volumes.<br><br></td><td><br></td></tr><tr><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td></tr></tbody></table>",
      "imgs": []
     },
     {
