@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T22:24:02.737Z",
+ "maj": "2026-11-11T22:24:58.352Z",
  "items": [
   {
    "id": "rmwcnxn0fbyxd",
@@ -128,7 +128,7 @@
      "id": "rmwcnx9g8m57a",
      "type": "texte",
      "titre": "4. Exemples d’utilisation",
-     "texte": "<p>Le chiffrement hybride est partout : il est probable que vous l’utilisiez des dizaines de fois par jour sans le savoir.</p><p>Usage Où intervient l’hybride ? Détails</p><p>HTTPS / TLS Le navigateur et le serveur négocient une clé de Cadenas du navigateur, (web) session grâce à la cryptographie asymétrique banque en ligne, achats, (échange de clés ECDHE, certificat du serveur). Le sites institutionnels. trafic est ensuite chiffré en AES-GCM ou ChaCha20-Poly1305.</p><p>Messagerie Le message est chiffré avec une clé symétrique Courriels sensibles, électronique aléatoire, laquelle est chiffrée avec la clé publique échanges juridiques, santé, chiffrée de chaque destinataire. journalisme. (PGP/GPG, S/MIME)</p><p>VPN (IPsec/IKEv2, Une phase d’établissement asymétrique Télétravail, interconnexion OpenVPN, (certificats ou clés publiques, échange de sites. WireGuard) Diffie-Hellman) fabrique les clés symétriques qui chiffrent le tunnel.</p><p>SSH Échange de clés asymétrique pour établir une Administration de serveurs, session, puis chiffrement symétrique de toute la transferts SFTP. session.</p><p>Messageries Des échanges de clés asymétriques Chiffrement de bout en bout. instantanées (Diffie-Hellman sur courbes elliptiques) renouvelés (Signal, très fréquemment, puis des clés symétriques pour WhatsApp…) les messages.</p><p>Chiffrement en Chaque objet est chiffré avec une clé de données Stockage cloud, bases de cloud (« envelope symétrique, elle-même chiffrée par une clé données chiffrées, rotation encryption », maîtresse stockée dans un service de gestion de de clés facilitée. KMS) clés ou un HSM.</p><p>Signature et Un document est chiffré en symétrique, la clé est Coffres-forts numériques, chiffrement de chiffrée pour chaque destinataire autorisé : data rooms, partage de documents plusieurs lecteurs sans rechiffrer tout le document. fichiers sécurisé.</p>",
+     "texte": "<p>Le chiffrement hybride est partout : il est probable que vous l’utilisiez des dizaines de fois par jour sans le savoir.</p>",
      "imgs": []
     },
     {
