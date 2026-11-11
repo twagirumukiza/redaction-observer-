@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T22:37:09.897Z",
+ "maj": "2026-11-11T22:37:16.405Z",
  "items": [
   {
    "id": "rmwcnxn0fbyxd",
@@ -149,7 +149,7 @@
      "id": "rmwcnx9g84ycw",
      "type": "texte",
      "titre": "Bonnes pratiques",
-     "texte": "<ul><li>Utiliser des algorithmes et paramètres à jour : AES-256 (ou ChaCha20-Poly1305) en mode&nbsp;<b>authentifié</b> , RSA ≥ 3072 bits ou courbes elliptiques modernes (P-256, Curve25519).</li></ul><ul><li>Générer les clés de session avec un générateur aléatoire cryptographiquement sûr, et <b>ne jamais réutiliser</b> une clé de session ou un nonce.</li></ul><ul><li>Protéger les clés privées (HSM, coffre de clés, carte à puce), prévoir leur rotation et leur révocation.</li></ul><ul><li>Vérifier l’authenticité des clés publiques via une PKI ou en contrôlant les empreintes.</li><li>Désactiver les protocoles et suites cryptographiques obsolètes (SSL, TLS 1.0/1.1, RC4, 3DES).</li><li>S’appuyer sur des bibliothèques éprouvées (OpenSSL, libsodium…) plutôt que sur une</li></ul><p>implémentation maison.</p><p><b>Et demain : l’hybride post-quantique</b></p><p><b>Face à la menace quantique, les navigateurs et les services web déploient désormais des échanges de clés dits hybrides post-quantiques , qui combinent un algorithme classique (X25519) et un algorithme post-quantique (ML-KEM, standardisé par le NIST). La logique est la même : si l’un des deux est cassé, l’autre protège encore la clé. Les données restent chiffrées en symétrique (AES-256), dont la sécurité est moins affectée par le calcul quantique.</b></p><p><b><br></b></p>",
+     "texte": "<ul><li>Utiliser des algorithmes et paramètres à jour : AES-256 (ou ChaCha20-Poly1305) en mode&nbsp;<b>authentifié</b> , RSA ≥ 3072 bits ou courbes elliptiques modernes (P-256, Curve25519).</li></ul><ul><li>Générer les clés de session avec un générateur aléatoire cryptographiquement sûr, et <b>ne jamais réutiliser</b> une clé de session ou un nonce.</li></ul><ul><li>Protéger les clés privées (HSM, coffre de clés, carte à puce), prévoir leur rotation et leur révocation.</li></ul><ul><li>Vérifier l’authenticité des clés publiques via une PKI ou en contrôlant les empreintes.</li><li>Désactiver les protocoles et suites cryptographiques obsolètes (SSL, TLS 1.0/1.1, RC4, 3DES).</li><li>S’appuyer sur des bibliothèques éprouvées (OpenSSL, libsodium…) plutôt que sur une</li></ul><p>implémentation maison.</p><p><b>Et demain : l’hybride post-quantique</b></p><p>Face à la menace quantique, les navigateurs et les services web déploient désormais des échanges de clés dits hybrides post-quantiques , qui combinent un algorithme classique (X25519) et un algorithme post-quantique (ML-KEM, standardisé par le NIST). La logique est la même : si l’un des deux est cassé, l’autre protège encore la clé. Les données restent chiffrées en symétrique (AES-256), dont la sécurité est moins affectée par le calcul quantique.</p><p><b><br></b></p>",
      "imgs": []
     },
     {
