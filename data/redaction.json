@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T22:17:55.519Z",
+ "maj": "2026-11-11T22:18:03.911Z",
  "items": [
   {
    "id": "rmwcnxn0fbyxd",
@@ -102,7 +102,7 @@
      "id": "rmwcnx9g87xv7",
      "type": "texte",
      "titre": "2. Le principe du chiffrement hybride",
-     "texte": "<p>Le chiffrement hybride tire parti de la complémentarité des deux approches : le chiffrement asymétrique sert uniquement à transmettre une clé secrète , et le chiffrement symétrique protège les données elles-mêmes.&nbsp;</p><p>On parle aussi d’ enveloppe numérique (« digital envelope ») : la clé symétrique est mise sous enveloppe avec la clé publique du destinataire.</p><p>Figure 4 – Chiffrement hybride, message d’Alice à Bob : les étapes 1 à 4. Schéma : Twagirumukiza Innocent.</p>",
+     "texte": "<p>Le chiffrement hybride tire parti de la complémentarité des deux approches : <b>le chiffrement asymétrique sert uniquement à transmettre une clé secrète , et le chiffrement symétrique protège les données elles-mêmes.&nbsp;</b></p><p>On parle aussi d’ enveloppe numérique (« digital envelope ») : la clé symétrique est mise sous enveloppe avec la clé publique du destinataire.</p><p>Figure 4 – Chiffrement hybride, message d’Alice à Bob : les étapes 1 à 4. Schéma : Twagirumukiza Innocent.</p>",
      "imgs": []
     },
     {
