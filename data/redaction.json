@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T22:20:29.308Z",
+ "maj": "2026-11-11T22:20:35.085Z",
  "items": [
   {
    "id": "rmwcnxn0fbyxd",
@@ -114,7 +114,7 @@
      "id": "rmwcnx9g856n7",
      "type": "texte",
      "titre": "Les étapes, en suivant le schéma",
-     "texte": "<table><tbody><tr><th>Étape</th><th>Qui&nbsp;</th><th>Ce qui se passe</th></tr><tr><td>1</td><td><br></td><td><br></td></tr><tr><td>2</td><td><br></td><td><br></td></tr><tr><td>3</td><td><br></td><td><br></td></tr><tr><td>4</td><td><br></td><td><br></td></tr></tbody></table><p>Pourquoi ça marche 1. Seule la petite clé de session passe par l’algorithme lent, les données volumineuses sont traitées par l’algorithme rapide. 2. La clé de session n’a jamais besoin d’être échangée à l’avance par un canal sûr. 3. La clé de session est à usage unique : sa compromission ne dévoile qu’un seul échange.</p>",
+     "texte": "<table><tbody><tr><th>Étape</th><th>Qui&nbsp;</th><th>Ce qui se passe</th></tr><tr><td><b>1</b></td><td><br></td><td><br></td></tr><tr><td><b>2</b></td><td><br></td><td><br></td></tr><tr><td>3</td><td><br></td><td><br></td></tr><tr><td>4</td><td><br></td><td><br></td></tr></tbody></table><p>Pourquoi ça marche 1. Seule la petite clé de session passe par l’algorithme lent, les données volumineuses sont traitées par l’algorithme rapide. 2. La clé de session n’a jamais besoin d’être échangée à l’avance par un canal sûr. 3. La clé de session est à usage unique : sa compromission ne dévoile qu’un seul échange.</p>",
      "imgs": []
     },
     {
