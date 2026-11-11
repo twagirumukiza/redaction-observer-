@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T22:36:47.694Z",
+ "maj": "2026-11-11T22:37:03.166Z",
  "items": [
   {
    "id": "rmwcnxn0fbyxd",
@@ -155,7 +155,7 @@
     {
      "id": "rmwcnx9g8sd8r",
      "type": "texte",
-     "titre": "",
+     "titre": "6. Lien avec la conformité",
      "texte": "<p>Face à la menace quantique, les navigateurs et les services web déploient désormais des échanges de clés dits <b>hybrides post-quantiques</b> , qui combinent un algorithme classique (X25519) et un algorithme post-quantique (ML-KEM, standardisé par le NIST). La logique est la même : si l’un des deux est cassé, l’autre protège encore la clé. Les données restent chiffrées en symétrique (AES-256), dont la sécurité est moins affectée par le calcul quantique.</p>",
      "imgs": []
     }
