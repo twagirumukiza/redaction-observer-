@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T11:19:41.477Z",
+ "maj": "2026-11-11T11:20:16.014Z",
  "items": [
   {
    "id": "408ff287345d",
@@ -68,8 +68,8 @@
    "analyse": "<p>La cyberattaque ciblant les réfrigérateurs de supermarchés illustre l’étendue croissante des opérations de sabotage d’infrastructure critique menées depuis l’étranger. Ce type d’incident soulève immédiatement les questions de conformité aux directives européennes telles que le NIS2, qui impose des obligations de sécurité renforcées pour les services essentiels et digitaux tels que la distribution alimentaire.</p><p>Dans un cadre de gouvernance, la France doit démontrer la capacité de son dispositif national à anticiper, détecter et répondre aux menaces. L’annotation de la déclaration de Barrot indique que la réponse sera «proportionnelle et nécessaire», ce qui suggère une approche structurée autour de la politique nationale de cybersécurité et d’une collaboration étroite avec les autorités européennes.</p><p>Les risques de Ransomware et de sabotage industriel se multiplient lorsque les chaînes d’approvisionnement deviennent de réels points d’entrée. La conduite de cette application de la doctrine de cyberdéfense renforce l’importance d’une politique de sécurité intégrée couvrant applicatifs, infrastructures physiques, personnes et partenaires tiers.</p>",
    "conclusion": "<p>Ce constat sous‑ligne que les infrastructures de sécurité alimentaire ne sont pas à l’abri des attaques cybernétiques motivées par des objectifs de sabotage. Une gouvernance robuste, conforme aux cadres européens, et une vigilance continue vis-à-vis des fournisseurs et du réseau, constituent les premières lignes de défense pour les entreprises. La réaction rapide de la France et l’engagement de l’Union européenne signalent une volonté de traiter ces incidents avec la même rigueur que les menaces physiques.</p>",
    "imgPos": "tete",
-   "imgX": 50,
-   "imgY": 50,
+   "imgX": 45,
+   "imgY": 20,
    "imgZ": 1,
    "liensUtiles": "",
    "intro": "<p>La France a attribué à une unité cyber de la Garde nationale iranienne la responsabilité d’une attaque d’envergure visant des contrôleurs de réfrigération de supermarchés. L’Iran a rejeté ces accusations comme infondées.</p>",
