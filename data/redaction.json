@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T22:14:36.909Z",
+ "maj": "2026-11-11T22:15:01.866Z",
  "items": [
   {
    "id": "rmwcnxn0fbyxd",
@@ -90,7 +90,7 @@
      "imgs": [
       {
        "image": "",
-       "legende": ""
+       "legende": "Figure 2 – Chiffrement asymétrique, message d’Alice à Bob : chiffrement avec la clé publique de Bob, déchiffrement avec sa clé privée."
       },
       {
        "image": "",
