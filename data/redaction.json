@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T22:29:58.349Z",
+ "maj": "2026-11-11T22:30:03.111Z",
  "items": [
   {
    "id": "rmwcnxn0fbyxd",
@@ -135,7 +135,7 @@
      "id": "rmwcnx9g815yd",
      "type": "texte",
      "titre": "Exemple : une connexion HTTPS",
-     "texte": "<ul><li>Le navigateur contacte le site et reçoit son<b> certificat</b> (qui contient la clé publique du serveur).</li><li>Les deux parties réalisent un échange de clés asymétrique (ECDHE) et s’accordent sur un secret partagé , dont dérivent les clés de session.</li></ul><ul><li>Toutes les données (pages, mots de passe, formulaires) sont ensuite chiffrées avec des clés</li></ul><p>symétriques temporaires.</p><p>Twagirumukiza · twagirumukiza.github.io/cyber-risk-observer Page 4 Cyber Risk Observer · Notions cyber Le chiffrement hybride</p>",
+     "texte": "<ul><li>Le navigateur contacte le site et reçoit son<b> certificat</b> (qui contient la clé publique du serveur).</li><li>Les deux parties réalisent un échange de clés asymétrique (ECDHE) et s’accordent sur un<b> secret partagé </b>, dont dérivent les clés de session.</li></ul><ul><li>Toutes les données (pages, mots de passe, formulaires) sont ensuite chiffrées avec des clés symétriques temporaires.</li></ul><p>Twagirumukiza · twagirumukiza.github.io/cyber-risk-observer Page 4 Cyber Risk Observer · Notions cyber Le chiffrement hybride</p>",
      "imgs": []
     },
     {
