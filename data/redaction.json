@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T22:26:00.279Z",
+ "maj": "2026-11-11T22:26:10.704Z",
  "items": [
   {
    "id": "rmwcnxn0fbyxd",
@@ -128,7 +128,7 @@
      "id": "rmwcnx9g8m57a",
      "type": "texte",
      "titre": "4. Exemples d’utilisation",
-     "texte": "<p>Le chiffrement hybride est partout : il est probable que vous l’utilisiez des dizaines de fois par jour sans le savoir.</p><table><tbody><tr><th>Usage</th><th>Où intervient l’hybride ?</th><th>Détails</th></tr><tr><td>HTTPS / TLS<br>(web)<br><br></td><td><br></td><td><br></td></tr><tr><td>Messagerie<br>électronique<br>chiffrée<br>(PGP/GPG,<br>S/MIME)<br><br></td><td><br></td><td><br></td></tr><tr><td>VPN (IPsec/IKEv2,<br>OpenVPN,<br>WireGuard)</td><td><br></td><td><br></td></tr><tr><td>SSH&nbsp;</td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td></tr></tbody></table>",
+     "texte": "<p>Le chiffrement hybride est partout : il est probable que vous l’utilisiez des dizaines de fois par jour sans le savoir.</p><table><tbody><tr><th>Usage</th><th>Où intervient l’hybride ?</th><th>Détails</th></tr><tr><td>HTTPS / TLS<br>(web)<br><br></td><td><br></td><td><br></td></tr><tr><td>Messagerie<br>électronique<br>chiffrée<br>(PGP/GPG,<br>S/MIME)<br><br></td><td><br></td><td><br></td></tr><tr><td>VPN (IPsec/IKEv2,<br>OpenVPN,<br>WireGuard)</td><td><br></td><td><br></td></tr><tr><td>SSH&nbsp;</td><td><br></td><td><br></td></tr><tr><td>Messageries<br>instantanées<br>(Signal,<br>WhatsApp…)</td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td></tr></tbody></table>",
      "imgs": []
     },
     {
