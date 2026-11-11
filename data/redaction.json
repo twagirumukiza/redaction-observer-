@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T11:36:27.251Z",
+ "maj": "2026-11-11T11:36:31.841Z",
  "items": [
   {
    "id": "ca43af01938e",
@@ -10,7 +10,7 @@
    "analyse": "<p>OpenSSL joue un rôle central dans les infrastructures critiques, notamment dans les SIRH, les services bancaires et les équipements IoT. Le cadre réglementaire européen, tel que NIS2 et DORA, impose aux opérateurs de services essentiels de garantir la disponibilité, l’intégrité et la confidentialité de leurs réseaux. Des failles prenant la forme d’un déni de service alignés à la catégorie « disponibilité » transforment ceci en non‑conformité potentielle.</p><p>L’impact sur la confidentialité soulève également des questions de conformité au RGPD, le vol de données sensibles pouvant entraîner des sanctions financières lourdes. Le contournement de la politique de sécurité quille l’évaluation des contrôles internes, un pilier fondamental de la démarche GRC.</p><p>La convergence des risques techniques et réglementaires souligne la nécessité pour les organisations de mettre en œuvre des stratégies de gestion de vulnérabilité transactionnelle. Cela implique un suivi continu de la mise à jour d’OpenSSL et la validation de la résilience grâce à l’audit de l’architecture cryptographique existante.</p>",
    "conclusion": "<p>Les multiples vulnérabilités d’OpenSSL identifiées par le CERT‑FR représentent un risque sérieux pour la disponibilité et la confidentialité des systèmes protégés par ce composant. Mettre en place un plan de mise à jour rapide, renforcer les contrôles et maintenir un registre clair constitue la meilleure réponse pour se conformer aux exigences réglementaires actuelles.</p>",
    "imgPos": "tete",
-   "imgX": 50,
+   "imgX": 53,
    "imgY": 29,
    "imgZ": 1,
    "liensUtiles": "",
