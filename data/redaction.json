@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T22:30:25.692Z",
+ "maj": "2026-11-11T22:32:32.914Z",
  "items": [
   {
    "id": "rmwcnxn0fbyxd",
@@ -142,7 +142,7 @@
      "id": "rmwcnx9g8ank9",
      "type": "texte",
      "titre": "5. Avantages, limites et bonnes pratiques",
-     "texte": "<p>Avantages Limites / points de vigilance</p><p>Performance proche du symétrique, même La sécurité repose sur la protection de la clé sur de très gros volumes. privée : sa perte ou son vol est critique.</p><p>Pas besoin de canal sûr préalable pour Il faut s’assurer que la clé publique appartient bien partager un secret. au bon destinataire (certificats, PKI, empreintes) pour éviter l’attaque de l’homme du milieu.</p><p>Plusieurs destinataires possibles : la même La force du dispositif est celle de son maillon le plus clé de session est chiffrée pour chacun. faible : une clé RSA trop courte ou un aléa de mauvaise qualité ruinent l’ensemble.</p><p>Clé de session à usage unique : un incident Les algorithmes asymétriques actuels (RSA, ECC) ne compromet qu’un seul échange seront vulnérables à un ordinateur quantique (confidentialité persistante avec ECDHE). suffisamment puissant.</p>",
+     "texte": "",
      "imgs": []
     },
     {
