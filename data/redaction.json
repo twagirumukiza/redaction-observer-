@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T22:06:20.134Z",
+ "maj": "2026-11-11T22:06:40.676Z",
  "items": [
   {
    "id": "rmwcnxn0fbyxd",
@@ -75,7 +75,12 @@
      "type": "texte",
      "titre": "1.1 Le chiffrement symétrique",
      "texte": "<p>Une <b>même clé secrète</b> sert à chiffrer et à déchiffrer. Alice et Bob doivent donc la posséder tous les deux. Les algorithmes (AES, ChaCha20) sont très rapides et adaptés aux gros volumes de données. La difficulté est de <b>transmettre la clé en toute sécurité</b> : si un attaquant l’intercepte, tout le secret est perdu.</p><p>Figure 1 – Chiffrement symétrique : la même clé secrète chiffre et déchiffre (Alice vers Bob).</p>",
-     "imgs": []
+     "imgs": [
+      {
+       "image": "",
+       "legende": ""
+      }
+     ]
     },
     {
      "id": "rmwcnx9g8fh0u",
