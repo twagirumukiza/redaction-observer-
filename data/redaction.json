@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T22:15:01.866Z",
+ "maj": "2026-11-11T22:15:11.599Z",
  "items": [
   {
    "id": "rmwcnxn0fbyxd",
@@ -94,7 +94,7 @@
       },
       {
        "image": "",
-       "legende": ""
+       "legende": "Figure 3 – Chiffrement asymétrique, message de Bob à Alice : Bob utilise cette fois la clé publique d’Alice."
       }
      ]
     },
