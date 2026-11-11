@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-11T22:07:55.434Z",
+ "maj": "2026-11-11T22:08:00.334Z",
  "items": [
   {
    "id": "rmwcnxn0fbyxd",
@@ -78,7 +78,7 @@
      "imgs": [
       {
        "image": "",
-       "legende": ""
+       "legende": "Figure 1 – Chiffrement symétrique : la même clé secrète chiffre et déchiffre (Alice vers Bob)."
       }
      ]
     },
