@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-12T17:36:42.400Z",
+ "maj": "2026-11-12T17:36:56.519Z",
  "items": [
   {
    "id": "rmwdtnh4ke19c",
@@ -54,7 +54,7 @@
    "auteurLiens": "",
    "auteurPhoto": "",
    "actions": [],
-   "actionsHtml": "<table><tbody><tr><th>Élément</th><th>Application au cas NVIDIA</th></tr><tr><td><b>Valeurs métier&nbsp;</b></td><td><br></td></tr><tr><td><b>Écosystème</b>&nbsp;</td><td><br></td></tr><tr><td><b>Événement redouté</b>&nbsp;</td><td><br></td></tr><tr><td><b>Source de risque&nbsp;</b></td><td><br></td></tr><tr><td><b>Objectif visé&nbsp;</b></td><td><br></td></tr><tr><td><b>Chemin d’attaque</b>&nbsp;</td><td><br></td></tr><tr><td><b>Conséquences</b>&nbsp;</td><td><br></td></tr></tbody></table>",
+   "actionsHtml": "<table><tbody><tr><th>Élément</th><th>Application au cas NVIDIA</th></tr><tr><td><b>Valeurs métier&nbsp;</b></td><td><br></td></tr><tr><td><b>Écosystème</b>&nbsp;</td><td><br></td></tr><tr><td><b>Événement redouté</b>&nbsp;</td><td><br></td></tr><tr><td><b>Source de risque&nbsp;</b></td><td><br></td></tr><tr><td><b>Objectif visé&nbsp;</b></td><td><br></td></tr><tr><td><b>Chemin d’attaque</b>&nbsp;</td><td><br></td></tr><tr><td><b>Conséquences</b>&nbsp;</td><td>Perte d’avantage technologique, atteinte à la souveraineté, sanctions et préjudice<br>économique</td></tr></tbody></table>",
    "source": "",
    "url": "",
    "date": "2026-11-12",
