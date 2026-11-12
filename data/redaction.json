@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-12T21:58:44.201Z",
+ "maj": "2026-11-12T21:59:20.550Z",
  "items": [
   {
    "id": "rmwe32oescaie",
@@ -36,6 +36,7 @@
     "p:rmwe360xch25l",
     "p:rmwe387e6olem",
     "p:rmwe3a2u7t8uk",
+    "p:rmwe3bmdcyv58",
     "con"
    ],
    "imageCarte": "",
@@ -75,6 +76,13 @@
      "type": "texte",
      "titre": "4. Les réseaux criminels : profiter d’une crise sans nécessairement l’avoir déclenchée",
      "texte": "La dimension criminelle doit également être examinée.<p>Lorsqu’une mobilisation migratoire devient massive, elle crée un environnement favorable à l’apparition d’intermédiaires cherchant à tirer profit de la situation.</p><p>La vente de matériel de traversée, la mise en relation entre candidats au départ et prestataires, ou encore la fourniture d’une assistance logistique peuvent devenir des activités lucratives.</p><p>Dans son intervention du 3 septembre, le président du gouvernement espagnol a expressément indiqué que des réseaux criminels organisés et des profiteurs avaient exploité et alimenté la situation, notamment en proposant du matériel et des services d’assistance au franchissement.</p><p>Cette dimension est importante, mais elle ne doit pas conduire à une conclusion excessive.</p><p>Un réseau criminel peut exploiter une crise sans en être l’initiateur. Un intermédiaire peut profiter d’une mobilisation spontanée sans avoir participé à la création de la rumeur. Un vendeur de matériel n’est pas nécessairement un organisateur de passage clandestin.</p><p>Pour identifier les véritables responsabilités, il faudrait notamment examiner les flux financiers, les relations entre intermédiaires, les éventuelles prestations organisées à grande échelle et les communications antérieures au déclenchement de la crise.</p><p>La question du financement est particulièrement intéressante : qui a fourni les moyens matériels, qui a organisé les déplacements et qui a bénéficié économiquement de cette mobilisation ?</p><p>Les informations publiques disponibles ne permettent pas d’attribuer l’ensemble de ces activités à une organisation unique.</p>",
+     "imgs": []
+    },
+    {
+     "id": "rmwe3bmdcyv58",
+     "type": "texte",
+     "titre": "5. Le Maroc : une responsabilité politique possible, mais une attribution qui reste à démontrer",
+     "texte": "",
      "imgs": []
     }
    ],
