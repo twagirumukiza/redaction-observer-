@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-12T18:11:27.545Z",
+ "maj": "2026-11-12T18:12:50.802Z",
  "items": [
   {
    "id": "rmwdtnh4ke19c",
@@ -11,11 +11,11 @@
    "conclusion": "<p style=\"text-align: justify;\">Le départ de Jensen Huang révèle une réalité souvent sous-estimée : la protection des technologies stratégiques ne dépend pas uniquement de la robustesse des infrastructures informatiques.</p><p style=\"text-align: justify;\">Elle dépend également de la sécurité des personnes, de la qualité de la gouvernance, du contrôle des relations commerciales et de la capacité à anticiper les opérations de renseignement.</p><p style=\"text-align: justify;\">Dans la compétition mondiale autour de l’intelligence artificielle, les semi-conducteurs constituent une ressource stratégique. Mais les informations, les décisions et les relations humaines qui permettent de les concevoir, de les produire et de les commercialiser le sont tout autant.</p><p style=\"text-align: justify;\">L’affaire NVIDIA rappelle ainsi que le facteur humain ne doit pas être considéré comme une dimension secondaire de la cybersécurité.</p><p style=\"text-align: justify;\">Il constitue un élément central de la protection des actifs critiques.</p><p style=\"text-align: justify;\">La prochaine grande faille d’une entreprise technologique ne sera peut-être pas informatique. Elle pourrait se situer au cœur même de son dispositif de gouvernance.</p>",
    "imgPos": "tete",
    "imgTaille": "",
-   "imgX": 50,
-   "imgY": 50,
+   "imgX": 46,
+   "imgY": 16,
    "imgZ": 1,
    "liensUtiles": "• HUMINT : comprendre les méthodes du renseignement humain.\n• Espionnage économique : les nouvelles vulnérabilités des entreprises stratégiques.\n• Semi-conducteurs : la confrontation technologique entre Washington et Pékin.\n• EBIOS RM : intégrer les risques humains et géopolitiques dans la cartographie des risques.\n• Souveraineté numérique : protéger les infrastructures et les technologies critiques.",
-   "intro": "<p>CYBER RISK OBSERVER twagirumukiza.github.io/cyber-risk-observer</p>",
+   "intro": "<p>Coup de tonnerre dans l’industrie technologique américaine. Jensen Huang, cofondateur et dirigeant</p><p>emblématique de NVIDIA, a quitté ses fonctions de président-directeur général avec effet immédiat le</p><p>11 novembre 2026. Une décision qui intervient après plusieurs jours de révélations concernant ses</p><p>relations personnelles et des soupçons d’opération de renseignement chinois.</p>",
    "stIntro": "",
    "rang": null,
    "une": 0,
