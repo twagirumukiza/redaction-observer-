@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-12T22:01:21.358Z",
+ "maj": "2026-11-12T22:01:43.353Z",
  "items": [
   {
    "id": "rmwe32oescaie",
@@ -39,6 +39,7 @@
     "p:rmwe3bmdcyv58",
     "p:rmwe3c6i79ois",
     "p:rmwe3d3m28587",
+    "p:rmwe3ecod6w1z",
     "con"
    ],
    "imageCarte": "",
@@ -99,6 +100,13 @@
      "type": "texte",
      "titre": "7. La piste de l’ingérence étrangère : une hypothèse examinée, mais non démontrée",
      "texte": "Une crise de cette ampleur peut naturellement susciter des interrogations sur l’intervention d’acteurs extérieurs.<p>La déstabilisation d’une frontière européenne pourrait présenter un intérêt stratégique pour un État souhaitant exercer une pression diplomatique, fragiliser la confiance dans les institutions espagnoles ou provoquer des tensions au sein de l’Union européenne.</p><p>Le recours à des relais numériques, à des campagnes de désinformation et à des réseaux de diffusion indirects correspond à des méthodes que l’on retrouve dans certaines opérations d’influence contemporaines.</p><p>Cependant, il serait incorrect de transformer cette possibilité théorique en accusation.</p><p>Dans son intervention parlementaire du 3 septembre 2026, le président espagnol a indiqué que les services de renseignement n’avaient pas établi de liens entre les comptes concernés et des gouvernements marocain, russe ou israélien.</p><p>Il a également reconnu l’existence de signaux faibles de coordination dans certains appels à l’action, sans que cela permette d’en identifier les responsables.</p><p>Cette distinction est essentielle.</p><p>Une similitude de publications, une synchronisation de messages ou une administration commune de plusieurs comptes peuvent constituer des indices de coordination. Mais ces éléments ne suffisent pas à démontrer une opération étatique.</p><p>Pour établir une attribution, il faudrait disposer d’éléments techniques, humains ou financiers supplémentaires : infrastructures numériques communes, traces d’administration, liens organisationnels, transferts financiers ou communications internes.</p><p>En l’absence de tels éléments, l’attribution à un gouvernement particulier demeure spéculative.</p>",
+     "imgs": []
+    },
+    {
+     "id": "rmwe3ecod6w1z",
+     "type": "texte",
+     "titre": "8. Ceuta et la guerre hybride : une frontière physique vulnérable à la manipulation informationnelle",
+     "texte": "",
      "imgs": []
     }
    ],
