@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-12T21:53:01.850Z",
+ "maj": "2026-11-12T21:53:38.208Z",
  "items": [
   {
    "id": "rmwe32oescaie",
@@ -32,6 +32,7 @@
     "info",
     "ana",
     "act",
+    "p:rmwe348y115cz",
     "con"
    ],
    "imageCarte": "",
@@ -44,7 +45,15 @@
     "act": [],
     "con": []
    },
-   "parties": [],
+   "parties": [
+    {
+     "id": "rmwe348y115cz",
+     "type": "texte",
+     "titre": "1. Une crise déclenchée par la transformation d’une information juridique en promesse d’ouverture",
+     "texte": "",
+     "imgs": []
+    }
+   ],
    "stInfo": "",
    "stAna": "",
    "stAct": "",
