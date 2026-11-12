@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-12T22:02:01.284Z",
+ "maj": "2026-11-12T22:02:26.692Z",
  "items": [
   {
    "id": "rmwe32oescaie",
@@ -40,6 +40,7 @@
     "p:rmwe3c6i79ois",
     "p:rmwe3d3m28587",
     "p:rmwe3ecod6w1z",
+    "p:rmwe3f704ufrf",
     "con"
    ],
    "imageCarte": "",
@@ -107,6 +108,13 @@
      "type": "texte",
      "titre": "8. Ceuta et la guerre hybride : une frontière physique vulnérable à la manipulation informationnelle",
      "texte": "L’intérêt stratégique de cette crise réside dans la combinaison de plusieurs dimensions habituellement étudiées séparément.<p>La première est informationnelle : la diffusion d’une interprétation trompeuse d’une décision judiciaire.</p><p>La deuxième est numérique : la circulation de messages et de vidéos à travers des plateformes publiques et des messageries privées.</p><p>La troisième est criminelle : l’exploitation économique d’une mobilisation par des intermédiaires.</p><p>La quatrième est institutionnelle : la difficulté pour les autorités d’anticiper et de gérer un mouvement de population d’une ampleur exceptionnelle.</p><p>La cinquième est géopolitique : la possibilité qu’une crise frontalière soit exploitée dans le cadre de tensions entre États.</p><p>Cette combinaison évoque les mécanismes de la guerre hybride, sans pour autant prouver que la crise de Ceuta constitue une opération hybride étatique délibérément planifiée.</p><p>La notion de guerre hybride ne doit pas devenir une explication automatique de toute crise complexe.</p><p>Elle désigne ici un cadre d’analyse permettant d’étudier l’interaction entre les moyens informationnels, les pressions politiques, les acteurs non étatiques et les vulnérabilités institutionnelles.</p><p>Ceuta illustre surtout une évolution importante : la frontière n’est plus seulement une ligne géographique à surveiller. Elle est également un espace informationnel dans lequel une rumeur peut modifier les comportements d’une population et produire des conséquences physiques immédiates.</p>",
+     "imgs": []
+    },
+    {
+     "id": "rmwe3f704ufrf",
+     "type": "texte",
+     "titre": "9. Les enseignements pour la cybersécurité et le renseignement",
+     "texte": "",
      "imgs": []
     }
    ],
