@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-12T21:57:59.462Z",
+ "maj": "2026-11-12T21:58:25.038Z",
  "items": [
   {
    "id": "rmwe32oescaie",
@@ -35,6 +35,7 @@
     "p:rmwe348y115cz",
     "p:rmwe360xch25l",
     "p:rmwe387e6olem",
+    "p:rmwe3a2u7t8uk",
     "con"
    ],
    "imageCarte": "",
@@ -67,6 +68,13 @@
      "type": "texte",
      "titre": "3. L’effet boule de neige : quand les images deviennent un instrument de mobilisation",
      "texte": "L’un des mécanismes les plus intéressants de cette crise est la relation entre les images et les comportements collectifs.<p>Les vidéos de personnes arrivant à Ceuta ont constitué des éléments de persuasion particulièrement efficaces.</p><p>Contrairement à un simple message écrit, une vidéo donne l’impression de présenter une situation directement observable. Elle peut montrer des personnes dans l’eau, des arrivées sur le territoire espagnol, des groupes de jeunes ou des témoignages de réussite.</p><p>Mais une vidéo ne permet pas nécessairement de connaître les circonstances exactes de son enregistrement.</p><p>Elle peut être ancienne, sortie de son contexte, géolocalisée de manière erronée ou accompagnée d’une légende mensongère.</p><p>Dans une situation de forte incertitude, les utilisateurs peuvent interpréter ces images comme la confirmation d’une information qu’ils souhaitent croire.</p><p>Le mécanisme peut être représenté ainsi :</p><p><b>Rumeur → partage → vidéos de traversées → perception d’une opportunité → mobilisation → nouvelles images → amplification.</b></p><p>Ce phénomène constitue une boucle de rétroaction informationnelle.</p><p>Plus les images circulent, plus la mobilisation semble importante. Plus la mobilisation augmente, plus les images disponibles se multiplient. Le contenu numérique devient alors à la fois le reflet et l’accélérateur de la crise.</p><p>Cette dynamique ne nécessite pas nécessairement une organisation centrale. Elle peut émerger de la combinaison de milliers de décisions individuelles, de recommandations algorithmiques et de comportements d’imitation.</p><p>C’est précisément ce qui rend ce type de phénomène difficile à anticiper.</p>",
+     "imgs": []
+    },
+    {
+     "id": "rmwe3a2u7t8uk",
+     "type": "texte",
+     "titre": "4. Les réseaux criminels : profiter d’une crise sans nécessairement l’avoir déclenchée",
+     "texte": "",
      "imgs": []
     }
    ],
