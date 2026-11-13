@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-13T21:35:51.534Z",
+ "maj": "2026-11-13T21:36:10.662Z",
  "items": [
   {
    "id": "rmwfhrxxtkn4l",
@@ -35,6 +35,7 @@
     "p:rmwfhsyr9q5hq",
     "p:rmwfhtttaebje",
     "p:rmwfhw1h2bu99",
+    "p:rmwfhxey6jcrd",
     "con"
    ],
    "imageCarte": "",
@@ -67,6 +68,13 @@
      "type": "texte",
      "titre": "3. L'espionnage économique entre dans une nouvelle dimension",
      "texte": "<p style=\"text-align: justify;\">La compétition autour de l'IA repose sur plusieurs ressources stratégiques : les semi-conducteurs, les données, les infrastructures de calcul, les algorithmes, les talents et les connaissances scientifiques.</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">Pour un service de renseignement, ces ressources représentent autant de cibles potentielles.</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">L'espionnage économique et technologique ne se limite pas au vol de plans industriels ou à l'intrusion dans les réseaux informatiques d'une entreprise. Il peut également viser la compréhension des orientations de recherche, des stratégies commerciales, des chaînes d'approvisionnement et des innovations encore confidentielles.</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">L'IA peut renforcer les capacités d'analyse de ces informations, mais aussi faciliter certaines opérations cyber.</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">Dans ce contexte, les entreprises qui développent des modèles avancés, les laboratoires de recherche, les fabricants de composants et les fournisseurs de services cloud constituent des environnements particulièrement sensibles.</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">Il serait toutefois incorrect d'attribuer automatiquement au Guoanbu toute opération d'espionnage technologique impliquant un acteur chinois. L'attribution doit reposer sur des éléments techniques, documentaires et institutionnels.</p><p style=\"text-align: justify;\"><br></p>",
+     "imgs": []
+    },
+    {
+     "id": "rmwfhxey6jcrd",
+     "type": "texte",
+     "titre": "4. Le cyberespionnage : l'autre terrain de la compétition",
+     "texte": "",
      "imgs": []
     }
    ],
