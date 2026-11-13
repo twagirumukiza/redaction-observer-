@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-13T21:37:04.272Z",
+ "maj": "2026-11-13T21:38:26.905Z",
  "items": [
   {
    "id": "rmwfhrxxtkn4l",
@@ -36,6 +36,7 @@
     "p:rmwfhtttaebje",
     "p:rmwfhw1h2bu99",
     "p:rmwfhxey6jcrd",
+    "p:rmwfi0f3agaqc",
     "con"
    ],
    "imageCarte": "",
@@ -75,6 +76,13 @@
      "type": "texte",
      "titre": "4. Le cyberespionnage : l'autre terrain de la compétition",
      "texte": "<p style=\"text-align: justify;\">L'intelligence artificielle offre également de nouvelles possibilités aux acteurs du cyberespionnage.</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">Elle peut contribuer à automatiser certaines étapes de reconnaissance, à analyser des vulnérabilités, à améliorer la rédaction de messages de hameçonnage ou à faciliter l'analyse des données dérobées.</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">Elle peut aussi être utilisée pour produire des contenus synthétiques, créer de fausses identités numériques ou soutenir des opérations d'influence.</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">Le ministère chinois de la Sécurité d'État a lui-même reconnu publiquement les risques associés à ces évolutions.</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">En novembre 2023, il alertait déjà sur les risques de fuite de données, de cyberattaques et de manipulation de l'information liés à l'intelligence artificielle.</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">En décembre 2025, le ministère mettait de nouveau en garde contre l'utilisation de deepfakes pour provoquer la panique, manipuler l'opinion et obtenir des informations sensibles.</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">Ces prises de position sont révélatrices : le MSS considère l'IA à la fois comme une technologie porteuse de risques pour la sécurité nationale et comme un domaine qui doit faire l'objet d'une surveillance stratégique.</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">Elles ne démontrent cependant pas, à elles seules, que le ministère conduit des opérations cyber reposant sur des systèmes d'IA avancés.</p>",
+     "imgs": []
+    },
+    {
+     "id": "rmwfi0f3agaqc",
+     "type": "texte",
+     "titre": "5. Une compétition qui dépasse les entreprises technologiques",
+     "texte": "",
      "imgs": []
     }
    ],
