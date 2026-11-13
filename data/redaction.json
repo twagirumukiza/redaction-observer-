@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-13T21:40:23.371Z",
+ "maj": "2026-11-13T21:40:30.197Z",
  "items": [
   {
    "id": "rmwfhrxxtkn4l",
@@ -98,7 +98,7 @@
      "id": "rmwfi1zchxkt4",
      "type": "texte",
      "titre": "7. Ce que les démocraties doivent surveiller",
-     "texte": "Pour les pays européens, cette évolution soulève plusieurs questions.<p>Les administrations, les entreprises stratégiques et les centres de recherche utilisent de plus en plus des outils d'intelligence artificielle externes. Ils peuvent parfois y transmettre des informations confidentielles, des documents internes ou des éléments relatifs à leurs infrastructures.</p><p>La maîtrise des données devient donc une question de sécurité économique et de souveraineté numérique.</p><p>Plusieurs mesures méritent une attention particulière :</p><ul><li>renforcer la protection des données sensibles utilisées dans les systèmes d'IA ;</li><li>contrôler les accès aux modèles et aux interfaces de programmation ;</li><li>surveiller les tentatives d'extraction systématique des capacités des modèles ;</li><li>renforcer la sécurité des laboratoires et des entreprises stratégiques ;</li><li>développer des capacités nationales et européennes de renseignement technologique ;</li><li>intégrer les risques liés à l'IA dans les dispositifs de gestion des risques cyber.</li></ul><p>La compétition ne se joue pas uniquement dans les centres de données. Elle se joue également dans les systèmes d'information, les laboratoires, les chaînes d'approvisionnement et les flux de connaissances</p>",
+     "texte": "Pour les pays européens, cette évolution soulève plusieurs questions.<p>Les administrations, les entreprises stratégiques et les centres de recherche utilisent de plus en plus des outils d'intelligence artificielle externes. Ils peuvent parfois y transmettre des informations confidentielles, des documents internes ou des éléments relatifs à leurs infrastructures.</p><p>La maîtrise des données devient donc une question de sécurité économique et de souveraineté numérique.</p><p><b>Plusieurs mesures méritent une attention particulière :</b></p><ul><li>renforcer la protection des données sensibles utilisées dans les systèmes d'IA ;</li><li>contrôler les accès aux modèles et aux interfaces de programmation ;</li><li>surveiller les tentatives d'extraction systématique des capacités des modèles ;</li><li>renforcer la sécurité des laboratoires et des entreprises stratégiques ;</li><li>développer des capacités nationales et européennes de renseignement technologique ;</li><li>intégrer les risques liés à l'IA dans les dispositifs de gestion des risques cyber.</li></ul><p>La compétition ne se joue pas uniquement dans les centres de données. Elle se joue également dans les systèmes d'information, les laboratoires, les chaînes d'approvisionnement et les flux de connaissances</p>",
      "imgs": []
     }
    ],
