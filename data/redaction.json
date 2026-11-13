@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-13T21:45:18.102Z",
+ "maj": "2026-11-13T21:45:27.843Z",
  "items": [
   {
    "id": "rmwfhrxxtkn4l",
@@ -114,10 +114,10 @@
    "stAna": "",
    "stAct": "",
    "stCon": "",
-   "auteur": "",
-   "auteurRole": "",
-   "auteurLiens": "",
-   "auteurPhoto": "",
+   "auteur": "Twagirumukiza Innocent",
+   "auteurRole": "Cybersecurity & Risk Management Consultant",
+   "auteurLiens": "https://www.linkedin.com/in/innocent-twagirumukiza/",
+   "auteurPhoto": "images/auteur-18aef013594b.jpg",
    "actions": [],
    "actionsHtml": "",
    "source": "",
