@@ -1,5 +1,5 @@
 {
- "maj": "2026-11-13T21:32:03.973Z",
+ "maj": "2026-11-13T21:32:40.575Z",
  "items": [
   {
    "id": "rmwfhrxxtkn4l",
@@ -32,6 +32,7 @@
     "info",
     "ana",
     "act",
+    "p:rmwfhsyr9q5hq",
     "con"
    ],
    "imageCarte": "",
@@ -44,7 +45,15 @@
     "act": [],
     "con": []
    },
-   "parties": [],
+   "parties": [
+    {
+     "id": "rmwfhsyr9q5hq",
+     "type": "texte",
+     "titre": "1. Le Guoanbu : un service de renseignement au cœur de la stratégie chinoise",
+     "texte": "",
+     "imgs": []
+    }
+   ],
    "stInfo": "",
    "stAna": "",
    "stAct": "",
